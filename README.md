@@ -1,13 +1,12 @@
 # Optifik
 
-TODO: write a paragraph here...
+Python library to compute a thickness from an interferometric spectrum.
 
-
-This library replaces oospectro.
+This library replaces [oospectro](https://github.com/sciunto-org/oospectro/).
 
 ## Documentation
 
-<https://sciunto.github.io/optifik/>
+<https://sciunto-org.github.io/optifik/>
 
 ## Installation
 
