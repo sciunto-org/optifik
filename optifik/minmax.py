@@ -83,7 +83,8 @@ def thickness_from_minmax(wavelengths,
         thickness_minmax = 1 / slope /  4
 
         # Scikit-learn
-        #X, y = k_values.reshape(-1, 1), 1/wavelengths[peaks][::-1]
+        #from sklearn import linear_model, datasets
+        #X, y = k_values.reshape(-1, 1), n_over_lambda[::-1]
 
         ## Fit line using all data
         #lr = linear_model.LinearRegression()
@@ -100,7 +101,8 @@ def thickness_from_minmax(wavelengths,
         #line_y = lr.predict(line_X)
         #line_y_ransac = slransac.predict(line_X)
 
-        #slope = slransac.estimator_.coef_[0]
+        #slope = -slransac.estimator_.coef_[0]
+        #thickness_minmax = 1 / slope /  4
 
         if plot:
             fig, ax = plt.subplots()
