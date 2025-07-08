@@ -17,7 +17,8 @@ def load():
     yaml_file = FOLDER / 'known_value.yaml'
 
     with open(yaml_file, "r") as yaml_file:
-        thickness_dict = yaml.safe_load(yaml_file)
+        content = yaml.safe_load(yaml_file)
+        thickness_dict = content['known_thicknesses']
 
     data = [(FOLDER / fn, val) for fn, val in thickness_dict.items()]
     return data
