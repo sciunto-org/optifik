@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath('../optifik'))
 project = 'optifik'
 copyright = '2025, F. Boulogne et al.'
 author = 'F. Boulogne et al.'
-html_baseurl = "https://sciunto.github.io/optifik/"
+html_baseurl = "https://sciunto-org.github.io/optifik/"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
