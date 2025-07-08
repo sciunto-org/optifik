@@ -1,0 +1,77 @@
+[project]
+name = "optifik"
+version = "0.1.0"
+description = "Compute film thickness from interferometry"
+authors = [
+  { name = "François Boulogne", email = "francois.boulogne@cnrs.fr" },
+  { name = "Victor Ziapkoff", email = "victor.ziapkoff@universite-paris-saclay.fr" },
+]
+license = "GPL-3.0"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "numpy>=1.10.0",
+  "scipy>=1.1.0",
+  "matplotlib>=1.3.1",
+  "scikit-image>=0.20",
+]
+
+[tool.setuptools]
+packages = ["optifik"]
+
+
+[project.urls]
+Documentation = "https://sciunto.github.io/optifik/"
+Repository = "https://github.com/sciunto-org/optifik"
+Issues = "https://github.com/sciunto-org/optifik/issues"
+
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "pyyaml",
+  "bumpver"
+]
+
+docs = [
+  "sphinx>=7.0",
+  "sphinx-rtd-theme>=2.0",
+  "numpydoc>=1.6",
+  "myst-parser>=2.0",  # Markdown + reStructuredText
+  "sphinx-autodoc-typehints>=2.0",
+  "sphinx-copybutton>=0.5",
+  "sphinx-design>=0.5",
+  "nbsphinx",
+  "jupyter",
+  "ipykernel",
+  "sphinx-book-theme",
+]
+
+[tool.setuptools.package-data]
+optifik = ["data/*"]
+
+[tool.pytest.ini_options]
+#addopts = "-v --tb=short --disable-warnings"
+testpaths = ["tests"]
+python_files = "test_*.py"
+pythonpath = ["."]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.coverage.run]
+source = ["optifik"]
+omit = ["optifik/tests/*"]
+
+[tool.bumpver]
+current_version = "0.1.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit = true
+tag = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
+"optifik/__init__.py" = ['__version__ = "{version}"']
+

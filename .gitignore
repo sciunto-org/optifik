@@ -1,0 +1,10 @@
+__pycache__
+.backups
+optifik.egg-info
+*.bak
+*.pyc
+.ipynb_checkpoints
+.venv
+build/
+_build/
+dist/

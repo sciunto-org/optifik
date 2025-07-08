@@ -1,0 +1,8 @@
+- François Boulogne
+    Project coordinator
+
+- Lorène Champougny
+    Provided data sets
+
+- Victor Ziapkoff
+    Implemented the scheludko method
