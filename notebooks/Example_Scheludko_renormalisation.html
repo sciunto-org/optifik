@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Small thickness : Scheludko renormalisation &#8212; optifik  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Example_Scheludko_renormalisation';</script>
+    <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/Example_Scheludko_renormalisation.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="optifik  documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="optifik  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of Content</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generalities.html">Generalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite this work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ack_licence.html">Acknowledgments and licence</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Example_Scheludko_renormalisation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Small thickness : Scheludko renormalisation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Small thickness : Scheludko renormalisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Case-1-:-Non-zero-interference-order-m">Case 1 : Non-zero interference order <span class="math notranslate nohighlight">\(m\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1-:-Identifying-peak-wavelength">Step 1 : Identifying peak wavelength</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Code-:">Code :</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Console-output-:">Console output :</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Remarks:">Remarks:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2-:-Determine-film-thickness">Step 2 : Determine film thickness</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-the-path-to-the-folder-containing-your-.xy-file">Define the path to the folder containing your .xy file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-wavelengths-and-intensities-from-the-file">Load wavelengths and intensities from the file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Intensity-as-a-function-of-wavelength">Intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Smoothing-the-intensity">Smoothing the intensity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Smoothed-intensity-as-a-function-of-wavelength">Smoothed intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Extract-the-wavelength-corresponding-to-the-peak-at-the-end-of-the-rightmost-monotonic-branch">Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-refractive-index-array-matching-the-shape-of-'lambdas',-assuming-a-constant-value-of-1.33">Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Determine-the-film-thickness-by-Sheludko-renormalisation">Determine the film thickness by Sheludko renormalisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Case-2-:-zero-interference-order-m">Case 2 : zero interference order <span class="math notranslate nohighlight">\(m\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Define the path to the folder containing your .xy file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Load wavelengths and intensities from the file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Smoothing the intensity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Smoothed intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-the-path-to-the-folder-containing-your-.xy-void-file">Define the path to the folder containing your .xy void file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-wavelengths-and-intensities-from-the-void-file">Load wavelengths and intensities from the void file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Determine the film thickness by Sheludko renormalisation</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Small-thickness-:-Scheludko-renormalisation">
+<h1>Small thickness : Scheludko renormalisation<a class="headerlink" href="#Small-thickness-:-Scheludko-renormalisation" title="Link to this heading">#</a></h1>
+<p>When four or fewer peaks are detected, the Scheludko renormalization method becomes effective. Since this method relies on the inverse function of the reflected intensity as a function of wavelength between two consecutive interference orders <span class="math notranslate nohighlight">\(m\)</span>, we distinguish between two cases : one with a non-zero interference order, and one with zero interference order.</p>
+<section id="Case-1-:-Non-zero-interference-order-m">
+<h2>Case 1 : Non-zero interference order <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#Case-1-:-Non-zero-interference-order-m" title="Link to this heading">#</a></h2>
+<section id="Step-1-:-Identifying-peak-wavelength">
+<h3>Step 1 : Identifying peak wavelength<a class="headerlink" href="#Step-1-:-Identifying-peak-wavelength" title="Link to this heading">#</a></h3>
+<p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
+<p><img alt="Plot_Peak_Scheludko.png" class="no-scaled-link" src="notebooks/Plot_Peak_Scheludko.png" style="width: 600px;" /></p>
+<p>In the <span class="math notranslate nohighlight">\([450, 800]\)</span> nm spectral range shown above, four peaks have been successfully detected, indicating that they correspond to non-zero interference orders. To apply the Scheludko renormalization method between the rightmost peaks, we first extract their wavelength. This is done using the <code class="docutils literal notranslate"><span class="pre">get_default_start_stop_wavelengths</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module.</p>
+</section>
+<section id="Code-:">
+<h3>Code :<a class="headerlink" href="#Code-:" title="Link to this heading">#</a></h3>
+<p>```python from optifik.scheludko import get_default_start_stop_wavelengths ### Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch get_default_start_stop_wavelengths(lambdas, Intensities_smoothed, refractive_index= 1.33,min_peak_prominence=0.019, plot=True)</p>
+</section>
+<section id="Console-output-:">
+<h3>Console output :<a class="headerlink" href="#Console-output-:" title="Link to this heading">#</a></h3>
+<p>```python (595.80422, 683.40758)</p>
+<p>The console output shows the wavelength corresponding to the peak at the end of the rightmost monotonic branch, which are 595.8 nm and 683.4 nm in this example</p>
+</section>
+<section id="Remarks:">
+<h3>Remarks:<a class="headerlink" href="#Remarks:" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The example correponds to the file <code class="docutils literal notranslate"><span class="pre">000005253.xy</span></code>, located in the <code class="docutils literal notranslate"><span class="pre">..\tests\basic</span></code> folder</p></li>
+<li><p>You can specify the medium’s refractive index and the peak prominence using the <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> and <code class="docutils literal notranslate"><span class="pre">min_peak_prominence</span></code> parameters, respectively.</p></li>
+<li><p>You can also provide a refractive index function <span class="math notranslate nohighlight">\(n(\lambda)\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input.</p></li>
+</ul>
+</section>
+<section id="Step-2-:-Determine-film-thickness">
+<h3>Step 2 : Determine film thickness<a class="headerlink" href="#Step-2-:-Determine-film-thickness" title="Link to this heading">#</a></h3>
+<p>To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">thickness_from_scheludko</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module. Here an exemple of plots you can obtain.</p>
+<p><a href="#id8"><span class="problematic" id="id9">|4afa8c0cf4b4436fbacaa254d69d6af0||d11854dc6e9349e5ad2c90ed08f84d70|</span></a></p>
+<p>The left plot shows the Scheludko thickness computation at each wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> along the rightmost monotonic branch (see Step 1), for all interference orders between 0 and 12. The code automatically determines the correct interference order <span class="math notranslate nohighlight">\(m\)</span> and calculates the corresponding film thickness <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<blockquote>
+<div><p>Complete Code :</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>```python import numpy as np from optifik.io import load_spectrum from optifik.analysis import plot_spectrum from optifik.analysis import smooth_intensities from optifik.scheludko import get_default_start_stop_wavelengths from optifik.scheludko import thickness_from_scheludko</p>
+</section>
+</section>
+</section>
+<section id="Define-the-path-to-the-folder-containing-your-.xy-file">
+<h1>Define the path to the folder containing your .xy file<a class="headerlink" href="#Define-the-path-to-the-folder-containing-your-.xy-file" title="Link to this heading">#</a></h1>
+<p>Data_folder = r’C:<span class="math">\path</span><span class="math">\to</span><span class="math">\your</span><span class="math">\data</span>’</p>
+</section>
+<section id="Load-wavelengths-and-intensities-from-the-file">
+<h1>Load wavelengths and intensities from the file<a class="headerlink" href="#Load-wavelengths-and-intensities-from-the-file" title="Link to this heading">#</a></h1>
+<p>lambdas, intensities = load_spectrum(Data_folder, wavelength_min=450)</p>
+</section>
+<section id="Intensity-as-a-function-of-wavelength">
+<h1>Intensity as a function of wavelength<a class="headerlink" href="#Intensity-as-a-function-of-wavelength" title="Link to this heading">#</a></h1>
+<p>plot_spectrum(lambdas,intensities)</p>
+</section>
+<section id="Smoothing-the-intensity">
+<h1>Smoothing the intensity<a class="headerlink" href="#Smoothing-the-intensity" title="Link to this heading">#</a></h1>
+<p>Intensities_smoothed = smooth_intensities(intensities)</p>
+</section>
+<section id="Smoothed-intensity-as-a-function-of-wavelength">
+<h1>Smoothed intensity as a function of wavelength<a class="headerlink" href="#Smoothed-intensity-as-a-function-of-wavelength" title="Link to this heading">#</a></h1>
+<p>plot_spectrum(lambdas, Intensities_smoothed)</p>
+</section>
+<section id="Extract-the-wavelength-corresponding-to-the-peak-at-the-end-of-the-rightmost-monotonic-branch">
+<h1>Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch<a class="headerlink" href="#Extract-the-wavelength-corresponding-to-the-peak-at-the-end-of-the-rightmost-monotonic-branch" title="Link to this heading">#</a></h1>
+<p>wavelength_min, wavelength_max = get_default_start_stop_wavelengths(lambdas, Intensities_smoothed, refractive_index= 1.33, min_peak_prominence=0.019, plot=True)</p>
+</section>
+<section id="Create-a-refractive-index-array-matching-the-shape-of-'lambdas',-assuming-a-constant-value-of-1.33">
+<h1>Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33<a class="headerlink" href="#Create-a-refractive-index-array-matching-the-shape-of-'lambdas',-assuming-a-constant-value-of-1.33" title="Link to this heading">#</a></h1>
+<p>refractive_index = np.full_like(lambdas, 1.33)</p>
+</section>
+<section id="Determine-the-film-thickness-by-Sheludko-renormalisation">
+<h1>Determine the film thickness by Sheludko renormalisation<a class="headerlink" href="#Determine-the-film-thickness-by-Sheludko-renormalisation" title="Link to this heading">#</a></h1>
+<p>thickness_from_scheludko(lambdas, Intensities_smoothed, refractive_index=refractive_index, wavelength_start=wavelength_min, wavelength_stop=wavelength_max, interference_order=None, intensities_void=None, plot=True)</p>
+<blockquote>
+<div><p>Console output :</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>```python h-difference for m=0: 112.0 nm h-difference for m=1: 144.9 nm h-difference for m=2: 79.1 nm h-difference for m=3: 177.9 nm h-difference for m=4: 47.6 nm h-difference for m=5: 210.8 nm h-difference for m=6: 16.6 nm h-difference for m=7: 243.7 nm h-difference for m=8: 33.3 nm h-difference for m=9: 276.7 nm h-difference for m=10: 65.2 nm h-difference for m=11: 309.6 nm h-difference for m=12: 97.1 nm Out[1]: stderr: 0.09997378762434937 thickness: 778.1384700848703</p>
+<p>The console output shows the maximum thickness difference for every interfererence order <span class="math notranslate nohighlight">\(m\)</span> from 0 to 12 with the smallest difference indicating the correct order, here <span class="math notranslate nohighlight">\(m=6\)</span>. It also provides the film thickness along with its associated uncertainty, here <span class="math notranslate nohighlight">\(h=778\)</span> nm.</p>
+<ul class="simple">
+<li><p>It is <strong>mandatory</strong> to provide a refractive index function <span class="math notranslate nohighlight">\(n(\lambda)\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input. Note that in this example, a constant function is used, but a wavelength-dependent model such as Cauchy’s law <span class="math notranslate nohighlight">\(\left(n(\lambda) = A + \frac{B}{\lambda^2}\right)\)</span> could also be used.</p></li>
+<li><p>It is <strong>mandatory</strong> to give <code class="docutils literal notranslate"><span class="pre">wavelength_start</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_stop</span></code>.</p></li>
+<li><p>You can specify manually any interferencer order using the <code class="docutils literal notranslate"><span class="pre">interferencer</span> <span class="pre">order</span></code>parameter.</p></li>
+</ul>
+<section id="Case-2-:-zero-interference-order-m">
+<h2>Case 2 : zero interference order <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#Case-2-:-zero-interference-order-m" title="Link to this heading">#</a></h2>
+<p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
+<p><img alt="Plot_Spectrum_m_is_0.png" class="no-scaled-link" src="notebooks/Plot_Spectrum_m_is_0.png" style="width: 600px;" /></p>
+<p>In the <span class="math notranslate nohighlight">\([450, 800]\)</span> nm spectral range shown above, only one maximum have been successfully detected, indicating that it corresponds to zero interference order. To apply the Scheludko renormalization method we use the the void intensity as in input in using the <code class="docutils literal notranslate"><span class="pre">thickness_from_scheludko</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module. Here an exemple of plot you can obtain.</p>
+<p><img alt="Plot_Scheludko_m_Zero0.png" class="no-scaled-link" src="notebooks/Plot_Scheludko_m_Zero.png" style="width: 600px;" /></p>
+<blockquote>
+<div><p>Complete Code :</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>```python import numpy as np from optifik.io import load_spectrum from optifik.analysis import plot_spectrum from optifik.analysis import smooth_intensities from optifik.scheludko import thickness_from_scheludko</p>
+</section>
+</section>
+<section id="id1">
+<h1>Define the path to the folder containing your .xy file<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Data_folder = r’C:<span class="math">\path</span><span class="math">\to</span><span class="math">\your</span><span class="math">\data</span>’</p>
+</section>
+<section id="id2">
+<h1>Load wavelengths and intensities from the file<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>lambdas, intensities = load_spectrum(Data_folder, wavelength_min=450)</p>
+</section>
+<section id="id3">
+<h1>Intensity as a function of wavelength<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p>plot_spectrum(lambdas,intensities)</p>
+</section>
+<section id="id4">
+<h1>Smoothing the intensity<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>Intensities_smoothed = smooth_intensities(intensities)</p>
+</section>
+<section id="id5">
+<h1>Smoothed intensity as a function of wavelength<a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<p>plot_spectrum(lambdas, Intensities_smoothed)</p>
+</section>
+<section id="Define-the-path-to-the-folder-containing-your-.xy-void-file">
+<h1>Define the path to the folder containing your .xy void file<a class="headerlink" href="#Define-the-path-to-the-folder-containing-your-.xy-void-file" title="Link to this heading">#</a></h1>
+<p>Data_folder_void = r’C:<span class="math">\path</span><span class="math">\to</span><span class="math">\your</span><span class="math">\data</span>’</p>
+</section>
+<section id="Load-wavelengths-and-intensities-from-the-void-file">
+<h1>Load wavelengths and intensities from the void file<a class="headerlink" href="#Load-wavelengths-and-intensities-from-the-void-file" title="Link to this heading">#</a></h1>
+<p>lambdas_void, intensities_void = load_spectrum(Data_folder_void, wavelength_min=450)</p>
+</section>
+<section id="id6">
+<h1>Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33<a class="headerlink" href="#id6" title="Link to this heading">#</a></h1>
+<p>refractive_index = np.full_like(lambdas, 1.33)</p>
+</section>
+<section id="id7">
+<h1>Determine the film thickness by Sheludko renormalisation<a class="headerlink" href="#id7" title="Link to this heading">#</a></h1>
+<p>thickness_from_scheludko(lambdas, Intensities_smoothed, refractive_index= refractive_index, wavelength_start= None, wavelength_stop=None, interference_order=0, intensities_void=intensities_void, plot=True)</p>
+<blockquote>
+<div><p>Console output :</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>```python Out[1]: stderr: 0.07063184770702519 thickness: 115.3088570107459</p>
+<p>The console output shows the film thickness along with its associated uncertainty, here <span class="math notranslate nohighlight">\(h= 115\)</span> nm.</p>
+<ul class="simple">
+<li><p>It is <strong>mandatory</strong> to provide a refractive index function <span class="math notranslate nohighlight">\(n(\lambda)\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input. Note that in this example, a constant function is used, but a wavelength-dependent model such as Cauchy’s law <span class="math notranslate nohighlight">\(\left(n(\lambda) = A + \frac{B}{\lambda^2}\right)\)</span> could also be used.</p></li>
+<li><p>It is <strong>not</strong> mandatory to give <code class="docutils literal notranslate"><span class="pre">wavelength_start</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_stop</span></code>.</p></li>
+<li><p>It is <strong>mandatory</strong> to give the <code class="docutils literal notranslate"><span class="pre">intensities_void</span></code> parameter in the same format as the <code class="docutils literal notranslate"><span class="pre">Intensities_smoothed</span></code> parameter.</p></li>
+</ul>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Small thickness : Scheludko renormalisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Case-1-:-Non-zero-interference-order-m">Case 1 : Non-zero interference order <span class="math notranslate nohighlight">\(m\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1-:-Identifying-peak-wavelength">Step 1 : Identifying peak wavelength</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Code-:">Code :</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Console-output-:">Console output :</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Remarks:">Remarks:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2-:-Determine-film-thickness">Step 2 : Determine film thickness</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-the-path-to-the-folder-containing-your-.xy-file">Define the path to the folder containing your .xy file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-wavelengths-and-intensities-from-the-file">Load wavelengths and intensities from the file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Intensity-as-a-function-of-wavelength">Intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Smoothing-the-intensity">Smoothing the intensity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Smoothed-intensity-as-a-function-of-wavelength">Smoothed intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Extract-the-wavelength-corresponding-to-the-peak-at-the-end-of-the-rightmost-monotonic-branch">Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-refractive-index-array-matching-the-shape-of-'lambdas',-assuming-a-constant-value-of-1.33">Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Determine-the-film-thickness-by-Sheludko-renormalisation">Determine the film thickness by Sheludko renormalisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Case-2-:-zero-interference-order-m">Case 2 : zero interference order <span class="math notranslate nohighlight">\(m\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Define the path to the folder containing your .xy file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Load wavelengths and intensities from the file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Smoothing the intensity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Smoothed intensity as a function of wavelength</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-the-path-to-the-folder-containing-your-.xy-void-file">Define the path to the folder containing your .xy void file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-wavelengths-and-intensities-from-the-void-file">Load wavelengths and intensities from the void file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Determine the film thickness by Sheludko renormalisation</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By F. Boulogne et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, F. Boulogne et al..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
