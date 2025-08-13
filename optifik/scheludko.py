@@ -24,7 +24,7 @@ def _thicknesses_scheludko_at_order(wavelengths,
         Intensity values.
     interference_order : int
         Interference order.
-    refractive_index : array_like (or float)
+    refractive_index : array
         Refractive index.
     intensities_void : array, optional
         Intensities of void.
@@ -64,7 +64,7 @@ def _Delta(wavelengths, thickness, interference_order, refractive_index):
     ----------
     wavelengths : array
         Wavelength values in nm.
-    thickness : array_like (or float)
+    thickness : array
         Film thickness.
     interference_order : int
         Interference order.
@@ -139,7 +139,7 @@ def get_default_start_stop_wavelengths(wavelengths,
         Wavelength values in nm.
     intensities : array
         Intensity values.
-    refractive_index : scalar, optional
+    refractive_index : scalar or array
         Value of the refractive index of the medium.
     min_peak_prominence : scalar
         Required prominence of peaks.
@@ -157,6 +157,9 @@ def get_default_start_stop_wavelengths(wavelengths,
     wavelength_start : scalar
     wavelength_stop : scalar
     """
+    if isinstance(refractive_index, (float, int)):
+        refractive_index  = np.full_like(wavelengths,  refractive_index)
+
     # idx_min idx max
     idx_peaks_min, idx_peaks_max = finds_peak(wavelengths, intensities,
                                               min_peak_prominence=min_peak_prominence,
@@ -200,7 +203,7 @@ def thickness_from_scheludko(wavelengths,
         Wavelength values in nm.
     intensities : array
         Intensity values.
-    refractive_index : scalar, optional
+    refractive_index : scalar or array
         Value of the refractive index of the medium.
     wavelength_start : scalar, optional
         Starting value of a monotonic branch.
@@ -223,6 +226,9 @@ def thickness_from_scheludko(wavelengths,
         The attribute `thickness` gives the thickness value in nm.
 
     """
+    if isinstance(refractive_index, (float, int)):
+        refractive_index  = np.full_like(wavelengths,  refractive_index)
+
     if plot:
         setup_matplotlib()
 
@@ -298,6 +304,12 @@ def thickness_from_scheludko(wavelengths,
                                                      intensities_void=intensities_void_masked)
 
     elif interference_order > 0:
+        # mask input data
+        mask = (wavelengths >= wavelength_start) & (wavelengths <= wavelength_stop)
+        wavelengths_masked = wavelengths[mask]
+        r_index_masked = r_index[mask]
+        intensities_masked = intensities[mask]
+
         h_values = _thicknesses_scheludko_at_order(wavelengths_masked,
                                                    intensities_masked,
                                                    interference_order,
@@ -354,8 +366,8 @@ def thickness_from_scheludko(wavelengths,
                  label=label)
 
         plt.legend()
-        plt.ylabel(r'$\Delta$')
-        plt.xlabel(r'$\lambda$ ($ \mathrm{nm} $)')
+        plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
+        plt.xlabel(r'$\lambda$ $[\mathrm{{nm}}]$')
         import inspect
         plt.title(inspect.currentframe().f_code.co_name)
 
