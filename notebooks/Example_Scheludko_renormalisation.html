@@ -50,6 +50,8 @@
     <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/Example_Scheludko_renormalisation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Source Code and Issues" href="../source.html" />
+    <link rel="prev" title="Intermediate thickness : Peak fitting" href="Example_Peak_fitting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -160,10 +162,69 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of Content</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../generalities.html">Generalities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test.html">This is a test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html">Examples</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness : Peak fitting</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Small thickness : Scheludko renormalisation</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source.html">Source Code and Issues</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite this work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ack_licence.html">Acknowledgments and licence</a></li>
 </ul>
@@ -388,7 +449,7 @@ document.write(`
 <section id="Step-2-:-Determine-film-thickness">
 <h3>Step 2 : Determine film thickness<a class="headerlink" href="#Step-2-:-Determine-film-thickness" title="Link to this heading">#</a></h3>
 <p>To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">thickness_from_scheludko</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module. Here an exemple of plots you can obtain.</p>
-<p><a href="#id8"><span class="problematic" id="id9">|293eecb295c640a1a76f52bbc57590b6||fe1f06cbea994d52bf722e8b684a782c|</span></a></p>
+<p><a href="#id8"><span class="problematic" id="id9">|e0686ac395044331b1d066591df55830||68f30949a2e944b1b2525042f582573f|</span></a></p>
 <p>The left plot shows the Scheludko thickness computation at each wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> along the rightmost monotonic branch (see Step 1), for all interference orders between 0 and 12. The code automatically determines the correct interference order <span class="math notranslate nohighlight">\(m\)</span> and calculates the corresponding film thickness <span class="math notranslate nohighlight">\(h\)</span>.</p>
 <blockquote>
 <div><p>Complete Code :</p>
@@ -512,6 +573,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Example_Peak_fitting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Intermediate thickness : Peak fitting</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../source.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Source Code and Issues</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

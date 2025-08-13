@@ -7,13 +7,14 @@ from an interferometric spectrum.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Table of Content
 
    generalities
    installation
    api_reference
-   examples
+   notebooks/index.rst
+   source
    cite
    ack_licence
 
