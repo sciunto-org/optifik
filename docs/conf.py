@@ -34,8 +34,8 @@ numpydoc_show_inherited_class_members = True
 numpydoc_use_plots = False  # Plots in doctring
 numpydoc_class_members_toctree = False
 
-nbsphinx_execute = 'auto'  # ou 'auto' pour exécuter si nécessaire
-nbsphinx_notebooks = ['notebooks/']  # Dossier contenant vos .ipynb
+nbsphinx_execute = 'auto'
+nbsphinx_notebooks = ['notebooks/']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
