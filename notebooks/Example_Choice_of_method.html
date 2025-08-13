@@ -110,8 +110,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -164,9 +162,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../generalities.html">Generalities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite this work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ack_licence.html">Acknowledgments and licence</a></li>
 </ul>
@@ -395,7 +390,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">intensities</span></code>: the corresponding measured intensities</p></li>
 </ul>
 <p>The data can be ploted with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain.</p>
-<p><img alt="Plot_Spectrum.png" class="no-scaled-link" src="notebooks/Plot_Spectrum.png" style="width: 600px;" /></p>
+<p><img alt="Plot_Spectrum.png" class="no-scaled-link" src="../_images/Plot_Spectrum.png" style="width: 600px;" /></p>
 <p>```python from optifik.analysis import plot_spectrum</p>
 </section>
 <section id="Intensity-as-a-function-of-wavelength">
@@ -404,7 +399,7 @@ document.write(`
 <section id="Step-2-:-Data-Smoothing">
 <h2>Step 2 : Data Smoothing<a class="headerlink" href="#Step-2-:-Data-Smoothing" title="Link to this heading">#</a></h2>
 <p>Once this data is loaded, you can apply a Savitsky-Golay filter of order 3 and a window of 11 points to smooth the data. We use the function <code class="docutils literal notranslate"><span class="pre">smooth_intensities</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code>.</p>
-<p><img alt="Plot_Spectrum_Smoothed_Intensities.png" class="no-scaled-link" src="notebooks/Plot_Spectrum_Smoothed_Intensities.png" style="width: 600px;" /></p>
+<p><img alt="Plot_Spectrum_Smoothed_Intensities.png" class="no-scaled-link" src="../_images/Plot_Spectrum_Smoothed_Intensities.png" style="width: 600px;" /></p>
 <section id="id1">
 <h3>Code :<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>```python from optifik.analysis import smooth_intensities</p>
@@ -421,7 +416,7 @@ document.write(`
 <section id="Step-3-:-Find-peaks">
 <h2>Step 3 : Find peaks<a class="headerlink" href="#Step-3-:-Find-peaks" title="Link to this heading">#</a></h2>
 <p>The scipy function <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">peaks</span></code> is then applied to the smoothed data with the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain.</p>
-<p><img alt="Finds_Peaks.png" class="no-scaled-link" src="notebooks/Finds_Peaks.png" style="width: 600px;" /></p>
+<p><img alt="Finds_Peaks.png" class="no-scaled-link" src="../_images/Finds_Peaks.png" style="width: 600px;" /></p>
 <section id="id2">
 <h3>Code :<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>```python from optifik.analysis import finds_peak</p>

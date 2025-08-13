@@ -112,8 +112,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -166,9 +164,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../generalities.html">Generalities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite this work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ack_licence.html">Acknowledgments and licence</a></li>
 </ul>
@@ -364,9 +359,9 @@ document.write(`
 <section id="Scenario-1-:-Successful-peak-fitting">
 <h2>Scenario 1 : Successful peak fitting<a class="headerlink" href="#Scenario-1-:-Successful-peak-fitting" title="Link to this heading">#</a></h2>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
-<p><img alt="Finds_Peaks.png" class="no-scaled-link" src="notebooks/Finds_Peaks.png" style="width: 600px;" /></p>
+<p><img alt="Finds_Peaks.png" class="no-scaled-link" src="../_images/Finds_Peaks.png" style="width: 600px;" /></p>
 <p>To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the linear regression method <code class="docutils literal notranslate"><span class="pre">method='linreg'</span></code> of the <code class="docutils literal notranslate"><span class="pre">thickness_from_minmax</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.minmax</span></code> module. Here an exemple of plot you can obtain.</p>
-<p><img alt="Plot_minmax.png" class="no-scaled-link" src="notebooks/Plot_minmax.png" style="width: 600px;" /></p>
+<p><img alt="Plot_minmax.png" class="no-scaled-link" src="../_images/Plot_minmax.png" style="width: 600px;" /></p>
 <section id="Code-:">
 <h3>Code :<a class="headerlink" href="#Code-:" title="Link to this heading">#</a></h3>
 <p>```python from optifik.minmax import thickness_from_minmax</p>
@@ -416,9 +411,9 @@ document.write(`
 <section id="Scenario-2-:-Small-errors-detection">
 <h2>Scenario 2 : Small errors detection<a class="headerlink" href="#Scenario-2-:-Small-errors-detection" title="Link to this heading">#</a></h2>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
-<p><img alt="Plot_Peak_ransac.png" class="no-scaled-link" src="notebooks/Plot_Peak_ransac.png" style="width: 600px;" /></p>
+<p><img alt="Plot_Peak_ransac.png" class="no-scaled-link" src="../_images/Plot_Peak_ransac.png" style="width: 600px;" /></p>
 <p>On the above figure, errors are visible on the rightmost data points. To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the RANSAC method <code class="docutils literal notranslate"><span class="pre">method='ransac'</span></code> of the <code class="docutils literal notranslate"><span class="pre">thickness_from_minmax</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.minmax</span></code> module. Here an exemple of plot you can obtain.</p>
-<p><img alt="Plot_ransac.png" class="no-scaled-link" src="notebooks/Plot_ransac.png" style="width: 600px;" /></p>
+<p><img alt="Plot_ransac.png" class="no-scaled-link" src="../_images/Plot_ransac.png" style="width: 600px;" /></p>
 <section id="id2">
 <h3>Code :<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>```python from optifik.minmax import thickness_from_minmax</p>

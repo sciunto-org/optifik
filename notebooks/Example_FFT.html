@@ -112,8 +112,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -166,9 +164,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../generalities.html">Generalities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite this work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ack_licence.html">Acknowledgments and licence</a></li>
 </ul>
@@ -350,9 +345,9 @@ document.write(`
 <h1>Thick films : Fast Fourier Transform (FFT) Method<a class="headerlink" href="#Thick-films-:-Fast-Fourier-Transform-(FFT)-Method" title="Link to this heading">#</a></h1>
 <p>When the spectrum contains a large number of peaks (&gt; 15), the most suitable method is to make an FFT. Theoritical details will be provided in an upcoming publication.</p>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
-<p><img alt="Plot_Spectrum_FFT.png" class="no-scaled-link" src="notebooks/Plot_Spectrum_FFT.png" style="width: 600px;" /></p>
+<p><img alt="Plot_Spectrum_FFT.png" class="no-scaled-link" src="../_images/Plot_Spectrum_FFT.png" style="width: 600px;" /></p>
 <p>For this case, 21 peak have been successfully identified. To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">thickness_from_fft</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.fft</span></code> module. Here an exemple of plot you can obtain.</p>
-<p><img alt="Plot_FFT.png" class="no-scaled-link" src="notebooks/Plot_FFT.png" style="width: 600px;" /></p>
+<p><img alt="Plot_FFT.png" class="no-scaled-link" src="../_images/Plot_FFT.png" style="width: 600px;" /></p>
 <section id="Code-:">
 <h2>Code :<a class="headerlink" href="#Code-:" title="Link to this heading">#</a></h2>
 <p>```python from optifik.fft import thickness_from_fft</p>
