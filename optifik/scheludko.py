@@ -367,7 +367,7 @@ def thickness_from_scheludko(wavelengths,
                  label=label)
 
         plt.legend()
-        plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
+        plt.ylabel(r'$\Delta$')
         plt.xlabel(r'$\lambda$ $[\mathrm{{nm}}]$')
         plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
