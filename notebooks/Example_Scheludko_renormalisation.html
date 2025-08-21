@@ -364,13 +364,18 @@ document.write(`
 <span class="n">datafile_path</span> <span class="o">=</span> <span class="n">datafile_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../data/basic/000005253.xy&#39;</span><span class="p">)</span>
 
 <span class="c1"># Load wavelengths and intensities from the file</span>
-<span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span> <span class="o">=</span> <span class="n">load_spectrum</span><span class="p">(</span><span class="n">datafile_path</span><span class="p">,</span> <span class="n">wavelength_min</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span> <span class="o">=</span> <span class="n">load_spectrum</span><span class="p">(</span><span class="n">datafile_path</span><span class="p">,</span>
+                                         <span class="n">wavelength_min</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span>
+                                         <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
 <span class="c1"># Smoothing the intensity</span>
-<span class="n">Intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
+<span class="n">intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
 
 <span class="c1"># Peak detection function, min_peak_prominence and min_peak_distance can be adjusted.</span>
-<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">,</span> <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+           <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+           <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -401,10 +406,11 @@ document.write(`
 </div>
 <dl>
 <dt># Extract the wavelength corresponding to the peak</dt><dd><p># at the end of the rightmost monotonic branch
-get_default_start_stop_wavelengths(wavelengths, Intensities_smoothed,</p>
+get_default_start_stop_wavelengths(wavelengths, intensities_smoothed,</p>
 <blockquote>
-<div><p>refractive_index= 1.33,
-min_peak_prominence=0.02, plot=True)</p>
+<div><p>refractive_index=1.33,
+min_peak_prominence=0.02,
+plot=True)</p>
 </div></blockquote>
 </dd>
 </dl>
@@ -442,7 +448,7 @@ min_peak_prominence=0.02, plot=True)</p>
 
 <span class="c1"># Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch</span>
 <span class="n">wavelength_min</span><span class="p">,</span> <span class="n">wavelength_max</span> <span class="o">=</span> <span class="n">get_default_start_stop_wavelengths</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>
-                                                                    <span class="n">Intensities_smoothed</span><span class="p">,</span>
+                                                                    <span class="n">intensities_smoothed</span><span class="p">,</span>
                                                                     <span class="n">refractive_index</span><span class="o">=</span> <span class="mf">1.33</span><span class="p">,</span>
                                                                     <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.019</span><span class="p">,</span>
                                                                     <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -452,7 +458,7 @@ min_peak_prominence=0.02, plot=True)</p>
 
 <span class="c1"># Determine the film thickness by Sheludko renormalisation</span>
 <span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>
-                         <span class="n">Intensities_smoothed</span><span class="p">,</span>
+                         <span class="n">intensities_smoothed</span><span class="p">,</span>
                          <span class="n">refractive_index</span><span class="o">=</span><span class="n">refractive_index</span><span class="p">,</span>
                          <span class="n">wavelength_start</span><span class="o">=</span><span class="n">wavelength_min</span><span class="p">,</span>
                          <span class="n">wavelength_stop</span><span class="o">=</span><span class="n">wavelength_max</span><span class="p">,</span>
@@ -545,10 +551,13 @@ h-difference for m=12: 99.2 nm
                                          <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
 <span class="c1"># Smoothing the intensity</span>
-<span class="n">Intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
+<span class="n">intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
 
 <span class="c1"># Peak detection function, min_peak_prominence and min_peak_distance can be adjusted.</span>
-<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">,</span> <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+           <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+           <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -583,11 +592,10 @@ h-difference for m=12: 99.2 nm
                                                <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
 <span class="c1"># Refractive index calculated using Cauchy&#39;s law</span>
-<span class="n">refractive_index</span> <span class="o">=</span> <span class="mf">1.324188</span> <span class="o">+</span> <span class="mf">3102.060378</span><span class="o">/</span><span class="p">(</span><span class="n">wavelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">refractive_index</span> <span class="o">=</span> <span class="mf">1.324188</span> <span class="o">+</span> <span class="mf">3102.060378</span> <span class="o">/</span> <span class="p">(</span><span class="n">wavelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Determine the film thickness by Sheludko renormalisation</span>
-<span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>
-                         <span class="n">Intensities_smoothed</span><span class="p">,</span>
+<span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
                          <span class="n">refractive_index</span><span class="o">=</span><span class="n">refractive_index</span><span class="p">,</span>
                          <span class="n">wavelength_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">wavelength_stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -625,7 +633,7 @@ h-difference for m=12: 99.2 nm
 <ul class="simple">
 <li><p>You can provide a refractive index constant <span class="math notranslate nohighlight">\(n(\lambda) = n\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input. Note that in this example a wavelength-dependent model such as Cauchy’s law <span class="math notranslate nohighlight">\(\left(n(\lambda) = A + \frac{B}{\lambda^2}\right)\)</span> is used.</p></li>
 <li><p>It is <strong>not</strong> mandatory to give <code class="docutils literal notranslate"><span class="pre">wavelength_start</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_stop</span></code>.</p></li>
-<li><p>It is <strong>mandatory</strong> to give the <code class="docutils literal notranslate"><span class="pre">intensities_void</span></code> parameter in the same format as the <code class="docutils literal notranslate"><span class="pre">Intensities_smoothed</span></code> parameter.</p></li>
+<li><p>It is <strong>mandatory</strong> to give the <code class="docutils literal notranslate"><span class="pre">intensities_void</span></code> parameter in the same format as the <code class="docutils literal notranslate"><span class="pre">intensities_smoothed</span></code> parameter.</p></li>
 </ul>
 </section>
 </section>
