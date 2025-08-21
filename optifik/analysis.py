@@ -14,6 +14,18 @@ from .utils import setup_matplotlib
 
 
 def plot_spectrum(wavelengths, intensities, title=''):
+    """
+    Helper function to quicly plot a spectrum.
+
+    Parameters
+    ----------
+    wavelengths : array
+        Wavelength values in nm.
+    intensities : array
+        Intensity values.
+    title : string
+        Plot title.
+    """
     setup_matplotlib()
     plt.figure()
     plt.plot(wavelengths, intensities, 'o-', markersize=2)
