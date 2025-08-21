@@ -41,7 +41,7 @@ def thickness_from_fft(wavelengths, intensities,
 
     # FFT requires evenly spaced data.
     # So, we interpolate the signal.
-    # Interpolate to get a linear increase of 1 / wavelengths.
+    # Interpolate to get a linear increase of r_index / wavelengths.
     inverse_wavelengths_times_n = refractive_index / wavelengths
     f = interp1d(inverse_wavelengths_times_n, intensities)
 
@@ -70,8 +70,8 @@ def thickness_from_fft(wavelengths, intensities,
         plt.figure()
         plt.loglog(inverse_wavelengths_fft, np.abs(intensities_fft))
         plt.loglog(freq_max, np.abs(intensities_fft[idx_max_fft]), 'o')
-        plt.xlabel('Frequency')
-        plt.ylabel(r'FFT($I^\star$)')
+        plt.xlabel('$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
+        plt.ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
         plt.title(f'Thickness={thickness_fft:.2f}')
 
     return OptimizeResult(thickness=thickness_fft,)

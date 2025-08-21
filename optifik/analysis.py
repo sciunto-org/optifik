@@ -1,6 +1,7 @@
 from scipy.signal import savgol_filter
 from scipy.signal import find_peaks
 
+import inspect
 import matplotlib.pyplot as plt
 plt.rc('text', usetex=True)
 plt.rcParams.update({
@@ -72,8 +73,7 @@ def finds_peak(wavelengths, intensities, min_peak_prominence, min_peak_distance=
         plt.xlabel(r'$\lambda$ (nm)')
         plt.ylabel(r'$I^\star$')
         plt.legend()
-        import inspect
-        plt.title(inspect.currentframe().f_code.co_name)
+        plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
         plt.tight_layout()
         plt.show()
 

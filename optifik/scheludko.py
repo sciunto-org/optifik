@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.optimize import curve_fit
 
+import inspect
 import matplotlib.pyplot as plt
 
 from .io import load_spectrum
@@ -257,8 +258,8 @@ def thickness_from_scheludko(wavelengths,
 
         if plot:
             plt.figure()
-            plt.ylabel(r'$h$ ($\mathrm{{nm}}$)')
-            plt.xlabel(r'$\lambda$ ($ \mathrm{nm} $)')
+            plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
+            plt.xlabel(r'$\lambda$ $[\mathrm{nm}]$')
 
         for _order in range(0, max_tested_order+1):
             h_values = _thicknesses_scheludko_at_order(wavelengths_masked,
@@ -368,8 +369,7 @@ def thickness_from_scheludko(wavelengths,
         plt.legend()
         plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
         plt.xlabel(r'$\lambda$ $[\mathrm{{nm}}]$')
-        import inspect
-        plt.title(inspect.currentframe().f_code.co_name)
+        plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
     return OptimizeResult(thickness=fitted_h, stderr=std_err)
 

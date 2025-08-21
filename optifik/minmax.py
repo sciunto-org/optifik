@@ -4,6 +4,7 @@ from scipy import stats
 from skimage.measure import ransac, LineModelND
 from scipy.signal import find_peaks
 
+import inspect
 import matplotlib.pyplot as plt
 
 from .utils import OptimizeResult, setup_matplotlib
@@ -107,7 +108,7 @@ def thickness_from_minmax(wavelengths,
         if plot:
             fig, ax = plt.subplots()
 
-            ax.set_xlabel('extremum n°')
+            ax.set_xlabel('Extremum No.')
             ax.set_ylabel('$n$($\lambda$) / $\lambda$')
             ax.plot(data[inliers, 0], data[inliers, 1], 'xb', alpha=0.6, label='Inliers')
             ax.plot(data[~inliers, 0], data[~inliers, 1], '+r', alpha=0.6, label='Outliers')
@@ -115,8 +116,7 @@ def thickness_from_minmax(wavelengths,
 
             ax.legend()
             ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
-            import inspect
-            plt.title(inspect.currentframe().f_code.co_name)
+            plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
             plt.tight_layout()
             plt.show()
 
@@ -134,15 +134,14 @@ def thickness_from_minmax(wavelengths,
         if plot:
             fig, ax = plt.subplots()
 
-            ax.set_xlabel('extremum n°')
+            ax.set_xlabel('Extremum No.')
             ax.set_ylabel('$n$($\lambda$) / $\lambda$')
             ax.plot(k_values, n_over_lambda, 's', label='Extrema')
             ax.plot(k_values, intercept + k_values * slope, label='Fit')
 
             ax.legend()
             ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
-            import inspect
-            plt.title(inspect.currentframe().f_code.co_name)
+            plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
             plt.tight_layout()
             plt.show()
 
