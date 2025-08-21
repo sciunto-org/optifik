@@ -351,7 +351,7 @@ document.write(`
 <h3>Step 1 : Identifying peak wavelength<a class="headerlink" href="#Step-1-:-Identifying-peak-wavelength" title="Link to this heading">#</a></h3>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -387,17 +387,17 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(array([200, 720], dtype=int64), array([ 58, 442], dtype=int64))
+(array([200, 720]), array([ 58, 442]))
 </pre></div></div>
 </div>
 <p>In the <span class="math notranslate nohighlight">\([450, 800]\)</span> nm spectral range shown above, four peaks have been successfully detected, indicating that they correspond to non-zero interference orders. To apply the Scheludko renormalization method between the rightmost peaks, we first extract their wavelength. This is done using the <code class="docutils literal notranslate"><span class="pre">get_default_start_stop_wavelengths</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.scheludko</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_default_start_stop_wavelengths</span>
@@ -421,12 +421,12 @@ plot=True)</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(595.80422, 683.40758)
+(np.float64(595.80422), np.float64(683.40758))
 </pre></div></div>
 </div>
 <p>The console output shows the wavelength corresponding to the peak at the end of the rightmost monotonic branch, which are 595.8 nm and 683.4 nm in this example</p>
@@ -440,7 +440,7 @@ plot=True)</p>
 <h3>Step 2 : Determine film thickness<a class="headerlink" href="#Step-2-:-Determine-film-thickness" title="Link to this heading">#</a></h3>
 <p>To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">thickness_from_scheludko</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module. Here an exemple of plots you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.scheludko</span><span class="w"> </span><span class="kn">import</span> <span class="n">thickness_from_scheludko</span>
@@ -495,13 +495,13 @@ h-difference for m=12: 99.2 nm
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-    stderr: 0.08714010331130176
- thickness: 777.069973853932
+    stderr: np.float64(0.08714010335010836)
+ thickness: np.float64(777.06997385397)
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -532,7 +532,7 @@ h-difference for m=12: 99.2 nm
 <h2>Case 2 : zero interference order <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#Case-2-:-zero-interference-order-m" title="Link to this heading">#</a></h2>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -568,17 +568,17 @@ h-difference for m=12: 99.2 nm
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(array([], dtype=int64), array([587], dtype=int64))
+(array([], dtype=int64), array([587]))
 </pre></div></div>
 </div>
 <p>In the <span class="math notranslate nohighlight">\([450, 800]\)</span> nm spectral range shown above, only one maximum have been successfully detected, indicating that it corresponds to zero interference order. To apply the Scheludko renormalization method we use the the void intensity as in input in using the <code class="docutils literal notranslate"><span class="pre">thickness_from_scheludko</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module. Here an exemple of plot you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.scheludko</span><span class="w"> </span><span class="kn">import</span> <span class="n">thickness_from_scheludko</span>
@@ -612,13 +612,13 @@ h-difference for m=12: 99.2 nm
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-    stderr: 0.0708124178816189
- thickness: 115.32819886909938
+    stderr: np.float64(0.07081241796526806)
+ thickness: np.float64(115.32819887136147)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">

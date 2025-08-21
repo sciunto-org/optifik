@@ -397,7 +397,11 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_spectrum</span>
 
 <span class="c1"># Load wavelengths and intensities from the file</span>
-<span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span> <span class="o">=</span> <span class="n">load_spectrum</span><span class="p">(</span><span class="n">datafile_path</span><span class="p">,</span> <span class="n">wavelength_min</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="c1"># Comma separated values by default</span>
+<span class="c1"># but options are available to read alternative text formats.</span>
+<span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span> <span class="o">=</span> <span class="n">load_spectrum</span><span class="p">(</span><span class="n">datafile_path</span><span class="p">,</span>
+                                         <span class="n">wavelength_min</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span>
+                                         <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
 <span class="c1"># Intensity as a function of wavelength</span>
 <span class="n">plot_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span><span class="p">)</span>
@@ -422,10 +426,10 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth_intensities</span>
 
 <span class="c1"># Smoothing the intensity</span>
-<span class="n">Intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
+<span class="n">intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
 
 <span class="c1"># Smoothed intensity as a function of wavelength</span>
-<span class="n">plot_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">)</span>
+<span class="n">plot_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -447,7 +451,10 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">finds_peak</span>
 
 <span class="c1"># Peak detection function, min_peak_prominence and min_peak_distance can be adjusted.</span>
-<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">,</span> <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.018</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.018</span><span class="p">,</span>
+           <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+           <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
