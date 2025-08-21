@@ -12,6 +12,13 @@ io
    :undoc-members:
    :show-inheritance:
 
+analysis
+--------
+.. automodule:: optifik.analysis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 fft
 ---
 .. automodule:: optifik.fft
