@@ -1,6 +1,10 @@
 
 # Step by step release process
 
+* Ensure packages are installed
+```
+pip install build twine
+```
 
 * Write changelog
 
