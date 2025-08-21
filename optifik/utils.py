@@ -44,8 +44,10 @@ def setup_matplotlib():
     plt.rcParams.update({
         'figure.dpi': 300,
         'figure.figsize': (10, 6),
-        'axes.labelsize': 26,
-        'xtick.labelsize': 32,
-        'ytick.labelsize': 32,
+        'font.size': 20,
+        'axes.labelsize': 25,
+        'xtick.labelsize': 25,
+        'ytick.labelsize': 25,
         'legend.fontsize': 23,
+        'figure.titlesize': 20,
     })
