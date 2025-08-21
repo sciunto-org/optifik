@@ -16,13 +16,20 @@ Alternatively, you can install directly from source:
     cd optifik
     pip install -e .
 
-or from the main branch (in development)
+or from the main branch (in development):
 
 .. code-block:: bash
 
     git clone https://github.com/sciunto-org/optifik.git
     cd optifik
     pip install -e .
+
+
+Check the installation and the version:
+
+.. code-block:: bash
+
+    python -c 'import optifik; print(optifik.__version__)'
 
 Requirements
 ------------
