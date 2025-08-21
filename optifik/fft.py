@@ -20,7 +20,7 @@ def thickness_from_fft(wavelengths, intensities,
         Wavelength values in nm.
     intensities : array
         Intensity values.
-    refractive_index : scalar, optional
+    refractive_index : scalar or array
         Value of the refractive index of the medium.
     num_half_space : scalar, optional
         Number of points to compute FFT's half space.

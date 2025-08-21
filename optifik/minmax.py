@@ -108,11 +108,11 @@ def thickness_from_minmax(wavelengths,
         if plot:
             fig, ax = plt.subplots()
 
-            ax.set_xlabel('Extremum No.')
-            ax.set_ylabel('$n$($\lambda$) / $\lambda$')
-            ax.plot(data[inliers, 0], data[inliers, 1], 'xb', alpha=0.6, label='Inliers')
-            ax.plot(data[~inliers, 0], data[~inliers, 1], '+r', alpha=0.6, label='Outliers')
-            ax.plot(k_values, model_robust.predict_y(k_values), '-g', label='Fit')
+            ax.set_xlabel(r'$\mathrm{{Index}}$ $N$')
+            ax.set_ylabel('$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ ')
+            ax.plot(data[inliers, 0], data[inliers, 1] * 1000, 'xb', alpha=0.6, label='Inliers')
+            ax.plot(data[~inliers, 0], data[~inliers, 1] * 1000, '+r', alpha=0.6, label='Outliers')
+            ax.plot(k_values, model_robust.predict_y(k_values) * 1000, '-g', label='Fit')
 
             ax.legend()
             ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
@@ -134,10 +134,10 @@ def thickness_from_minmax(wavelengths,
         if plot:
             fig, ax = plt.subplots()
 
-            ax.set_xlabel('Extremum No.')
-            ax.set_ylabel('$n$($\lambda$) / $\lambda$')
-            ax.plot(k_values, n_over_lambda, 's', label='Extrema')
-            ax.plot(k_values, intercept + k_values * slope, label='Fit')
+            ax.set_xlabel(r'$\mathrm{{Index}}$ $N$')
+            ax.set_ylabel('$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ ')
+            ax.plot(k_values, n_over_lambda * 1000, 's', label='Extrema')
+            ax.plot(k_values, (intercept + k_values * slope) * 1000, label='Fit')
 
             ax.legend()
             ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
