@@ -44,6 +44,8 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/index';</script>
     <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/index.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -166,9 +168,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html">Choice of method</a></li>
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness: Peak fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html">Small thickness : Scheludko renormalisation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../source.html">Source Code and Issues</a></li>
@@ -328,10 +330,23 @@ document.write(`
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html">Choice of method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html#Step-1-:-Loading-Experimental-Data-from-a-.xy-File">Step 1 : Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html#Step-2-:-Data-Smoothing">Step 2 : Data Smoothing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html">Choice of method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness: Peak fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html#Scenario-1:-Successful-peak-fitting">Scenario 1: Successful peak fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html#Scenario-2:-Small-errors-detection">Scenario 2: Small errors detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html">Small thickness : Scheludko renormalisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Case-1-:-Non-zero-interference-order-m">Case 1 : Non-zero interference order <span class="math notranslate nohighlight">\(m\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Case-2-:-zero-interference-order-m">Case 2 : zero interference order <span class="math notranslate nohighlight">\(m\)</span></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>

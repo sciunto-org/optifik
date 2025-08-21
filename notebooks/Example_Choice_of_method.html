@@ -49,7 +49,7 @@
     <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/Example_Choice_of_method.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Source Code and Issues" href="../source.html" />
+    <link rel="next" title="Thick films : Fast Fourier Transform (FFT) Method" href="Example_FFT.html" />
     <link rel="prev" title="Examples" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,9 +167,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Choice of method</a></li>
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness: Peak fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html">Small thickness : Scheludko renormalisation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../source.html">Source Code and Issues</a></li>
@@ -323,12 +323,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Choice of method</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1-:-Loading-Experimental-Data-from-a-.xy-File">Step 1 : Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2-:-Data-Smoothing">Step 2 : Data Smoothing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -342,9 +340,8 @@ document.write(`
   <section id="Choice-of-method">
 <h1>Choice of method<a class="headerlink" href="#Choice-of-method" title="Link to this heading">#</a></h1>
 <p>In this section, we demonstrate how to use the three implemented methods for film thickness determination on a dataset. Since these methods rely on peak detection, we begin by illustrating the peak detection process.</p>
-</section>
-<section id="Step-1-:-Loading-Experimental-Data-from-a-.xy-File">
-<h1>Step 1 : Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File<a class="headerlink" href="#Step-1-:-Loading-Experimental-Data-from-a-.xy-File" title="Link to this heading">#</a></h1>
+<section id="Step-1:-Loading-Experimental-Data-from-a-.xy-File">
+<h2>Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File<a class="headerlink" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File" title="Link to this heading">#</a></h2>
 <p>Before applying any thickness analysis method, the first step is to acquire the data using a spectrometer. The spectrometer typically exports the raw spectral data in a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> file format, which is essentially a plain text file containing two columns :</p>
 <ul class="simple">
 <li><p>The <strong>wavelength</strong> (in nanometers)</p></li>
@@ -352,7 +349,7 @@ document.write(`
 </ul>
 <p>Here is an example of the raw content in such a file using the NanoCalc 2000 VIS/NIR spectrometer :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -393,7 +390,7 @@ document.write(`
 </ul>
 <p>The data can be ploted with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_spectrum</span>
@@ -415,11 +412,11 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="Step-2-:-Data-Smoothing">
-<h1>Step 2 : Data Smoothing<a class="headerlink" href="#Step-2-:-Data-Smoothing" title="Link to this heading">#</a></h1>
+<section id="Step-2:-Data-Smoothing">
+<h2>Step 2: Data Smoothing<a class="headerlink" href="#Step-2:-Data-Smoothing" title="Link to this heading">#</a></h2>
 <p>Once this data is loaded, you can apply a Savitsky-Golay filter of order 3 and a window of 11 points to smooth the data. We use the function <code class="docutils literal notranslate"><span class="pre">smooth_intensities</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth_intensities</span>
@@ -441,16 +438,16 @@ document.write(`
 </div>
 </section>
 <section id="Step-3-:-Find-peaks">
-<h1>Step 3 : Find peaks<a class="headerlink" href="#Step-3-:-Find-peaks" title="Link to this heading">#</a></h1>
+<h2>Step 3 : Find peaks<a class="headerlink" href="#Step-3-:-Find-peaks" title="Link to this heading">#</a></h2>
 <p>The scipy function <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">peaks</span></code> is then applied to the smoothed data with the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain with the function <code class="docutils literal notranslate"><span class="pre">finds_peak</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">finds_peak</span>
 
 <span class="c1"># Peak detection function, min_peak_prominence and min_peak_distance can be adjusted.</span>
-<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">,</span> <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.018</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">,</span> <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.018</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -462,7 +459,7 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -472,6 +469,7 @@ document.write(`
 </div>
 <p>The console output shows the wavelength peak indices for both minima and maxima. For this example, 7 peaks have been successfully detected.</p>
 <p>In the following, we will distinguish three cases based on the number of peaks detected in the spectrum, each of which will be treated differently. The procedure described above is assumed to have been followed.</p>
+</section>
 </section>
 
 
@@ -495,11 +493,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../source.html"
+       href="Example_FFT.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Source Code and Issues</p>
+        <p class="prev-next-title">Thick films : Fast Fourier Transform (FFT) Method</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -519,12 +517,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Choice of method</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1-:-Loading-Experimental-Data-from-a-.xy-File">Step 1 : Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2-:-Data-Smoothing">Step 2 : Data Smoothing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
