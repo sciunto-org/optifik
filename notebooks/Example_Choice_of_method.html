@@ -388,7 +388,7 @@ document.write(`
 <p>You can specify <code class="docutils literal notranslate"><span class="pre">wavelength_min</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_max</span></code> to remove irrelevant data.</p>
 <p>The function returns:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lambdas</span></code>: an array of wavelengths (in nm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wavelengths</span></code>: an array of wavelengths (in nm)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">intensities</span></code>: the corresponding measured intensities</p></li>
 </ul>
 <p>The data can be ploted with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain.</p>
@@ -400,10 +400,10 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_spectrum</span>
 
 <span class="c1"># Load wavelengths and intensities from the file</span>
-<span class="n">wavelength</span><span class="p">,</span> <span class="n">intensities</span> <span class="o">=</span> <span class="n">load_spectrum</span><span class="p">(</span><span class="n">datafile_path</span><span class="p">,</span> <span class="n">wavelength_min</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span> <span class="o">=</span> <span class="n">load_spectrum</span><span class="p">(</span><span class="n">datafile_path</span><span class="p">,</span> <span class="n">wavelength_min</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">wavelength_max</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
 <span class="c1"># Intensity as a function of wavelength</span>
-<span class="n">plot_spectrum</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">intensities</span><span class="p">)</span>
+<span class="n">plot_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -428,7 +428,7 @@ document.write(`
 <span class="n">Intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
 
 <span class="c1"># Smoothed intensity as a function of wavelength</span>
-<span class="n">plot_spectrum</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">)</span>
+<span class="n">plot_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">Intensities_smoothed</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
