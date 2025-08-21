@@ -9,6 +9,15 @@ You can install Optifik using `pip` in a virtualenv:
 
 Alternatively, you can install directly from source:
 
+* `Releases on github <https://github.com/sciunto-org/optifik/releases>`_
+
+.. code-block:: bash
+
+    cd optifik
+    pip install -e .
+
+or from the main branch (in development)
+
 .. code-block:: bash
 
     git clone https://github.com/sciunto-org/optifik.git
