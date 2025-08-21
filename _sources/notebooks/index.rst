@@ -1,13 +1,13 @@
 :orphan:
 
-Examples
-========
+Walkthrough
+===========
 
 
 .. toctree::
     :maxdepth: 2
 
-    Example_Choice_of_method.ipynb
-    Example_FFT.ipynb
-    Example_Peak_fitting.ipynb
-    Example_Scheludko_renormalisation.ipynb
+    1_Choice_of_method.ipynb
+    2_FFT.ipynb
+    3_Peak_fitting.ipynb
+    4_Scheludko_renormalisation.ipynb

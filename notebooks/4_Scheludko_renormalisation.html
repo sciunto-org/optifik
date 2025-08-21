@@ -47,12 +47,12 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Example_Scheludko_renormalisation';</script>
-    <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/Example_Scheludko_renormalisation.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4_Scheludko_renormalisation';</script>
+    <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/4_Scheludko_renormalisation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Source Code and Issues" href="../source.html" />
-    <link rel="prev" title="Intermediate thickness: Peak fitting" href="Example_Peak_fitting.html" />
+    <link rel="prev" title="Intermediate thickness: Peak fitting" href="3_Peak_fitting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,10 +167,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../generalities.html">Generalities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html">Choice of method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness: Peak fitting</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Walkthrough</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_Choice_of_method.html">Choice of method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_Peak_fitting.html">Intermediate thickness: Peak fitting</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Small thickness : Scheludko renormalisation</a></li>
 </ul>
 </details></li>
@@ -231,7 +231,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/Example_Scheludko_renormalisation.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/4_Scheludko_renormalisation.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -383,7 +383,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_5_0.png" src="../_images/notebooks_Example_Scheludko_renormalisation_5_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_5_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_5_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -417,7 +417,7 @@ plot=True)</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_7_0.png" src="../_images/notebooks_Example_Scheludko_renormalisation_7_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_7_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_7_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -471,7 +471,7 @@ plot=True)</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_12_0.png" src="../_images/notebooks_Example_Scheludko_renormalisation_12_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_0.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -508,14 +508,14 @@ h-difference for m=12: 99.2 nm
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_12_3.png" src="../_images/notebooks_Example_Scheludko_renormalisation_12_3.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_3.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_3.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_12_4.png" src="../_images/notebooks_Example_Scheludko_renormalisation_12_4.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_4.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_4.png" />
 </div>
 </div>
 <p>The first plot shows the Scheludko thickness computation at each wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> along the rightmost monotonic branch (see Step 1), for all interference orders between 0 and 12. The code automatically determines the correct interference order <span class="math notranslate nohighlight">\(m\)</span> and calculates the corresponding film thickness <span class="math notranslate nohighlight">\(h\)</span>. The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess.</p>
@@ -564,7 +564,7 @@ h-difference for m=12: 99.2 nm
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_18_0.png" src="../_images/notebooks_Example_Scheludko_renormalisation_18_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_18_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_18_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -608,7 +608,7 @@ h-difference for m=12: 99.2 nm
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_20_0.png" src="../_images/notebooks_Example_Scheludko_renormalisation_20_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_20_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_0.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -625,7 +625,7 @@ h-difference for m=12: 99.2 nm
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Example_Scheludko_renormalisation_20_2.png" src="../_images/notebooks_Example_Scheludko_renormalisation_20_2.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_20_2.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_2.png" />
 </div>
 </div>
 <p>The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess. The console output shows the film thickness along with its associated uncertainty, here <span class="math notranslate nohighlight">\(h= 115\)</span> nm.</p>
@@ -649,7 +649,7 @@ h-difference for m=12: 99.2 nm
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Example_Peak_fitting.html"
+       href="3_Peak_fitting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
