@@ -321,7 +321,7 @@ document.write(`
 
     <span class="c1"># FFT requires evenly spaced data.</span>
     <span class="c1"># So, we interpolate the signal.</span>
-    <span class="c1"># Interpolate to get a linear increase of 1 / wavelengths.</span>
+    <span class="c1"># Interpolate to get a linear increase of r_index / wavelengths.</span>
     <span class="n">inverse_wavelengths_times_n</span> <span class="o">=</span> <span class="n">refractive_index</span> <span class="o">/</span> <span class="n">wavelengths</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">inverse_wavelengths_times_n</span><span class="p">,</span> <span class="n">intensities</span><span class="p">)</span>
 
@@ -350,8 +350,8 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">inverse_wavelengths_fft</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">intensities_fft</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">freq_max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">intensities_fft</span><span class="p">[</span><span class="n">idx_max_fft</span><span class="p">]),</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;FFT($I^\star$)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm{{Optical \ Distance}} \ \mathcal</span><span class="si">{D}</span><span class="s1">$ $[\mathrm{{nm}}]$&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{FFT}}$ $(I^\star)$&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Thickness=</span><span class="si">{</span><span class="n">thickness_fft</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">thickness_fft</span><span class="p">,)</span></div>
