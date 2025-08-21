@@ -326,6 +326,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.io.load_spectrum"><code class="docutils literal notranslate"><span class="pre">load_spectrum()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-optifik.analysis">analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.analysis.finds_peak"><code class="docutils literal notranslate"><span class="pre">finds_peak()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.analysis.plot_spectrum"><code class="docutils literal notranslate"><span class="pre">plot_spectrum()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.analysis.smooth_intensities"><code class="docutils literal notranslate"><span class="pre">smooth_intensities()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-optifik.fft">fft</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.fft.thickness_from_fft"><code class="docutils literal notranslate"><span class="pre">thickness_from_fft()</span></code></a></li>
 </ul>
@@ -379,6 +385,75 @@ By default, the delimiter is a comma.</p>
 <dd class="field-even"><dl class="simple">
 <dt><strong>values</strong><span class="classifier">arrays</span></dt><dd><p>(lamdbas, intensities)</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-optifik.analysis">
+<span id="analysis"></span><h2>analysis<a class="headerlink" href="#module-optifik.analysis" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="optifik.analysis.finds_peak">
+<span class="sig-prename descclassname"><span class="pre">optifik.analysis.</span></span><span class="sig-name descname"><span class="pre">finds_peak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_peak_prominence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_peak_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/analysis.html#finds_peak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.analysis.finds_peak" title="Link to this definition">#</a></dt>
+<dd><p>Detect minima and maxima.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelengths</strong><span class="classifier">array</span></dt><dd><p>Wavelength values in nm.</p>
+</dd>
+<dt><strong>intensities</strong><span class="classifier">array</span></dt><dd><p>Intensity values.</p>
+</dd>
+<dt><strong>min_peak_prominence</strong><span class="classifier">float</span></dt><dd><p>min prominence for scipy find_peak.</p>
+</dd>
+<dt><strong>min_peak_distance</strong><span class="classifier">int, optional</span></dt><dd><p>min peak distance for scipy find_peak. The default is 10.</p>
+</dd>
+<dt><strong>plot</strong><span class="classifier">bool, optional</span></dt><dd><p>Display a curve, useful for checking or debuging. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>(peaks_min, peaks_max)</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="optifik.analysis.plot_spectrum">
+<span class="sig-prename descclassname"><span class="pre">optifik.analysis.</span></span><span class="sig-name descname"><span class="pre">plot_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/analysis.html#plot_spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.analysis.plot_spectrum" title="Link to this definition">#</a></dt>
+<dd><p>Helper function to quicly plot a spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelengths</strong><span class="classifier">array</span></dt><dd><p>Wavelength values in nm.</p>
+</dd>
+<dt><strong>intensities</strong><span class="classifier">array</span></dt><dd><p>Intensity values.</p>
+</dd>
+<dt><strong>title</strong><span class="classifier">string</span></dt><dd><p>Plot title.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="optifik.analysis.smooth_intensities">
+<span class="sig-prename descclassname"><span class="pre">optifik.analysis.</span></span><span class="sig-name descname"><span class="pre">smooth_intensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/analysis.html#smooth_intensities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.analysis.smooth_intensities" title="Link to this definition">#</a></dt>
+<dd><p>Return a smoothed intensities array with a Savitzky-Golay filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>intensities</strong><span class="classifier">ndarray</span></dt><dd><p>Intensity values</p>
+</dd>
+<dt><strong>window_size</strong><span class="classifier">int, optional</span></dt><dd><p>The length of the filter window. The default is 11.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>smoothed_intensities</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -581,6 +656,12 @@ Mandatory if interference_order == 0.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-optifik.io">io</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.io.load_spectrum"><code class="docutils literal notranslate"><span class="pre">load_spectrum()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-optifik.analysis">analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.analysis.finds_peak"><code class="docutils literal notranslate"><span class="pre">finds_peak()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.analysis.plot_spectrum"><code class="docutils literal notranslate"><span class="pre">plot_spectrum()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optifik.analysis.smooth_intensities"><code class="docutils literal notranslate"><span class="pre">smooth_intensities()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-optifik.fft">fft</a><ul class="nav section-nav flex-column">
