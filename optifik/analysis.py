@@ -30,7 +30,7 @@ def plot_spectrum(wavelengths, intensities, title=''):
     plt.figure()
     plt.plot(wavelengths, intensities, 'o-', markersize=2)
     plt.xlabel(r'$\lambda$ (nm)')
-    plt.ylabel(r'$I^*$')
+    plt.ylabel(r'$I^\star$')
     plt.title(title)
     plt.tight_layout()
     plt.show()
@@ -70,7 +70,7 @@ def finds_peak(wavelengths, intensities, min_peak_prominence, min_peak_distance=
         plt.plot(wavelengths[peaks_max], intensities[peaks_max], 'ro')
         plt.plot(wavelengths[peaks_min], intensities[peaks_min], 'ro')
         plt.xlabel(r'$\lambda$ (nm)')
-        plt.ylabel(r'$I^*$')
+        plt.ylabel(r'$I^\star$')
         plt.legend()
         import inspect
         plt.title(inspect.currentframe().f_code.co_name)

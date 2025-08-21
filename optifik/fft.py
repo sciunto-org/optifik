@@ -71,7 +71,7 @@ def thickness_from_fft(wavelengths, intensities,
         plt.loglog(inverse_wavelengths_fft, np.abs(intensities_fft))
         plt.loglog(freq_max, np.abs(intensities_fft[idx_max_fft]), 'o')
         plt.xlabel('Frequency')
-        plt.ylabel(r'FFT($I^*$)')
+        plt.ylabel(r'FFT($I^\star$)')
         plt.title(f'Thickness={thickness_fft:.2f}')
 
     return OptimizeResult(thickness=thickness_fft,)
