@@ -44,13 +44,11 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/index';</script>
     <link rel="canonical" href="https://sciunto-org.github.io/optifik/notebooks/index.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="This is a test" href="test.html" />
+    <link rel="next" title="Choice of method" href="Example_Choice_of_method.html" />
     <link rel="prev" title="API Reference" href="../api_reference.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,49 +165,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="test.html">This is a test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Example_Choice_of_method.html">Choice of method</a></li>
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness : Peak fitting</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html">Small thickness : Scheludko renormalisation</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -372,75 +328,10 @@ document.write(`
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="test.html">This is a test</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="test.html#Step-1">Step 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test.html#Step-2">Step 2</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html">Choice of method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html#Step-1-:-Loading-Experimental-Data-from-a-.xy-File">Step 1 : Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html#Step-2-:-Data-Smoothing">Step 2 : Data Smoothing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Example_Choice_of_method.html#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html">Thick films : Fast Fourier Transform (FFT) Method</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html#Code-:">Code :</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#Determine-the-film-thickness-by-Fast-Fourier-Transform">Determine the film thickness by Fast Fourier Transform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#Define-the-path-to-the-folder-containing-your-.xy-file">Define the path to the folder containing your .xy file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#Load-wavelengths-and-intensities-from-the-file">Load wavelengths and intensities from the file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#Intensity-as-a-function-of-wavelength">Intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#Smoothing-the-intensity">Smoothing the intensity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#Smoothed-intensity-as-a-function-of-wavelength">Smoothed intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_FFT.html#id1">Determine the film thickness by Fast Fourier Transform</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html#Console-output-:">Console output :</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Example_FFT.html#Remarks:">Remarks:</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html">Intermediate thickness : Peak fitting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html#Scenario-1-:-Successful-peak-fitting">Scenario 1 : Successful peak fitting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Determine-the-film-thickness-by-least-squares-linear-regression">Determine the film thickness by least squares linear regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Define-the-path-to-the-folder-containing-your-.xy-file">Define the path to the folder containing your .xy file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Load-wavelengths-and-intensities-from-the-file">Load wavelengths and intensities from the file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Intensity-as-a-function-of-wavelength">Intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Smoothing-the-intensity">Smoothing the intensity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Smoothed-intensity-as-a-function-of-wavelength">Smoothed intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id1">Determine the film thickness by least squares linear regression</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Example_Peak_fitting.html#Scenario-2-:-Small-errors-detection">Scenario 2 : Small errors detection</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#Determine-the-film-thickness-by-RANSAC-procedure">Determine the film thickness by RANSAC procedure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id3">Define the path to the folder containing your .xy file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id4">Load wavelengths and intensities from the file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id5">Intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id6">Smoothing the intensity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id7">Smoothed intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Peak_fitting.html#id8">Determine the film thickness by least squares linear regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html">Small thickness : Scheludko renormalisation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Case-1-:-Non-zero-interference-order-m">Case 1 : Non-zero interference order <span class="math notranslate nohighlight">\(m\)</span></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Define-the-path-to-the-folder-containing-your-.xy-file">Define the path to the folder containing your .xy file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Load-wavelengths-and-intensities-from-the-file">Load wavelengths and intensities from the file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Intensity-as-a-function-of-wavelength">Intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Smoothing-the-intensity">Smoothing the intensity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Smoothed-intensity-as-a-function-of-wavelength">Smoothed intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Extract-the-wavelength-corresponding-to-the-peak-at-the-end-of-the-rightmost-monotonic-branch">Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Create-a-refractive-index-array-matching-the-shape-of-'lambdas',-assuming-a-constant-value-of-1.33">Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Determine-the-film-thickness-by-Sheludko-renormalisation">Determine the film thickness by Sheludko renormalisation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Case-2-:-zero-interference-order-m">Case 2 : zero interference order <span class="math notranslate nohighlight">\(m\)</span></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id1">Define the path to the folder containing your .xy file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id2">Load wavelengths and intensities from the file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id3">Intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id4">Smoothing the intensity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id5">Smoothed intensity as a function of wavelength</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Define-the-path-to-the-folder-containing-your-.xy-void-file">Define the path to the folder containing your .xy void file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#Load-wavelengths-and-intensities-from-the-void-file">Load wavelengths and intensities from the void file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id6">Create a refractive index array matching the shape of ‘lambdas’, assuming a constant value of 1.33</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Example_Scheludko_renormalisation.html#id7">Determine the film thickness by Sheludko renormalisation</a></li>
 </ul>
 </div>
 </section>
@@ -466,11 +357,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="test.html"
+       href="Example_Choice_of_method.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">This is a test</p>
+        <p class="prev-next-title">Choice of method</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
