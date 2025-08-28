@@ -7,7 +7,6 @@ on:
 permissions:
   contents: write
 
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,6 +27,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[docs]"
+          pip install nbstripout
+
+      - name: Clean notebook outputs
+        run: |
+          find . -name "*.ipynb" -exec nbstripout {} \;
 
       - name: Build Sphinx docs
         run: |
