@@ -22,6 +22,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
+          sudo apt-get install -y dvipng
           sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-latex-recommended
           sudo apt-get install -y texlive-science texlive-fonts-recommended texlive-fonts-extra
           sudo apt-get install -y latexmk
