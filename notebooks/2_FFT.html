@@ -332,7 +332,7 @@ document.write(`
 <p>When the spectrum contains a large number of peaks (&gt; 15), the most suitable method is to make an FFT. Theoritical details will be provided in an upcoming publication.</p>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -369,18 +369,18 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(array([ 21,  45,  72, 102, 136, 175, 220, 271, 330, 401], dtype=int64),
- array([  9,  32,  58,  88, 119, 156, 197, 244, 298, 363, 441], dtype=int64))
+(array([ 21,  45,  72, 102, 136, 175, 220, 271, 330, 401]),
+ array([  9,  32,  58,  88, 119, 156, 197, 244, 298, 363, 441]))
 </pre></div></div>
 </div>
 <p>For this case, 21 peak have been successfully identified. To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">thickness_from_fft</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.fft</span></code> module. Here an exemple of plot you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.fft</span><span class="w"> </span><span class="kn">import</span> <span class="n">thickness_from_fft</span>
@@ -394,12 +394,12 @@ document.write(`
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
- thickness: 3562.947001650467
+ thickness: np.float64(3562.947001650467)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">

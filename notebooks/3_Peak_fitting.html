@@ -345,7 +345,7 @@ document.write(`
 <h2>Scenario 1: Successful peak fitting<a class="headerlink" href="#Scenario-1:-Successful-peak-fitting" title="Link to this heading">#</a></h2>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -380,17 +380,17 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(array([ 75, 300, 632], dtype=int64), array([ 15, 191, 454, 840], dtype=int64))
+(array([ 75, 300, 632]), array([ 15, 191, 454, 840]))
 </pre></div></div>
 </div>
 <p>To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the linear regression method <code class="docutils literal notranslate"><span class="pre">method='linreg'</span></code> of the <code class="docutils literal notranslate"><span class="pre">thickness_from_minmax</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.minmax</span></code> module. Here an exemple of plot you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.minmax</span><span class="w"> </span><span class="kn">import</span> <span class="n">thickness_from_minmax</span>
@@ -413,15 +413,15 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
- peaks_max: array([ 15, 191, 454, 840], dtype=int64)
- peaks_min: array([ 75, 300, 632], dtype=int64)
-    stderr: 3.90305266316079e-06
- thickness: 1363.2494169087543
+ peaks_max: array([ 15, 191, 454, 840])
+ peaks_min: array([ 75, 300, 632])
+    stderr: np.float64(3.90305266316079e-06)
+ thickness: np.float64(1363.2494169087543)
 </pre></div></div>
 </div>
 <p>The least-squares regression method in the <code class="docutils literal notranslate"><span class="pre">thickness_from_minmax</span></code> function automatically determines the film thickness <span class="math notranslate nohighlight">\(h\)</span>.</p>
@@ -436,7 +436,7 @@ document.write(`
 <h2>Scenario 2: Small errors detection<a class="headerlink" href="#Scenario-2:-Small-errors-detection" title="Link to this heading">#</a></h2>
 <p>Assuming the previous procedure has been followed and the resulting peak plot is as follows :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -472,18 +472,18 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(array([  29,  205,  463,  833, 1060, 1102], dtype=int64),
- array([ 118,  327,  635, 1045, 1080], dtype=int64))
+(array([  29,  205,  463,  833, 1060, 1102]),
+ array([ 118,  327,  635, 1045, 1080]))
 </pre></div></div>
 </div>
 <p>On the above figure, errors are visible on the rightmost data points. To derive the film thickness <span class="math notranslate nohighlight">\(h\)</span>, we use the RANSAC method <code class="docutils literal notranslate"><span class="pre">method='ransac'</span></code> of the <code class="docutils literal notranslate"><span class="pre">thickness_from_minmax</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.minmax</span></code> module. Here an exemple of plot you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.minmax</span><span class="w"> </span><span class="kn">import</span> <span class="n">thickness_from_minmax</span>
@@ -506,16 +506,16 @@ document.write(`
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-  num_inliers: 8
- num_outliers: 3
-    peaks_max: array([ 118,  327,  635, 1045, 1080], dtype=int64)
-    peaks_min: array([  29,  205,  463,  833, 1060, 1102], dtype=int64)
-    thickness: 1453.9390579484857
+  num_inliers: np.int64(8)
+ num_outliers: np.int64(3)
+    peaks_max: array([ 118,  327,  635, 1045, 1080])
+    peaks_min: array([  29,  205,  463,  833, 1060, 1102])
+    thickness: np.float64(1453.9390579484852)
 </pre></div></div>
 </div>
 <p>The RANSAC-based method in the <code class="docutils literal notranslate"><span class="pre">thickness_from_minmax</span></code> function automatically determines the film thickness <span class="math notranslate nohighlight">\(h\)</span>.</p>
