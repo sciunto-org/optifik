@@ -22,7 +22,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
-          sudo apt-get install -y texlive-latex-base texlive-science texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-latex-recommended
+          sudo apt-get install -y texlive-science texlive-fonts-recommended texlive-fonts-extra
+          sudo apt-get install -y latexmk
 
       - name: Install Python dependencies
         run: |
