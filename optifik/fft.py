@@ -39,11 +39,6 @@ def thickness_from_fft(wavelengths, intensities,
     if num_half_space is None:
         num_half_space = 10 * len(wavelengths)
 
-
-
-    if num_half_space is None:
-        num_half_space = 10 * len(wavelengths)
-
     x = refractive_index / wavelengths
     y = intensities
 
