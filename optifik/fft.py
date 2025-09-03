@@ -63,7 +63,7 @@ def thickness_from_fft(wavelengths, intensities,
         setup_matplotlib()
         plt.figure()
         plt.loglog(positive_freqs, positive_fft)
-        plt.loglog(peak_index, optical_thickness, 'o')
+        plt.loglog(optical_thickness, positive_fft[peak_index], 'o')
         plt.xlabel('$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
         plt.ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
         plt.title(f'Thickness={thickness:.2f}')
