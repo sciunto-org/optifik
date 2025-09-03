@@ -33,9 +33,6 @@ def thickness_from_fft(wavelengths, intensities,
     results : Instance of `OptimizeResult` class.
         The attribute `thickness` gives the thickness value in nm.
     """
-    if plot:
-        setup_matplotlib()
-
     if num_half_space is None:
         num_half_space = 10 * len(wavelengths)
 
@@ -63,6 +60,7 @@ def thickness_from_fft(wavelengths, intensities,
     thickness = optical_thickness / 2.
 
     if plot:
+        setup_matplotlib()
         plt.figure()
         plt.loglog(positive_freqs, positive_fft)
         plt.loglog(peak_index, optical_thickness, 'o')
