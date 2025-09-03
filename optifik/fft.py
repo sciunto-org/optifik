@@ -39,39 +39,40 @@ def thickness_from_fft(wavelengths, intensities,
     if num_half_space is None:
         num_half_space = 10 * len(wavelengths)
 
-    # FFT requires evenly spaced data.
-    # So, we interpolate the signal.
-    # Interpolate to get a linear increase of r_index / wavelengths.
-    inverse_wavelengths_times_n = refractive_index / wavelengths
-    f = interp1d(inverse_wavelengths_times_n, intensities)
-
-    inverse_wavelengths_linspace = np.linspace(inverse_wavelengths_times_n[0],
-                                           inverse_wavelengths_times_n[-1],
-                                           2*num_half_space)
-    intensities_linspace = f(inverse_wavelengths_linspace)
 
 
-    # Perform FFT
-    density = (inverse_wavelengths_times_n[-1]-inverse_wavelengths_times_n[0]) / (2*num_half_space)
-    inverse_wavelengths_fft = fftfreq(2*num_half_space, density)
-    intensities_fft = fft(intensities_linspace)
+    if num_half_space is None:
+        num_half_space = 10 * len(wavelengths)
 
-    # The FFT is symetrical over [0:N] and [N:2N].
-    # Keep over [N:2N], ie for positive freq.
-    intensities_fft = intensities_fft[num_half_space:2*num_half_space]
-    inverse_wavelengths_fft = inverse_wavelengths_fft[num_half_space:2*num_half_space]
+    x = refractive_index / wavelengths
+    y = intensities
 
-    idx_max_fft = np.argmax(abs(intensities_fft))
-    freq_max = inverse_wavelengths_fft[idx_max_fft]
+    # Resample the data
+    f = interp1d(x, y, kind='linear', fill_value='extrapolate')
+    x_uniform = np.linspace(x.min(), x.max(), 2 * num_half_space)
+    density = x_uniform[1] - x_uniform[0]
+    y_uniform = f(x_uniform)
 
-    thickness_fft = freq_max / 2.
+    ## FFT
+    fft_values = fft(y_uniform)
+    freqs = fftfreq(len(x_uniform), d=density)
+
+    # Select positive side
+    positive_freqs = freqs[freqs > 0]
+    positive_fft = np.abs(fft_values[freqs > 0])
+
+    # Find the prominent freq
+    peak_index = np.argmax(positive_fft)
+    optical_thickness = positive_freqs[peak_index]
+
+    thickness = optical_thickness / 2.
 
     if plot:
         plt.figure()
-        plt.loglog(inverse_wavelengths_fft, np.abs(intensities_fft))
-        plt.loglog(freq_max, np.abs(intensities_fft[idx_max_fft]), 'o')
+        plt.loglog(positive_freqs, positive_fft)
+        plt.loglog(peak_index, optical_thickness, 'o')
         plt.xlabel('$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
         plt.ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
-        plt.title(f'Thickness={thickness_fft:.2f}')
+        plt.title(f'Thickness={thickness:.2f}')
 
-    return OptimizeResult(thickness=thickness_fft,)
+    return OptimizeResult(thickness=thickness,)
