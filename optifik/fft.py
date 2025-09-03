@@ -53,7 +53,7 @@ def thickness_from_fft(wavelengths, intensities,
     density = x_uniform[1] - x_uniform[0]
     y_uniform = f(x_uniform)
 
-    ## FFT
+    # FFT
     fft_values = fft(y_uniform)
     freqs = fftfreq(len(x_uniform), d=density)
 
