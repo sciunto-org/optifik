@@ -313,14 +313,6 @@ document.write(`
 <span class="sd">    results : Instance of `OptimizeResult` class.</span>
 <span class="sd">        The attribute `thickness` gives the thickness value in nm.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-        <span class="n">setup_matplotlib</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">num_half_space</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">num_half_space</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
-
-
-
     <span class="k">if</span> <span class="n">num_half_space</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">num_half_space</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
 
@@ -333,7 +325,7 @@ document.write(`
     <span class="n">density</span> <span class="o">=</span> <span class="n">x_uniform</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_uniform</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">y_uniform</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_uniform</span><span class="p">)</span>
 
-    <span class="c1">## FFT</span>
+    <span class="c1"># FFT</span>
     <span class="n">fft_values</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">y_uniform</span><span class="p">)</span>
     <span class="n">freqs</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_uniform</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="n">density</span><span class="p">)</span>
 
@@ -348,6 +340,7 @@ document.write(`
     <span class="n">thickness</span> <span class="o">=</span> <span class="n">optical_thickness</span> <span class="o">/</span> <span class="mf">2.</span>
 
     <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">setup_matplotlib</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">positive_freqs</span><span class="p">,</span> <span class="n">positive_fft</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">peak_index</span><span class="p">,</span> <span class="n">optical_thickness</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
