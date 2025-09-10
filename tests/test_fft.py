@@ -56,14 +56,13 @@ def test_FFT_theory_range1():
     for expected in h_values:
         intensities = compute_spectrum_theory(expected, lambdas, n_values)
 
-        thickness_FFT = thickness_from_fft(lambdas,
-                                           intensities,
-                                           refractive_index=n_values,
-                                           num_half_space=None,
-                                           plot=False)
+        result = thickness_from_fft(lambdas,
+                                    intensities,
+                                    refractive_index=n_values,
+                                    num_half_space=None,
+                                    plot=False)
 
-        result = thickness_FFT.thickness
-        r_error = np.abs((result - expected) / expected)
+        r_error = np.abs((result.thickness - expected) / expected)
         assert r_error < 0.12
 
 
@@ -77,14 +76,13 @@ def test_FFT_theory_range2():
     for expected in h_values:
         intensities = compute_spectrum_theory(expected, lambdas, n_values)
 
-        thickness_FFT = thickness_from_fft(lambdas,
-                                           intensities,
-                                           refractive_index=n_values,
-                                           num_half_space=None,
-                                           plot=False)
+        result = thickness_from_fft(lambdas,
+                                    intensities,
+                                    refractive_index=n_values,
+                                    num_half_space=None,
+                                    plot=False)
 
-        result = thickness_FFT.thickness
-        r_error = np.abs((result - expected) / expected)
+        r_error = np.abs((result.thickness - expected) / expected)
         assert r_error < 4e-2
 
 
@@ -100,14 +98,12 @@ def test_FFT_data_basic(test_data_dir):
     smoothed_intensities = smooth_intensities(raw_intensities)
     r_index =  n_lambda(lambdas)
 
-    thickness_FFT = thickness_from_fft(lambdas,
+    result = thickness_from_fft(lambdas,
                                        smoothed_intensities,
                                        refractive_index=r_index,
-                                       plot=False
-                                       )
-    result = thickness_FFT.thickness
+                                       plot=False)
 
-    assert_allclose(result, expected, rtol=1e-1)
+    assert_allclose(result.thickness, expected, rtol=1e-1)
 
 
 @pytest.mark.parametrize("spectrum_path, expected", load_Lorene())
@@ -117,12 +113,10 @@ def test_FFT_data_Lorene(spectrum_path, expected):
     smoothed_intensities = raw_intensities.copy()
 
     r_index = 1.41
-    thickness_FFT = thickness_from_fft(lambdas,
-                                       smoothed_intensities,
-                                       refractive_index=r_index,
-                                       plot=False
-                                       )
+    result = thickness_from_fft(lambdas,
+                                smoothed_intensities,
+                                refractive_index=r_index,
+                                plot=False)
 
 
-    result = thickness_FFT.thickness
-    assert_allclose(result, expected, rtol=1e-1)
+    assert_allclose(result.thickness, expected, rtol=1e-1)
