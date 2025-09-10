@@ -9,6 +9,9 @@ from optifik.scheludko import get_default_start_stop_wavelengths
 from optifik.analysis import smooth_intensities
 from optifik.io import load_spectrum
 
+#
+# Helper
+#
 
 @pytest.fixture
 def test_data_dir():
@@ -31,7 +34,53 @@ def dataset1(test_data_dir):
         "r_index": r_index,
     }
 
+def n_lambda(lmbda):
+    """
+    For water + TTAB 1 CMC
+    """
+    return 1.324188 + 3102.060378 / (lmbda**2)
 
+def compute_spectrum_theory(h, lambdas, n_values):
+    sin_term = np.sin(2 * np.pi * n_values * h / lambdas) ** 2
+    denominator = (2 * n_values / (n_values**2 - 1)) ** 2 + sin_term
+    return sin_term / denominator
+
+
+#
+# Theory
+#
+
+def test_scheludko_theory():
+    lambda_min = 450
+    lambda_max = 800
+    lambdas = np.linspace(lambda_min, lambda_max, 1_000)
+    h_values = np.linspace(350, 1_000, 33)
+
+    n_values = n_lambda(lambdas)
+
+    for expected in h_values:
+        intensities = compute_spectrum_theory(expected, lambdas, n_values)
+        w_start, w_stop = get_default_start_stop_wavelengths(lambdas,
+                                                             intensities,
+                                                             refractive_index=n_values,
+                                                             min_peak_prominence=None,
+                                                             plot=False)
+
+
+        result = thickness_from_scheludko(lambdas,
+                                          intensities,
+                                          refractive_index=n_values,
+                                          wavelength_start=w_start,
+                                          wavelength_stop=w_stop,
+                                          plot=False)
+
+        r_error = np.abs((result.thickness - expected) / expected)
+        assert r_error < 2e-3
+
+
+#
+# Data
+#
 
 def test_data_interference_order_positive(dataset1):
     expected = dataset1['expected']
