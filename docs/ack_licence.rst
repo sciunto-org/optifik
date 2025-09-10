@@ -17,6 +17,24 @@ By alphabetic order:
 - Anniina Salonen
 - Victor Ziapkoff
 
+Fundings
+--------
+
+This work has been funded by the ANR - 22-CE06-0029.
+
+.. figure:: _static/logo_cnrs.jpg
+   :align: center
+   :width: 30%
+
+.. figure:: _static/logo_saclay.jpg
+   :align: center
+   :width: 30%
+
+.. figure:: _static/logo_anr.jpg
+   :align: center
+   :width: 30%
+
+
 
 Licence
 -------
