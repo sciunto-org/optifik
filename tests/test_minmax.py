@@ -14,7 +14,7 @@ def test_data_dir():
     return Path(__file__).parent.parent / 'data'
 
 
-def test_minmax_ransac(test_data_dir):
+def test_minmax_ransac_data_basic(test_data_dir):
     spectrum_path = test_data_dir / 'basic' / '000004310.xy'
     expected = 1338.35
 
@@ -34,7 +34,7 @@ def test_minmax_ransac(test_data_dir):
     assert_allclose(result.thickness, expected, rtol=1e-1)
 
 
-def test_minmax_linreg(test_data_dir):
+def test_minmax_linreg_data_basic(test_data_dir):
     spectrum_path = test_data_dir / 'basic' / '000004310.xy'
     expected = 1338.35
 

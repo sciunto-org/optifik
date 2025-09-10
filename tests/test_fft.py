@@ -9,7 +9,8 @@ from optifik.fft import thickness_from_fft
 from optifik.analysis import smooth_intensities
 from optifik.io import load_spectrum
 
-def load():
+
+def load_Lorene():
     test_data_dir = Path(__file__).parent.parent / 'data'
     FOLDER = test_data_dir / 'spectraLorene/sample2'
     yaml_file = FOLDER / 'sample2.yaml'
@@ -26,7 +27,7 @@ def test_data_dir():
     return Path(__file__).parent.parent / 'data'
 
 
-def test_FFT(test_data_dir):
+def test_FFT_data_basic(test_data_dir):
     spectrum_path = test_data_dir / 'basic' / '003582.xy'
     expected = 3524.51
 
@@ -41,8 +42,8 @@ def test_FFT(test_data_dir):
 
     assert_allclose(result, expected, rtol=1e-1)
 
-@pytest.mark.parametrize("spectrum_path, expected", load())
-def test_minmax(spectrum_path, expected):
+@pytest.mark.parametrize("spectrum_path, expected", load_Lorene())
+def test_FFT_data_Lorene(spectrum_path, expected):
     lambdas, raw_intensities = load_spectrum(spectrum_path, wavelength_min=680)
     smoothed_intensities = smooth_intensities(raw_intensities)
     smoothed_intensities = raw_intensities.copy()

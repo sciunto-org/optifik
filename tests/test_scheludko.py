@@ -33,7 +33,7 @@ def dataset1(test_data_dir):
 
 
 
-def test_interference_order_positive(dataset1):
+def test_data_interference_order_positive(dataset1):
     expected = dataset1['expected']
     lambdas = dataset1['lambdas']
     smoothed_intensities = dataset1['smoothed_intensities']
@@ -50,7 +50,7 @@ def test_interference_order_positive(dataset1):
                                           interference_order=-1,
                                           plot=False)
 
-def test_start_stop_swapped(dataset1):
+def test_data_start_stop_swapped(dataset1):
     expected = dataset1['expected']
     lambdas = dataset1['lambdas']
     smoothed_intensities = dataset1['smoothed_intensities']
@@ -68,7 +68,7 @@ def test_start_stop_swapped(dataset1):
                                           plot=False)
 
 
-def test_scheludko_4peaks(dataset1):
+def test_data_scheludko_4peaks(dataset1):
     expected = dataset1['expected']
     lambdas = dataset1['lambdas']
     smoothed_intensities = dataset1['smoothed_intensities']
@@ -94,7 +94,7 @@ def test_scheludko_4peaks(dataset1):
     assert_allclose(result.thickness, expected, rtol=1e-1)
 
 
-def test_scheludko_2peaks(test_data_dir):
+def test_data_scheludko_2peaks(test_data_dir):
     spectrum_path = test_data_dir / 'basic' / '000006544.xy'
     expected = 495.69
 
@@ -122,7 +122,7 @@ def test_scheludko_2peaks(test_data_dir):
     assert_allclose(result.thickness, expected, rtol=1e-1)
 
 
-def test_order0(test_data_dir):
+def test_data_order0(test_data_dir):
     spectrum_path = test_data_dir / 'basic' / '000018918.xy'
     expected = 115.33
 
