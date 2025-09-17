@@ -1,5 +1,5 @@
 
-# x.x.x
+# 0.2.0
 
 * Switch from scikit-image to scikit-learn for ransac
 * Add warning in minmax returns a NaN
