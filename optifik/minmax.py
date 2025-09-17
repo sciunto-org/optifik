@@ -73,7 +73,7 @@ def thickness_from_minmax(wavelengths,
         n_over_lambda = refractive_index / wavelengths[peaks][::-1]
 
     if method.lower() == 'ransac':
-        residual_threshold = 4e-5
+        residual_threshold = 4e-4
         min_samples = 2
         data = np.column_stack([k_values, n_over_lambda])
         
@@ -85,10 +85,7 @@ def thickness_from_minmax(wavelengths,
         #                               residual_threshold=residual_threshold,
         #                               max_trials=100)
         #slope = model_robust.params[1][1]
-        #thickness_minmax = 1 / slope /  4
-
- 
-        
+        #thickness_minmax = 1 / slope /  4       
         
         # Organize the data for RANSAC (sklearn)
         X = k_values.reshape(-1, 1)
@@ -107,10 +104,6 @@ def thickness_from_minmax(wavelengths,
         slope = model_robust.estimator_.coef_[0]
         thickness_minmax = 1 / slope / 4
         
-         
-        
-
-
         
         if plot:
             fig, ax = plt.subplots()

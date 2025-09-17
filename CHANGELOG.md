@@ -2,6 +2,7 @@
 # 0.2.1
 
 * BUGFIX: plot minmax
+* ENH: change residal_threshold for ransac, to improve stability
 
 
 # 0.2.0
