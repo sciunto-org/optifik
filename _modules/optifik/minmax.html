@@ -280,7 +280,7 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">ransac</span><span class="p">,</span> <span class="n">LineModelND</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">RANSACRegressor</span><span class="p">,</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_peaks</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
@@ -353,39 +353,38 @@ document.write(`
         <span class="n">n_over_lambda</span> <span class="o">=</span> <span class="n">refractive_index</span> <span class="o">/</span> <span class="n">wavelengths</span><span class="p">[</span><span class="n">peaks</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;ransac&#39;</span><span class="p">:</span>
-        <span class="n">residual_threshold</span> <span class="o">=</span> <span class="mf">4e-5</span>
+        <span class="n">residual_threshold</span> <span class="o">=</span> <span class="mf">4e-4</span>
         <span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="c1"># Scikit-image</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">k_values</span><span class="p">,</span> <span class="n">n_over_lambda</span><span class="p">])</span>
-        <span class="n">model_robust</span><span class="p">,</span> <span class="n">inliers</span> <span class="o">=</span> <span class="n">ransac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">LineModelND</span><span class="p">,</span>
-                                       <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">,</span>
-                                       <span class="n">residual_threshold</span><span class="o">=</span><span class="n">residual_threshold</span><span class="p">,</span>
-                                       <span class="n">max_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-        <span class="n">slope</span> <span class="o">=</span> <span class="n">model_robust</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">thickness_minmax</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">slope</span> <span class="o">/</span>  <span class="mi">4</span>
-
-        <span class="c1"># Scikit-learn</span>
-        <span class="c1">#from sklearn import linear_model, datasets</span>
-        <span class="c1">#X, y = k_values.reshape(-1, 1), n_over_lambda[::-1]</span>
-
-        <span class="c1">## Fit line using all data</span>
-        <span class="c1">#lr = linear_model.LinearRegression()</span>
-        <span class="c1">#lr.fit(X, y)</span>
-
-        <span class="c1">#slransac = linear_model.RANSACRegressor(min_samples=min_samples,</span>
-        <span class="c1">#                                        residual_threshold=residual_threshold)</span>
-        <span class="c1">#slransac.fit(X, y)</span>
-        <span class="c1">#inlier_mask = slransac.inlier_mask_</span>
-        <span class="c1">#outlier_mask = np.logical_not(inlier_mask)</span>
-
-        <span class="c1">## Predict data of estimated models</span>
-        <span class="c1">#line_X = np.arange(X.min(), X.max())[:, np.newaxis]</span>
-        <span class="c1">#line_y = lr.predict(line_X)</span>
-        <span class="c1">#line_y_ransac = slransac.predict(line_X)</span>
-
-        <span class="c1">#slope = -slransac.estimator_.coef_[0]</span>
-        <span class="c1">#thickness_minmax = 1 / slope /  4</span>
-
+        
+        <span class="c1"># Scikit-image</span>
+        <span class="c1">#from skimage.measure import ransac, LineModelND</span>
+        <span class="c1">#</span>
+        <span class="c1">#model_robust, inliers = ransac(data, LineModelND,</span>
+        <span class="c1">#                               min_samples=min_samples,</span>
+        <span class="c1">#                               residual_threshold=residual_threshold,</span>
+        <span class="c1">#                               max_trials=100)</span>
+        <span class="c1">#slope = model_robust.params[1][1]</span>
+        <span class="c1">#thickness_minmax = 1 / slope /  4       </span>
+        
+        <span class="c1"># Organize the data for RANSAC (sklearn)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">k_values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">n_over_lambda</span>
+        
+         
+        <span class="n">model_robust</span> <span class="o">=</span> <span class="n">RANSACRegressor</span><span class="p">(</span>
+            <span class="n">estimator</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">(),</span>
+            <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">,</span>
+            <span class="n">residual_threshold</span><span class="o">=</span><span class="n">residual_threshold</span><span class="p">,</span>
+            <span class="n">max_trials</span><span class="o">=</span><span class="mi">100</span>
+        <span class="p">)</span>
+        <span class="n">model_robust</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="n">inliers</span> <span class="o">=</span> <span class="n">model_robust</span><span class="o">.</span><span class="n">inlier_mask_</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">model_robust</span><span class="o">.</span><span class="n">estimator_</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">thickness_minmax</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">slope</span> <span class="o">/</span> <span class="mi">4</span>
+        
+        
         <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
             <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
@@ -393,7 +392,7 @@ document.write(`
             <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ &#39;</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">inliers</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">inliers</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;xb&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Inliers&#39;</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">inliers</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">inliers</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;+r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Outliers&#39;</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_values</span><span class="p">,</span> <span class="n">model_robust</span><span class="o">.</span><span class="n">predict_y</span><span class="p">(</span><span class="n">k_values</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fit&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_values</span><span class="p">,</span> <span class="n">model_robust</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fit&#39;</span><span class="p">)</span>
 
             <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Thickness = </span><span class="si">{</span><span class="n">thickness_minmax</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> nm&#39;</span><span class="p">)</span>
