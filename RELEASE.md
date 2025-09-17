@@ -8,6 +8,8 @@ pip install build twine
 
 * Write changelog
 
+* Commit changes
+
 * Push version
 
 ```
@@ -19,18 +21,26 @@ bumpver update --pre beta	# Version beta (1.0.0b1)	1.0.0 → 1.0.0b1
 bumpver update --pre rc  # Version release candidate (1.0.0rc1)	1.0.0 → 1.0.0rc1
 ```
 
+* Push tags
+
+```
+git push origin --tag
+```
 
 * Build
+
 ```
 python -m build
 ```
 
 * Check
+
 ```
 twine check dist/*
 ```
 
 * Push to pipy
+
 ```
 twine upload dist/*
 ```
