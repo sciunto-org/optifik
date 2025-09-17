@@ -41,6 +41,11 @@ pip install -e .
 pip install -e ".[dev]"
 ```
 
+* Run the test suite
+```
+pytest
+```
+
 * Install doc tools
 ```
 pip install -e ".[docs]"
