@@ -2,7 +2,7 @@ import warnings
 import numpy as np
 
 from scipy import stats
-from skimage.measure import ransac, LineModelND
+from sklearn.linear_model import RANSACRegressor, LinearRegression
 from scipy.signal import find_peaks
 
 import inspect
@@ -75,37 +75,42 @@ def thickness_from_minmax(wavelengths,
     if method.lower() == 'ransac':
         residual_threshold = 4e-5
         min_samples = 2
+        
         # Scikit-image
-        data = np.column_stack([k_values, n_over_lambda])
-        model_robust, inliers = ransac(data, LineModelND,
-                                       min_samples=min_samples,
-                                       residual_threshold=residual_threshold,
-                                       max_trials=100)
-        slope = model_robust.params[1][1]
-        thickness_minmax = 1 / slope /  4
-
-        # Scikit-learn
-        #from sklearn import linear_model, datasets
-        #X, y = k_values.reshape(-1, 1), n_over_lambda[::-1]
-
-        ## Fit line using all data
-        #lr = linear_model.LinearRegression()
-        #lr.fit(X, y)
-
-        #slransac = linear_model.RANSACRegressor(min_samples=min_samples,
-        #                                        residual_threshold=residual_threshold)
-        #slransac.fit(X, y)
-        #inlier_mask = slransac.inlier_mask_
-        #outlier_mask = np.logical_not(inlier_mask)
-
-        ## Predict data of estimated models
-        #line_X = np.arange(X.min(), X.max())[:, np.newaxis]
-        #line_y = lr.predict(line_X)
-        #line_y_ransac = slransac.predict(line_X)
-
-        #slope = -slransac.estimator_.coef_[0]
+        #from skimage.measure import ransac, LineModelND
+        #data = np.column_stack([k_values, n_over_lambda])
+        #model_robust, inliers = ransac(data, LineModelND,
+        #                               min_samples=min_samples,
+        #                               residual_threshold=residual_threshold,
+        #                               max_trials=100)
+        #slope = model_robust.params[1][1]
         #thickness_minmax = 1 / slope /  4
 
+ 
+        
+        
+        # Organize the data for RANSAC (sklearn)
+        X = k_values.reshape(-1, 1)
+        y = n_over_lambda
+        
+         
+        model_robust = RANSACRegressor(
+            estimator=LinearRegression(),
+            min_samples=min_samples,
+            residual_threshold=residual_threshold,
+            max_trials=100
+        )
+        model_robust.fit(X, y)
+        
+        inliers = model_robust.inlier_mask_
+        slope = model_robust.estimator_.coef_[0]
+        thickness_minmax = 1 / slope / 4
+        
+         
+        
+
+
+        
         if plot:
             fig, ax = plt.subplots()
 
