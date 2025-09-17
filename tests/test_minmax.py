@@ -1,4 +1,5 @@
 import pytest
+import warnings
 from pathlib import Path
 
 import numpy as np
@@ -71,6 +72,29 @@ def test_minmax_theory():
 
         r_error = np.abs((result.thickness - expected) / expected)
         assert r_error < 1e-2
+
+
+def test_minmax_less_than_2_peaks():
+    lambda_min = 450
+    lambda_max = 800
+    lambdas = np.linspace(lambda_min, lambda_max, 1_000)
+    h_values = np.linspace(100, 250, 3)
+
+    n_values = n_lambda(lambdas)
+    for expected in h_values:
+        intensities = compute_spectrum_theory(expected, lambdas, n_values)
+        with pytest.warns(RuntimeWarning):
+            result = thickness_from_minmax(lambdas,
+                                           intensities,
+                                           refractive_index=n_values,
+                                           method='linreg',
+                                           min_peak_prominence=None,
+                                           plot=False)
+
+         
+            assert result.thickness is np.nan
+
+
 
 
 #

@@ -62,7 +62,7 @@ def thickness_from_minmax(wavelengths,
     k_values = np.arange(len(peaks))
 
     if k_values.size < 2:
-        warnings.warn('Number of peaks < 2, cannot fit. Thickness set to NaN.')
+        warnings.warn('Number of peaks < 2, cannot fit. Thickness set to NaN.', RuntimeWarning)
         return OptimizeResult(thickness=np.nan)
 
 
