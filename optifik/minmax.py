@@ -112,7 +112,7 @@ def thickness_from_minmax(wavelengths,
             ax.set_ylabel(r'$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ ')
             ax.plot(data[inliers, 0], data[inliers, 1] * 1000, 'xb', alpha=0.6, label='Inliers')
             ax.plot(data[~inliers, 0], data[~inliers, 1] * 1000, '+r', alpha=0.6, label='Outliers')
-            ax.plot(k_values, model_robust.predict_y(k_values) * 1000, '-g', label='Fit')
+            ax.plot(k_values, model_robust.predict(X) * 1000, '-g', label='Fit')
 
             ax.legend()
             ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
