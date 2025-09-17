@@ -75,10 +75,11 @@ def thickness_from_minmax(wavelengths,
     if method.lower() == 'ransac':
         residual_threshold = 4e-5
         min_samples = 2
+        data = np.column_stack([k_values, n_over_lambda])
         
         # Scikit-image
         #from skimage.measure import ransac, LineModelND
-        #data = np.column_stack([k_values, n_over_lambda])
+        #
         #model_robust, inliers = ransac(data, LineModelND,
         #                               min_samples=min_samples,
         #                               residual_threshold=residual_threshold,

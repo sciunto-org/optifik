@@ -1,4 +1,9 @@
 
+# 0.2.1
+
+* BUGFIX: plot minmax
+
+
 # 0.2.0
 
 * Switch from scikit-image to scikit-learn for ransac
