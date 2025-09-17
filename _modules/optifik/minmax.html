@@ -342,7 +342,7 @@ document.write(`
     <span class="n">k_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">peaks</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">k_values</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Number of peaks &lt; 2, cannot fit. Thickness set to NaN.&#39;</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Number of peaks &lt; 2, cannot fit. Thickness set to NaN.&#39;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
 
 
