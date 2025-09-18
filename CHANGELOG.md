@@ -1,8 +1,12 @@
 
+# 0.x.x
+
+
 # 0.3.0
 
 * ENH: if latex is installed, use latex everywhere
 * ENH: pass polynom_order in parameters of smooth_intensities
+* ENH: PEP8
 
 # 0.2.1
 
