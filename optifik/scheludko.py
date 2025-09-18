@@ -280,7 +280,9 @@ def thickness_from_scheludko(wavelengths,
 
             if plot:
                 plt.plot(wavelengths_masked, h_values, '.',
-                         markersize=3, label=f"Order={_order}")
+                         markersize=3, label=f"Order={_order}, Difference={difference:.1f} nm")
+                plt.legend()
+                plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
     elif interference_order == 0:
 
         min_peak_prominence = 0.02

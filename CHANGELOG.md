@@ -2,6 +2,7 @@
 # 0.x.x
 
 * ENH: pass the maximum order tested in scheludko
+* ENH: add legend and title to plot for guessed order in scheludko
 
 # 0.3.0
 
