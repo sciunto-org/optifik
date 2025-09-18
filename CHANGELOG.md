@@ -1,6 +1,7 @@
 
 # 0.x.x
 
+* ENH: pass the maximum order tested in scheludko
 
 # 0.3.0
 

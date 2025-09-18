@@ -192,6 +192,7 @@ def thickness_from_scheludko(wavelengths,
                              wavelength_start=None,
                              wavelength_stop=None,
                              interference_order=None,
+                             max_order_tested=6,
                              intensities_void=None,
                              plot=None):
     """
@@ -214,6 +215,9 @@ def thickness_from_scheludko(wavelengths,
     interference_order : scalar, optional
         Interference order, zero or positive integer.
         If set to None, the value is guessed.
+    max_order_tested : int, optional
+        Maximum order tested if interference_order is `None'.
+        The default is 6.
     intensities_void : array, optional
         Intensity in absence of a film.
         Mandatory if interference_order == 0.
@@ -243,8 +247,6 @@ def thickness_from_scheludko(wavelengths,
 
     # Handle the interference order
     if interference_order is None:
-        # A bit extreme...
-        max_tested_order = 12
 
         # mask input data
         mask = (wavelengths >= wavelength_start) & (wavelengths <= wavelength_stop)
@@ -260,7 +262,7 @@ def thickness_from_scheludko(wavelengths,
             plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
             plt.xlabel(r'$\lambda$ $[\mathrm{nm}]$')
 
-        for _order in range(0, max_tested_order+1):
+        for _order in range(0, max_order_tested+1):
             h_values = _thicknesses_scheludko_at_order(wavelengths_masked,
                                                        intensities_masked,
                                                        _order,
@@ -268,7 +270,8 @@ def thickness_from_scheludko(wavelengths,
 
             difference = np.max(h_values) - np.min(h_values)
 
-            print(f"h-difference for m={_order}: {difference:.1f} nm")
+            # Put this in a logger eventually
+            #print(f"h-difference for m={_order}: {difference:.1f} nm")
 
             if difference < min_difference:
                 min_difference = difference
