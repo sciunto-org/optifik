@@ -440,7 +440,7 @@ By default, the delimiter is a comma.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="optifik.analysis.smooth_intensities">
-<span class="sig-prename descclassname"><span class="pre">optifik.analysis.</span></span><span class="sig-name descname"><span class="pre">smooth_intensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/analysis.html#smooth_intensities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.analysis.smooth_intensities" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">optifik.analysis.</span></span><span class="sig-name descname"><span class="pre">smooth_intensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynom_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/analysis.html#smooth_intensities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.analysis.smooth_intensities" title="Link to this definition">#</a></dt>
 <dd><p>Return a smoothed intensities array with a Savitzky-Golay filter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -448,6 +448,8 @@ By default, the delimiter is a comma.</p>
 <dt><strong>intensities</strong><span class="classifier">ndarray</span></dt><dd><p>Intensity values</p>
 </dd>
 <dt><strong>window_size</strong><span class="classifier">int, optional</span></dt><dd><p>The length of the filter window. The default is 11.</p>
+</dd>
+<dt><strong>polynom_order</strong><span class="classifier">int, optional</span></dt><dd><p>Polynom order used for the local fits. The default is 3.</p>
 </dd>
 </dl>
 </dd>
