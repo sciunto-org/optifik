@@ -282,7 +282,6 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_spectrum</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">setup_matplotlib</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">finds_peak</span>
 
@@ -439,7 +438,7 @@ document.write(`
 <span class="sd">    wavelength_stop : scalar</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">refractive_index</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-        <span class="n">refractive_index</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
+        <span class="n">refractive_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
 
     <span class="c1"># idx_min idx max</span>
     <span class="n">idx_peaks_min</span><span class="p">,</span> <span class="n">idx_peaks_max</span> <span class="o">=</span> <span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span><span class="p">,</span>
@@ -476,6 +475,7 @@ document.write(`
                              <span class="n">wavelength_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">wavelength_stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">interference_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">max_order_tested</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
                              <span class="n">intensities_void</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -498,6 +498,9 @@ document.write(`
 <span class="sd">    interference_order : scalar, optional</span>
 <span class="sd">        Interference order, zero or positive integer.</span>
 <span class="sd">        If set to None, the value is guessed.</span>
+<span class="sd">    max_order_tested : int, optional</span>
+<span class="sd">        Maximum order tested if interference_order is `None&#39;.</span>
+<span class="sd">        The default is 6.</span>
 <span class="sd">    intensities_void : array, optional</span>
 <span class="sd">        Intensity in absence of a film.</span>
 <span class="sd">        Mandatory if interference_order == 0.</span>
@@ -511,7 +514,7 @@ document.write(`
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">refractive_index</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-        <span class="n">refractive_index</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
+        <span class="n">refractive_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
         <span class="n">setup_matplotlib</span><span class="p">()</span>
@@ -527,8 +530,6 @@ document.write(`
 
     <span class="c1"># Handle the interference order</span>
     <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># A bit extreme...</span>
-        <span class="n">max_tested_order</span> <span class="o">=</span> <span class="mi">12</span>
 
         <span class="c1"># mask input data</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavelengths</span> <span class="o">&gt;=</span> <span class="n">wavelength_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wavelengths</span> <span class="o">&lt;=</span> <span class="n">wavelength_stop</span><span class="p">)</span>
@@ -544,7 +545,7 @@ document.write(`
             <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$h$ $[\mathrm{{nm}}]$&#39;</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda$ $[\mathrm</span><span class="si">{nm}</span><span class="s1">]$&#39;</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">_order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_tested_order</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_order_tested</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">h_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
                                                        <span class="n">intensities_masked</span><span class="p">,</span>
                                                        <span class="n">_order</span><span class="p">,</span>
@@ -552,7 +553,8 @@ document.write(`
 
             <span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span>
 
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;h-difference for m=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
+            <span class="c1"># Put this in a logger eventually</span>
+            <span class="c1">#print(f&quot;h-difference for m={_order}: {difference:.1f} nm&quot;)</span>
 
             <span class="k">if</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">min_difference</span><span class="p">:</span>
                 <span class="n">min_difference</span> <span class="o">=</span> <span class="n">difference</span>
@@ -582,10 +584,10 @@ document.write(`
 
         <span class="n">interference_order</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
-                                                     <span class="n">intensities_masked</span><span class="p">,</span>
-                                                     <span class="n">interference_order</span><span class="p">,</span>
-                                                     <span class="n">r_index_masked</span><span class="p">,</span>
-                                                     <span class="n">intensities_void</span><span class="o">=</span><span class="n">intensities_void_masked</span><span class="p">)</span>
+                                                           <span class="n">intensities_masked</span><span class="p">,</span>
+                                                           <span class="n">interference_order</span><span class="p">,</span>
+                                                           <span class="n">r_index_masked</span><span class="p">,</span>
+                                                           <span class="n">intensities_void</span><span class="o">=</span><span class="n">intensities_void_masked</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">interference_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># mask input data</span>
@@ -602,8 +604,6 @@ document.write(`
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;interference_order must be &gt;= 0.&#39;</span><span class="p">)</span>
 
-
-
     <span class="c1"># Compute the thickness for the selected order</span>
 
     <span class="c1"># Delta</span>
@@ -615,16 +615,10 @@ document.write(`
         <span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">intensities_masked</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">intensities_masked</span><span class="p">)</span>
     <span class="n">Delta_from_data</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
 
-
-
-    <span class="c1"># Delta_from_data = (intensities_masked -np.min(intensities_masked))/(np.max(intensities_masked) -np.min(intensities_masked))</span>
-    <span class="c1"># Delta_from_data = (intensities_raw_masked -np.min(intensities_raw_masked))/(np.max(intensities_raw_masked) -np.min(intensities_raw_masked))</span>
-
     <span class="n">DeltaScheludko</span> <span class="o">=</span> <span class="n">_Delta</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
                             <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">),</span>
                             <span class="n">interference_order</span><span class="p">,</span>
                             <span class="n">r_index_masked</span><span class="p">)</span>
-
 
     <span class="n">xdata</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">r_index_masked</span><span class="p">)</span>
     <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="n">_Delta_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">interference_order</span><span class="p">),</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">Delta_from_data</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">)])</span>
@@ -655,7 +649,6 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">fitted_h</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">std_err</span><span class="p">)</span></div>
-
 
 </pre></div>
 
