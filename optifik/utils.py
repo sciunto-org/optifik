@@ -27,8 +27,6 @@ class OptimizeResult(dict):
         return list(self.keys())
 
 
-
-
 def is_latex_installed():
     import shutil
     return shutil.which("latex") is not None or shutil.which("pdflatex") is not None
@@ -39,6 +37,7 @@ def setup_matplotlib():
     Configure matplotlib with LaTeX text rendering and custom font sizes.
 
     """
+    import matplotlib
     import matplotlib.pyplot as plt
 
     latex = is_latex_installed()
