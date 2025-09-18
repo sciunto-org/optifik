@@ -1,4 +1,8 @@
 
+# 0.2.2
+
+* ENH: pass polynom_order in parameters of smooth_intensities
+
 # 0.2.1
 
 * BUGFIX: plot minmax

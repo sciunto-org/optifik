@@ -80,7 +80,7 @@ def finds_peak(wavelengths, intensities, min_peak_prominence, min_peak_distance=
     return peaks_min, peaks_max
 
 
-def smooth_intensities(intensities, window_size=11):
+def smooth_intensities(intensities, window_size=11, polynom_order=3):
     """
     Return a smoothed intensities array with a Savitzky-Golay filter.
 
@@ -90,12 +90,14 @@ def smooth_intensities(intensities, window_size=11):
         Intensity values
     window_size : int, optional
         The length of the filter window. The default is 11.
+    polynom_order : int, optional
+        Polynom order used for the local fits. The default is 3.
+
 
     Returns
     -------
     smoothed_intensities
 
     """
-    polynom_order = 3
-    smoothed_intensities = savgol_filter(intensities, window_size, 3)
+    smoothed_intensities = savgol_filter(intensities, window_size, polynom_order)
     return smoothed_intensities
