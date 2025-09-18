@@ -4,7 +4,6 @@ from scipy.optimize import curve_fit
 import inspect
 import matplotlib.pyplot as plt
 
-from .io import load_spectrum
 from .utils import OptimizeResult, setup_matplotlib
 from .analysis import finds_peak
 
@@ -159,7 +158,7 @@ def get_default_start_stop_wavelengths(wavelengths,
     wavelength_stop : scalar
     """
     if isinstance(refractive_index, (float, int)):
-        refractive_index  = np.full_like(wavelengths,  refractive_index)
+        refractive_index = np.full_like(wavelengths,  refractive_index)
 
     # idx_min idx max
     idx_peaks_min, idx_peaks_max = finds_peak(wavelengths, intensities,
@@ -228,7 +227,7 @@ def thickness_from_scheludko(wavelengths,
 
     """
     if isinstance(refractive_index, (float, int)):
-        refractive_index  = np.full_like(wavelengths,  refractive_index)
+        refractive_index = np.full_like(wavelengths,  refractive_index)
 
     if plot:
         setup_matplotlib()
@@ -299,10 +298,10 @@ def thickness_from_scheludko(wavelengths,
 
         interference_order = 0
         thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
-                                                     intensities_masked,
-                                                     interference_order,
-                                                     r_index_masked,
-                                                     intensities_void=intensities_void_masked)
+                                                           intensities_masked,
+                                                           interference_order,
+                                                           r_index_masked,
+                                                           intensities_void=intensities_void_masked)
 
     elif interference_order > 0:
         # mask input data
@@ -319,8 +318,6 @@ def thickness_from_scheludko(wavelengths,
     else:
         raise ValueError('interference_order must be >= 0.')
 
-
-
     # Compute the thickness for the selected order
 
     # Delta
@@ -332,16 +329,10 @@ def thickness_from_scheludko(wavelengths,
         denom = np.max(intensities_masked) - np.min(intensities_masked)
     Delta_from_data = num / denom
 
-
-
-    # Delta_from_data = (intensities_masked -np.min(intensities_masked))/(np.max(intensities_masked) -np.min(intensities_masked))
-    # Delta_from_data = (intensities_raw_masked -np.min(intensities_raw_masked))/(np.max(intensities_raw_masked) -np.min(intensities_raw_masked))
-
     DeltaScheludko = _Delta(wavelengths_masked,
                             np.mean(thickness_values),
                             interference_order,
                             r_index_masked)
-
 
     xdata = (wavelengths_masked, r_index_masked)
     popt, pcov = curve_fit(lambda x, h: _Delta_fit(x, h, interference_order), xdata, Delta_from_data, p0=[np.mean(thickness_values)])
@@ -372,4 +363,3 @@ def thickness_from_scheludko(wavelengths,
         plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
     return OptimizeResult(thickness=fitted_h, stderr=std_err)
-

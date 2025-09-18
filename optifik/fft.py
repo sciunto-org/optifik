@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.interpolate import interp1d
-from scipy.fftpack import fft, ifft, fftfreq
+from scipy.fftpack import fft, fftfreq
 
 import matplotlib.pyplot as plt
 
@@ -64,7 +64,7 @@ def thickness_from_fft(wavelengths, intensities,
         plt.figure()
         plt.loglog(positive_freqs, positive_fft)
         plt.loglog(optical_thickness, positive_fft[peak_index], 'o')
-        plt.xlabel('$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
+        plt.xlabel(r'$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
         plt.ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
         plt.title(f'Thickness={thickness:.2f}')
 

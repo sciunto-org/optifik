@@ -65,9 +65,7 @@ def thickness_from_minmax(wavelengths,
         warnings.warn('Number of peaks < 2, cannot fit. Thickness set to NaN.', RuntimeWarning)
         return OptimizeResult(thickness=np.nan)
 
-
     if isinstance(refractive_index, np.ndarray):
-        #refractive_index = refractive_index[peaks][::-1]
         n_over_lambda = refractive_index[peaks][::-1] / wavelengths[peaks][::-1]
     else:
         n_over_lambda = refractive_index / wavelengths[peaks][::-1]
@@ -76,7 +74,7 @@ def thickness_from_minmax(wavelengths,
         residual_threshold = 4e-4
         min_samples = 2
         data = np.column_stack([k_values, n_over_lambda])
-        
+
         # Scikit-image
         #from skimage.measure import ransac, LineModelND
         #
@@ -85,13 +83,13 @@ def thickness_from_minmax(wavelengths,
         #                               residual_threshold=residual_threshold,
         #                               max_trials=100)
         #slope = model_robust.params[1][1]
-        #thickness_minmax = 1 / slope /  4       
-        
+        #thickness_minmax = 1 / slope /  4
+
         # Organize the data for RANSAC (sklearn)
         X = k_values.reshape(-1, 1)
         y = n_over_lambda
-        
-         
+
+        # Fit
         model_robust = RANSACRegressor(
             estimator=LinearRegression(),
             min_samples=min_samples,
@@ -99,12 +97,11 @@ def thickness_from_minmax(wavelengths,
             max_trials=100
         )
         model_robust.fit(X, y)
-        
+
         inliers = model_robust.inlier_mask_
         slope = model_robust.estimator_.coef_[0]
         thickness_minmax = 1 / slope / 4
-        
-        
+
         if plot:
             fig, ax = plt.subplots()
 

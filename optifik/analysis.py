@@ -3,13 +3,6 @@ from scipy.signal import find_peaks
 
 import inspect
 import matplotlib.pyplot as plt
-plt.rc('text', usetex=True)
-plt.rcParams.update({
-    'axes.labelsize': 26,
-    'xtick.labelsize': 32,
-    'ytick.labelsize': 32,
-    'legend.fontsize': 23,
-})
 
 from .utils import setup_matplotlib
 
@@ -37,7 +30,8 @@ def plot_spectrum(wavelengths, intensities, title=''):
     plt.show()
 
 
-def finds_peak(wavelengths, intensities, min_peak_prominence, min_peak_distance=10, plot=None):
+def finds_peak(wavelengths, intensities, min_peak_prominence,
+               min_peak_distance=10, plot=None):
     """
     Detect minima and maxima.
 
