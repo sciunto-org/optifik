@@ -40,7 +40,16 @@ def setup_matplotlib():
 
     """
     import matplotlib.pyplot as plt
-    plt.rc('text', usetex=is_latex_installed())
+
+    latex = is_latex_installed()
+
+    plt.rc('text', usetex=latex)
+
+    if latex:
+        matplotlib.rcParams['mathtext.fontset'] = 'stix'
+        matplotlib.rcParams['font.family'] = 'STIXGeneral'
+
+
     plt.rcParams.update({
         'figure.dpi': 300,
         'figure.figsize': (10, 6),
