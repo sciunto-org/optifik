@@ -125,7 +125,6 @@ def thickness_from_minmax(wavelengths,
 
     elif method.lower() == 'linreg':
         slope, intercept, r_value, p_value, std_err = stats.linregress(k_values, n_over_lambda)
-        #mean_n = np.mean(refractive_index)
         thickness_minmax = 1 / slope / 4
 
         if plot:
