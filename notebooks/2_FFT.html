@@ -411,7 +411,36 @@ document.write(`
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">thickness_from_fft</span></code> function automatically determines the film thickness.</p>
-<p>The console output shows the film thickness <span class="math notranslate nohighlight">\(h\)</span>, which is 3562.947 nm in this example.</p>
+<p>The uncertainty is determined from the step size in the Fourier space, which is determined by the length of the signal, <em>ie</em> the wavelength range. It is possible to reduce this uncertainty by applying a zero-padding to the data increase this range, which helps to narrow down the peak detection.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thickness_from_fft</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+                   <span class="n">refractive_index</span><span class="o">=</span><span class="mf">1.33</span><span class="p">,</span>
+                   <span class="n">num_half_space</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">N_padding</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                   <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+             thickness: np.float64(3522.1017201787677)
+ thickness_uncertainty: np.float64(80.96785563629328)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_2_FFT_8_1.png" src="../_images/notebooks_2_FFT_8_1.png" />
+</div>
+</div>
 <ul class="simple">
 <li><p>You can specify the medium’s refractive index using the <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> parameter.</p></li>
 <li><p>You can also provide a refractive index array <span class="math notranslate nohighlight">\(n(\lambda)\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input.</p></li>
