@@ -95,26 +95,28 @@ def thickness_from_fft(wavelengths, intensities,
         if N_padding > 1:
             fig, ax = plt.subplots(nrows=2)
             ax[0].set_title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
-            ax[0].loglog(positive_freqs, positive_fft)
+            ax[0].loglog(positive_freqs, positive_fft,
+                         label='FFT from original signal')
             ax[0].loglog(optical_thickness, positive_fft[peak_index], 'o')
 
             val, err = round_to_uncertainty(thickness, error)
-            label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
-            ax[1].set_title(f'Padding')
-            ax[1].loglog(positive_freqs_padding, positive_fft_padding)
+            label = rf'$h = {val} \pm {err}\ \mathrm{{nm}}$'
+            ax[1].loglog(positive_freqs_padding, positive_fft_padding,
+                         label='FFT from signal with zero-padding')
             ax[1].loglog(optical_thickness, positive_fft_padding[peak_index_padding],
                          'o', label=label)
             plt.legend()
+            plt.tight_layout()
 
             for a in ax:
-                a.set_xlabel(r'$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
                 a.set_ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
+            ax[1].set_xlabel(r'$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
         else:
             plt.figure()
             plt.loglog(positive_freqs, positive_fft)
 
             val, err = round_to_uncertainty(thickness, error)
-            label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
+            label = rf'$h = {val} \pm {err}\ \mathrm{{nm}}$'
             plt.loglog(optical_thickness, positive_fft[peak_index], 'o', label=label)
             plt.xlabel(r'$\mathrm{{Optical \ Distance}} \ \mathcal{D}$ $[\mathrm{{nm}}]$')
             plt.ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
