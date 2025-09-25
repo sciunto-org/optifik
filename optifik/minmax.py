@@ -108,8 +108,8 @@ def thickness_from_minmax(wavelengths,
         # STD
         x_in = data[inliers, 0]
         y_in = data[inliers, 1]
-        slope, intercept, r_value, p_value, slope_err = stats.linregress(x_in, y_in)
-        thickness_err = slope_err / (4 * slope**2)
+        res_lin_fit = stats.linregress(x_in, y_in)
+        thickness_err = res_lin_fit.stderr / (4 * res_lin_fit.slope**2)
 
 
         if plot:
@@ -136,9 +136,9 @@ def thickness_from_minmax(wavelengths,
                               thickness_uncertainty=thickness_err)
 
     elif method.lower() == 'linreg':
-        slope, intercept, r_value, p_value, slope_err = stats.linregress(k_values, n_over_lambda)
-        thickness_minmax = 1 / slope / 4
-        thickness_err = slope_err / (4 * slope**2)
+        res_lin_fit = stats.linregress(k_values, n_over_lambda)
+        thickness_minmax = 1 / res_lin_fit.slope / 4
+        thickness_err = res_lin_fit.stderr / (4 * res_lin_fit.slope**2)
 
         if plot:
             val, err = round_to_uncertainty(thickness_minmax, thickness_err)
@@ -148,7 +148,7 @@ def thickness_from_minmax(wavelengths,
             ax.set_xlabel(r'$\mathrm{{Index}}$ $N$')
             ax.set_ylabel(r'$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ ')
             ax.plot(k_values, n_over_lambda * 1000, 's', label='Extrema')
-            ax.plot(k_values, (intercept + k_values * slope) * 1000, label=label)
+            ax.plot(k_values, (res_lin_fit.intercept + k_values * res_lin_fit.slope) * 1000, label=label)
 
             ax.legend()
 
