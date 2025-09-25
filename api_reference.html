@@ -466,7 +466,7 @@ By default, the delimiter is a comma.</p>
 <span id="fft"></span><h2>fft<a class="headerlink" href="#module-optifik.fft" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="optifik.fft.thickness_from_fft">
-<span class="sig-prename descclassname"><span class="pre">optifik.fft.</span></span><span class="sig-name descname"><span class="pre">thickness_from_fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refractive_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_half_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/fft.html#thickness_from_fft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.fft.thickness_from_fft" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">optifik.fft.</span></span><span class="sig-name descname"><span class="pre">thickness_from_fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refractive_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_half_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/optifik/fft.html#thickness_from_fft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optifik.fft.thickness_from_fft" title="Link to this definition">#</a></dt>
 <dd><p>Determine the tickness by Fast Fourier Transform.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -476,6 +476,10 @@ By default, the delimiter is a comma.</p>
 <dt><strong>intensities</strong><span class="classifier">array</span></dt><dd><p>Intensity values.</p>
 </dd>
 <dt><strong>refractive_index</strong><span class="classifier">scalar or array</span></dt><dd><p>Value of the refractive index of the medium.</p>
+</dd>
+<dt><strong>N_padding</strong><span class="classifier">int, optional</span></dt><dd><p>Multiply the space by <cite>N_padding</cite> with zero-padding.
+This can be used to refine the peak detection.
+Default: 1.</p>
 </dd>
 <dt><strong>num_half_space</strong><span class="classifier">scalar, optional</span></dt><dd><p>Number of points to compute FFT’s half space.
 If <cite>None</cite>, default corresponds to <cite>10*len(wavelengths)</cite>.</p>
@@ -491,6 +495,10 @@ If <cite>None</cite>, default corresponds to <cite>10*len(wavelengths)</cite>.</
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>if <cite>N_padding</cite> &gt; 1, the peak is first detected without zero-padding,
+ie <cite>N_padding</cite> = 1. Then, padding is applied and the detection
+is done nearby the first peak detection.</p>
 </dd></dl>
 
 </section>
