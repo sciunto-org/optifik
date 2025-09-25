@@ -4,7 +4,7 @@ from scipy.optimize import curve_fit
 import inspect
 import matplotlib.pyplot as plt
 
-from .utils import OptimizeResult, setup_matplotlib
+from .utils import OptimizeResult, setup_matplotlib, round_to_uncertainty
 from .analysis import finds_peak
 
 
@@ -325,8 +325,6 @@ def thickness_from_scheludko(wavelengths,
         raise ValueError('interference_order must be >= 0.')
 
     # Compute the thickness for the selected order
-
-    # Delta
     if interference_order == 0:
         num = intensities_masked - np.min(intensities_void_masked)
         denom = np.max(intensities_masked) - np.min(intensities_void_masked)
@@ -357,11 +355,13 @@ def thickness_from_scheludko(wavelengths,
                  label=r'$\mathrm{{Smoothed}}\ \mathrm{{Data}}$')
 
         # Scheludko
-        label = rf'$\mathrm{{Scheludko}}\ (h = {np.mean(thickness_values):.1f} \pm {np.std(thickness_values):.1f}\ \mathrm{{nm}})$'
+        val, err = round_to_uncertainty(np.mean(thickness_values), np.std(thickness_values))
+        label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
         plt.plot(wavelengths_masked, DeltaScheludko,
                  'go-', markersize=2, label=label)
         # Fit
-        label = rf'$\mathrm{{Fit}}\ (h = {fitted_h:.1f}\pm {std_err:.1f} \ \mathrm{{nm}})$'
+        val, err = round_to_uncertainty(fitted_h, std_err)
+        label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
         plt.plot(wavelengths_masked,  Delta_values,
                  'ro-', markersize=2,
                  label=label)
