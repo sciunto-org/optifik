@@ -8,7 +8,7 @@ from scipy.signal import find_peaks
 import inspect
 import matplotlib.pyplot as plt
 
-from .utils import OptimizeResult, setup_matplotlib
+from .utils import OptimizeResult, setup_matplotlib, round_to_uncertainty
 
 
 def thickness_from_minmax(wavelengths,
@@ -17,6 +17,7 @@ def thickness_from_minmax(wavelengths,
                           min_peak_prominence,
                           min_peak_distance=10,
                           method='linreg',
+                          ransac_residual_threshold=1e-4,
                           plot=None):
 
     """
@@ -37,6 +38,9 @@ def thickness_from_minmax(wavelengths,
     method : string, optional
         Either 'linreg' for linear regression or 'ransac'
         for Randon Sampling Consensus.
+    ransac_residual_threshold : float, optional
+        Residual threshold for ransac.
+        Used only if `method=='ransac'`.
     plot : boolean, optional
         Show plots of peak detection and lin regression.
 
@@ -71,7 +75,6 @@ def thickness_from_minmax(wavelengths,
         n_over_lambda = refractive_index / wavelengths[peaks][::-1]
 
     if method.lower() == 'ransac':
-        residual_threshold = 4e-4
         min_samples = 2
         data = np.column_stack([k_values, n_over_lambda])
 
@@ -93,7 +96,7 @@ def thickness_from_minmax(wavelengths,
         model_robust = RANSACRegressor(
             estimator=LinearRegression(),
             min_samples=min_samples,
-            residual_threshold=residual_threshold,
+            residual_threshold=ransac_residual_threshold,
             max_trials=100
         )
         model_robust.fit(X, y)
@@ -107,20 +110,22 @@ def thickness_from_minmax(wavelengths,
         y_in = data[inliers, 1]
         y_in_pred = model_robust.predict(x_in.reshape(-1, 1))
         residuals = y_in - y_in_pred
-        std_thickness = np.std(residuals, ddof=1)
+        std_err = np.std(residuals, ddof=1)
+        thickness_err = std_err / (4 * slope**2)
 
 
         if plot:
-            fig, ax = plt.subplots()
+            val, err = round_to_uncertainty(thickness_minmax, thickness_err)
+            label = rf'$\mathrm{{Fit}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
 
+            fig, ax = plt.subplots()
             ax.set_xlabel(r'$\mathrm{{Index}}$ $N$')
             ax.set_ylabel(r'$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ ')
             ax.plot(data[inliers, 0], data[inliers, 1] * 1000, 'xb', alpha=0.6, label='Inliers')
             ax.plot(data[~inliers, 0], data[~inliers, 1] * 1000, '+r', alpha=0.6, label='Outliers')
-            ax.plot(k_values, model_robust.predict(X) * 1000, '-g', label='Fit')
+            ax.plot(k_values, model_robust.predict(X) * 1000, '-g', label=label)
 
             ax.legend()
-            ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
             plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
             plt.tight_layout()
             plt.show()
@@ -130,22 +135,25 @@ def thickness_from_minmax(wavelengths,
                               num_outliers=(~inliers).sum(),
                               peaks_max=peaks_max,
                               peaks_min=peaks_min,
-                              thickness_uncertainty=std_thickness)
+                              thickness_uncertainty=thickness_err)
 
     elif method.lower() == 'linreg':
         slope, intercept, r_value, p_value, std_err = stats.linregress(k_values, n_over_lambda)
         thickness_minmax = 1 / slope / 4
+        thickness_err = std_err / (4 * slope**2)
 
         if plot:
-            fig, ax = plt.subplots()
+            val, err = round_to_uncertainty(thickness_minmax, thickness_err)
+            label = rf'$\mathrm{{Fit}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
 
+            fig, ax = plt.subplots()
             ax.set_xlabel(r'$\mathrm{{Index}}$ $N$')
             ax.set_ylabel(r'$n$($\lambda$) / $\lambda$ \ $[\mathrm{{\mu m^{-1}}}]$ ')
             ax.plot(k_values, n_over_lambda * 1000, 's', label='Extrema')
-            ax.plot(k_values, (intercept + k_values * slope) * 1000, label='Fit')
+            ax.plot(k_values, (intercept + k_values * slope) * 1000, label=label)
 
             ax.legend()
-            ax.set_title(f'Thickness = {thickness_minmax:.2f} nm')
+
             plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
             plt.tight_layout()
             plt.show()
@@ -153,7 +161,7 @@ def thickness_from_minmax(wavelengths,
         return OptimizeResult(thickness=thickness_minmax,
                               peaks_max=peaks_max,
                               peaks_min=peaks_min,
-                              thickness_uncertainty=std_err)
+                              thickness_uncertainty=thickness_err)
 
     else:
         raise ValueError('Wrong method')

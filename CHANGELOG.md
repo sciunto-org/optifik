@@ -6,6 +6,7 @@
 * API: change the keyword for uncertainties on optimized results
 * NEW: compute std for minmax with ransac
 * NEW: add padding to FFT
+* API: possibility to adjust residual threshold for minmax with ransac
 
 # 0.3.0
 
