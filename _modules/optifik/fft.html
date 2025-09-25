@@ -338,6 +338,7 @@ document.write(`
     <span class="n">optical_thickness</span> <span class="o">=</span> <span class="n">positive_freqs</span><span class="p">[</span><span class="n">peak_index</span><span class="p">]</span>
 
     <span class="n">thickness</span> <span class="o">=</span> <span class="n">optical_thickness</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">positive_freqs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
         <span class="n">setup_matplotlib</span><span class="p">()</span>
@@ -348,7 +349,8 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{FFT}}$ $(I^\star)$&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Thickness=</span><span class="si">{</span><span class="n">thickness</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">thickness</span><span class="p">,)</span></div>
+    <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">thickness</span><span class="p">,</span>
+                          <span class="n">thickness_uncertainty</span><span class="o">=</span><span class="n">error</span><span class="p">)</span></div>
 
 </pre></div>
 
