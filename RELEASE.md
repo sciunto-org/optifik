@@ -21,6 +21,14 @@ bumpver update --pre beta	# beta (1.0.0b1)	1.0.0 → 1.0.0b1
 bumpver update --pre rc  # release candidate (1.0.0rc1)	1.0.0 → 1.0.0rc1
 ```
 
+```
+git push origin --tag && python -m build && twine check dist/* && twine upload dist/*
+```
+
+
+## Details
+
+
 * Push tags
 
 ```
