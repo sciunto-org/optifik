@@ -341,7 +341,10 @@ def thickness_from_scheludko(wavelengths,
                             r_index_masked)
 
     xdata = (wavelengths_masked, r_index_masked)
-    popt, pcov = curve_fit(lambda x, h: _Delta_fit(x, h, interference_order), xdata, Delta_from_data, p0=[np.mean(thickness_values)])
+    popt, pcov = curve_fit(lambda x, h: _Delta_fit(x, h, interference_order),
+                           xdata,
+                           Delta_from_data,
+                           p0=[np.mean(thickness_values)])
     fitted_h = popt[0]
     std_err = np.sqrt(pcov[0][0])
 
