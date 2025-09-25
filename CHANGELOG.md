@@ -1,13 +1,15 @@
 
-# 0.x.x
+# 0.4.0
 
-* ENH: pass the maximum order tested in scheludko
+* API: pass the maximum order tested in scheludko
 * ENH: add legend and title to plot for guessed order in scheludko
+* API: change the keyword for uncertainties on optimized results
+* NEW: compute std for minmax with ransac
 
 # 0.3.0
 
 * ENH: if latex is installed, use latex everywhere
-* ENH: pass polynom_order in parameters of smooth_intensities
+* API: pass polynom_order in parameters of smooth_intensities
 * ENH: PEP8
 
 # 0.2.1

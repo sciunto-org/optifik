@@ -58,6 +58,7 @@ def thickness_from_fft(wavelengths, intensities,
     optical_thickness = positive_freqs[peak_index]
 
     thickness = optical_thickness / 2.
+    error = np.diff(positive_freqs)[0]
 
     if plot:
         setup_matplotlib()
@@ -68,4 +69,5 @@ def thickness_from_fft(wavelengths, intensities,
         plt.ylabel(r'$\mathrm{{FFT}}$ $(I^\star)$')
         plt.title(f'Thickness={thickness:.2f}')
 
-    return OptimizeResult(thickness=thickness,)
+    return OptimizeResult(thickness=thickness,
+                          thickness_uncertainty=error)

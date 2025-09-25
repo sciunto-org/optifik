@@ -283,6 +283,7 @@ def thickness_from_scheludko(wavelengths,
                          markersize=3, label=f"Order={_order}, Difference={difference:.1f} nm")
                 plt.legend()
                 plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
+
     elif interference_order == 0:
 
         min_peak_prominence = 0.02
@@ -367,4 +368,5 @@ def thickness_from_scheludko(wavelengths,
         plt.xlabel(r'$\lambda$ $[\mathrm{{nm}}]$')
         plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
-    return OptimizeResult(thickness=fitted_h, stderr=std_err)
+    return OptimizeResult(thickness=fitted_h,
+                          thickness_uncertainty=std_err)

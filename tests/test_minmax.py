@@ -71,7 +71,9 @@ def test_minmax_theory():
                                        plot=False)
 
         r_error = np.abs((result.thickness - expected) / expected)
-        assert r_error < 1e-2
+        tol = 1e-2
+        assert r_error < tol
+        assert result.thickness_uncertainty / result.thickness < tol
 
 
 def test_minmax_less_than_2_peaks():
@@ -91,9 +93,8 @@ def test_minmax_less_than_2_peaks():
                                            min_peak_prominence=None,
                                            plot=False)
 
-         
-            assert result.thickness is np.nan
 
+            assert result.thickness is np.nan
 
 
 
@@ -118,7 +119,9 @@ def test_minmax_linreg_data_basic(test_data_dir):
                                    method='linreg',
                                    plot=False)
 
-    assert_allclose(result.thickness, expected, rtol=1e-1)
+    tol = 1e-1
+    assert_allclose(result.thickness, expected, rtol=tol)
+    assert result.thickness_uncertainty / result.thickness < tol
 
 
 def test_minmax_linreg_data_basic(test_data_dir):
@@ -138,4 +141,6 @@ def test_minmax_linreg_data_basic(test_data_dir):
                                    method='ransac',
                                    plot=False)
 
-    assert_allclose(result.thickness, expected, rtol=1e-1)
+    tol = 1e-1
+    assert_allclose(result.thickness, expected, rtol=tol)
+    assert result.thickness_uncertainty / result.thickness < tol

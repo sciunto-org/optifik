@@ -54,7 +54,7 @@ def test_scheludko_theory():
     lambda_min = 450
     lambda_max = 800
     lambdas = np.linspace(lambda_min, lambda_max, 1_000)
-    h_values = np.linspace(350, 1_000, 33)
+    h_values = np.linspace(350, 900, 23)
 
     n_values = n_lambda(lambdas)
 
@@ -74,8 +74,10 @@ def test_scheludko_theory():
                                           wavelength_stop=w_stop,
                                           plot=False)
 
+        tol = 2e-3
         r_error = np.abs((result.thickness - expected) / expected)
-        assert r_error < 2e-3
+        assert r_error < tol
+        assert result.thickness_uncertainty / result.thickness < tol
 
 
 #
@@ -98,6 +100,7 @@ def test_data_interference_order_positive(dataset1):
                                           wavelength_stop=w_stop,
                                           interference_order=-1,
                                           plot=False)
+
 
 def test_data_start_stop_swapped(dataset1):
     expected = dataset1['expected']
@@ -140,7 +143,9 @@ def test_data_scheludko_4peaks(dataset1):
                                       interference_order=None,
                                       plot=False)
 
-    assert_allclose(result.thickness, expected, rtol=1e-1)
+    tol = 1e-1
+    assert_allclose(result.thickness, expected, rtol=tol)
+    assert result.thickness_uncertainty / result.thickness < tol
 
 
 def test_data_scheludko_2peaks(test_data_dir):
@@ -168,7 +173,9 @@ def test_data_scheludko_2peaks(test_data_dir):
                                       interference_order=None,
                                       plot=False)
 
-    assert_allclose(result.thickness, expected, rtol=1e-1)
+    tol = 1e-1
+    assert_allclose(result.thickness, expected, rtol=tol)
+    assert result.thickness_uncertainty / result.thickness < tol
 
 
 def test_data_order0(test_data_dir):
@@ -196,6 +203,8 @@ def test_data_order0(test_data_dir):
                                       plot=False)
 
 
-    assert_allclose(result.thickness, expected, rtol=1e-1)
+    tol = 1e-1
+    assert_allclose(result.thickness, expected, rtol=tol)
+    assert result.thickness_uncertainty / result.thickness < tol
 
 

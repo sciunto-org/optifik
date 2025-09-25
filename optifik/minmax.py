@@ -102,6 +102,14 @@ def thickness_from_minmax(wavelengths,
         slope = model_robust.estimator_.coef_[0]
         thickness_minmax = 1 / slope / 4
 
+        # STD
+        x_in = data[inliers, 0]
+        y_in = data[inliers, 1]
+        y_in_pred = model_robust.predict(x_in.reshape(-1, 1))
+        residuals = y_in - y_in_pred
+        std_thickness = np.std(residuals, ddof=1)
+
+
         if plot:
             fig, ax = plt.subplots()
 
@@ -121,7 +129,8 @@ def thickness_from_minmax(wavelengths,
                               num_inliers=inliers.sum(),
                               num_outliers=(~inliers).sum(),
                               peaks_max=peaks_max,
-                              peaks_min=peaks_min)
+                              peaks_min=peaks_min,
+                              thickness_uncertainty=std_thickness)
 
     elif method.lower() == 'linreg':
         slope, intercept, r_value, p_value, std_err = stats.linregress(k_values, n_over_lambda)
@@ -144,7 +153,7 @@ def thickness_from_minmax(wavelengths,
         return OptimizeResult(thickness=thickness_minmax,
                               peaks_max=peaks_max,
                               peaks_min=peaks_min,
-                              stderr=std_err)
+                              thickness_uncertainty=std_err)
 
     else:
         raise ValueError('Wrong method')
