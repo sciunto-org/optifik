@@ -1,4 +1,5 @@
 import pytest
+import unittest
 import yaml
 from pathlib import Path
 
@@ -45,51 +46,92 @@ def compute_spectrum_theory(h, lambdas, n_values):
 #
 # Theory
 #
+class TestTheory(unittest.TestCase):
+    def test_FFT_theory_range1_wo_padding(self):
+        lambda_min = 450
+        lambda_max = 800
+        lambdas = np.linspace(lambda_min, lambda_max, 10_000)
+        h_values = np.linspace(1_500, 5_000, 33)
 
-def test_FFT_theory_range1():
-    lambda_min = 450
-    lambda_max = 800
-    lambdas = np.linspace(lambda_min, lambda_max, 10_000)
-    h_values = np.linspace(1_500, 5_000, 33)
+        n_values = n_lambda(lambdas)
+        for expected in h_values:
+            intensities = compute_spectrum_theory(expected, lambdas, n_values)
 
-    n_values = n_lambda(lambdas)
-    for expected in h_values:
-        intensities = compute_spectrum_theory(expected, lambdas, n_values)
+            result = thickness_from_fft(lambdas,
+                                        intensities,
+                                        refractive_index=n_values,
+                                        num_half_space=None,
+                                        plot=False)
 
-        result = thickness_from_fft(lambdas,
-                                    intensities,
-                                    refractive_index=n_values,
-                                    num_half_space=None,
-                                    plot=False)
-
-        r_error = np.abs((result.thickness - expected) / expected)
-        assert r_error < 0.12
+            r_error = np.abs((result.thickness - expected) / expected)
+            assert r_error < 0.12
 
 
-def test_FFT_theory_range2():
-    lambda_min = 450
-    lambda_max = 800
-    lambdas = np.linspace(lambda_min, lambda_max, 10_000)
-    h_values = np.linspace(5_000, 20_000, 33)
+    def test_FFT_theory_range2_wo_padding(self):
+        lambda_min = 450
+        lambda_max = 800
+        lambdas = np.linspace(lambda_min, lambda_max, 10_000)
+        h_values = np.linspace(5_000, 20_000, 33)
 
-    n_values = n_lambda(lambdas)
-    for expected in h_values:
-        intensities = compute_spectrum_theory(expected, lambdas, n_values)
+        n_values = n_lambda(lambdas)
+        for expected in h_values:
+            intensities = compute_spectrum_theory(expected, lambdas, n_values)
 
-        result = thickness_from_fft(lambdas,
-                                    intensities,
-                                    refractive_index=n_values,
-                                    num_half_space=None,
-                                    plot=False)
+            result = thickness_from_fft(lambdas,
+                                        intensities,
+                                        refractive_index=n_values,
+                                        num_half_space=None,
+                                        plot=False)
 
-        r_error = np.abs((result.thickness - expected) / expected)
-        assert r_error < 4e-2
+            r_error = np.abs((result.thickness - expected) / expected)
+            assert r_error < 4e-2
+
+    def test_FFT_theory_range1_w_padding(self):
+        lambda_min = 450
+        lambda_max = 800
+        lambdas = np.linspace(lambda_min, lambda_max, 10_000)
+        h_values = np.linspace(1_500, 5_000, 33)
+
+        n_values = n_lambda(lambdas)
+        for expected in h_values:
+            intensities = compute_spectrum_theory(expected, lambdas, n_values)
+
+            result = thickness_from_fft(lambdas,
+                                        intensities,
+                                        refractive_index=n_values,
+                                        N_padding=8,
+                                        num_half_space=None,
+                                        plot=False)
+
+            r_error = np.abs((result.thickness - expected) / expected)
+            assert r_error < 3e-2
+
+
+    def test_FFT_theory_range2_w_padding(self):
+        lambda_min = 450
+        lambda_max = 800
+        lambdas = np.linspace(lambda_min, lambda_max, 10_000)
+        h_values = np.linspace(5_000, 20_000, 33)
+
+        n_values = n_lambda(lambdas)
+        for expected in h_values:
+            intensities = compute_spectrum_theory(expected, lambdas, n_values)
+
+            result = thickness_from_fft(lambdas,
+                                        intensities,
+                                        refractive_index=n_values,
+                                        N_padding=8,
+                                        num_half_space=None,
+                                        plot=False)
+
+            r_error = np.abs((result.thickness - expected) / expected)
+            assert r_error < 5e-3
+
 
 
 #
 # Data
 #
-
 def test_FFT_data_basic(test_data_dir):
     spectrum_path = test_data_dir / 'basic' / '003582.xy'
     expected = 3524.51

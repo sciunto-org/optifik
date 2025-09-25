@@ -5,6 +5,7 @@
 * ENH: add legend and title to plot for guessed order in scheludko
 * API: change the keyword for uncertainties on optimized results
 * NEW: compute std for minmax with ransac
+* NEW: add padding to FFT
 
 # 0.3.0
 
