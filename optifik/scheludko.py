@@ -358,10 +358,10 @@ def thickness_from_scheludko(wavelengths,
         val, err = round_to_uncertainty(np.mean(thickness_values), np.std(thickness_values))
         label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
         plt.plot(wavelengths_masked, DeltaScheludko,
-                 'go-', markersize=2, label=label)
+                 'go-', markersize=4, label=label)
         # Fit
         val, err = round_to_uncertainty(fitted_h, std_err)
-        label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
+        label = rf'$\mathrm{{Fit}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
         plt.plot(wavelengths_masked,  Delta_values,
                  'ro-', markersize=2,
                  label=label)
