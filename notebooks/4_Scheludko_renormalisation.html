@@ -372,28 +372,19 @@ document.write(`
 <span class="n">intensities_smoothed</span> <span class="o">=</span> <span class="n">smooth_intensities</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
 
 <span class="c1"># Peak detection function, min_peak_prominence and min_peak_distance can be adjusted.</span>
-<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
-           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
-           <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-           <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">peaks_min</span><span class="p">,</span> <span class="n">peaks_max</span> <span class="o">=</span> <span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+                                   <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+                                   <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                   <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/notebooks_4_Scheludko_renormalisation_5_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_5_0.png" />
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-(array([200, 720]), array([ 58, 442]))
-</pre></div></div>
 </div>
 <p>In the <span class="math notranslate nohighlight">\([450, 800]\)</span> nm spectral range shown above, four peaks have been successfully detected, indicating that they correspond to non-zero interference orders. To apply the Scheludko renormalization method between the rightmost peaks, we first extract their wavelength. This is done using the <code class="docutils literal notranslate"><span class="pre">get_default_start_stop_wavelengths</span></code> function from the <code class="docutils literal notranslate"><span class="pre">optifik.scheludko</span></code> module.</p>
 <div class="nbinput docutils container">
@@ -406,28 +397,19 @@ document.write(`
 </div>
 <dl class="simple">
 <dt># Extract the wavelength corresponding to the peak at the end of the rightmost monotonic branch</dt><dd><dl class="simple">
-<dt>get_default_start_stop_wavelengths(wavelengths, intensities_smoothed,</dt><dd><p>refractive_index=1.33,
+<dt>start, stop = get_default_start_stop_wavelengths(wavelengths, intensities_smoothed,</dt><dd><p>refractive_index=1.33,
 min_peak_prominence=0.02,
 plot=True)</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/notebooks_4_Scheludko_renormalisation_7_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_7_0.png" />
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-(np.float64(595.80422), np.float64(683.40758))
-</pre></div></div>
 </div>
 <p>The console output shows the wavelength corresponding to the peak at the end of the rightmost monotonic branch, which are 595.8 nm and 683.4 nm in this example</p>
 <ul class="simple">
@@ -456,14 +438,14 @@ plot=True)</p>
 <span class="n">refractive_index</span> <span class="o">=</span> <span class="mf">1.324188</span> <span class="o">+</span> <span class="mf">3102.060378</span> <span class="o">/</span> <span class="p">(</span><span class="n">wavelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Determine the film thickness by Sheludko renormalisation</span>
-<span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>
-                         <span class="n">intensities_smoothed</span><span class="p">,</span>
-                         <span class="n">refractive_index</span><span class="o">=</span><span class="n">refractive_index</span><span class="p">,</span>
-                         <span class="n">wavelength_start</span><span class="o">=</span><span class="n">wavelength_min</span><span class="p">,</span>
-                         <span class="n">wavelength_stop</span><span class="o">=</span><span class="n">wavelength_max</span><span class="p">,</span>
-                         <span class="n">interference_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                         <span class="n">intensities_void</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                         <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>
+                                 <span class="n">intensities_smoothed</span><span class="p">,</span>
+                                 <span class="n">refractive_index</span><span class="o">=</span><span class="n">refractive_index</span><span class="p">,</span>
+                                 <span class="n">wavelength_start</span><span class="o">=</span><span class="n">wavelength_min</span><span class="p">,</span>
+                                 <span class="n">wavelength_stop</span><span class="o">=</span><span class="n">wavelength_max</span><span class="p">,</span>
+                                 <span class="n">interference_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">intensities_void</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -475,27 +457,17 @@ plot=True)</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-             thickness: np.float64(777.06997385397)
- thickness_uncertainty: np.float64(0.08714010335010836)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_2.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_2.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_1.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_1.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_3.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_3.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_12_2.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_2.png" />
 </div>
 </div>
 <p>The first plot shows the Scheludko thickness computation at each wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> along the rightmost monotonic branch (see Step 1), for all interference orders between 0 and 12. The code automatically determines the correct interference order <span class="math notranslate nohighlight">\(m\)</span> and calculates the corresponding film thickness <span class="math notranslate nohighlight">\(h\)</span>. The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess.</p>
@@ -574,13 +546,13 @@ plot=True)</p>
 <span class="n">refractive_index</span> <span class="o">=</span> <span class="mf">1.324188</span> <span class="o">+</span> <span class="mf">3102.060378</span> <span class="o">/</span> <span class="p">(</span><span class="n">wavelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Determine the film thickness by Sheludko renormalisation</span>
-<span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
-                         <span class="n">refractive_index</span><span class="o">=</span><span class="n">refractive_index</span><span class="p">,</span>
-                         <span class="n">wavelength_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                         <span class="n">wavelength_stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                         <span class="n">interference_order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                         <span class="n">intensities_void</span><span class="o">=</span><span class="n">intensities_void</span><span class="p">,</span>
-                         <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">thickness_from_scheludko</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+                                 <span class="n">refractive_index</span><span class="o">=</span><span class="n">refractive_index</span><span class="p">,</span>
+                                 <span class="n">wavelength_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">wavelength_stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">interference_order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">intensities_void</span><span class="o">=</span><span class="n">intensities_void</span><span class="p">,</span>
+                                 <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -591,9 +563,24 @@ plot=True)</p>
 <img alt="../_images/notebooks_4_Scheludko_renormalisation_20_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_0.png" />
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_20_1.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_1.png" />
+</div>
+</div>
+<p>The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess. The output shows the film thickness along with its associated uncertainty.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
@@ -601,14 +588,6 @@ plot=True)</p>
  thickness_uncertainty: np.float64(0.07081241796526806)
 </pre></div></div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_4_Scheludko_renormalisation_20_2.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_2.png" />
-</div>
-</div>
-<p>The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess. The console output shows the film thickness along with its associated uncertainty, here <span class="math notranslate nohighlight">\(h= 115\)</span> nm.</p>
 <ul class="simple">
 <li><p>You can provide a refractive index constant <span class="math notranslate nohighlight">\(n(\lambda) = n\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input. Note that in this example a wavelength-dependent model such as Cauchy’s law <span class="math notranslate nohighlight">\(\left(n(\lambda) = A + \frac{B}{\lambda^2}\right)\)</span> is used.</p></li>
 <li><p>It is <strong>not</strong> mandatory to give <code class="docutils literal notranslate"><span class="pre">wavelength_start</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_stop</span></code>.</p></li>

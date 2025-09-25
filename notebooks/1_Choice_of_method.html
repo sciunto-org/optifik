@@ -323,6 +323,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
@@ -339,7 +340,29 @@ document.write(`
                   
   <section id="Choice-of-method">
 <h1>Choice of method<a class="headerlink" href="#Choice-of-method" title="Link to this heading">#</a></h1>
-<p>In this section, we demonstrate how to use the three implemented methods for film thickness determination on a dataset. Since these methods rely on peak detection, we begin by illustrating the peak detection process.</p>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>First of all, you can check that <em>optifik</em> is properly installed with the last version by running:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">optifik</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">optifik</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.4.0
+</pre></div></div>
+</div>
+<p>In this notebook, we demonstrate how to use the three implemented methods for film thickness determination on a dataset. Since these methods rely on peak detection, we begin by illustrating the peak detection process.</p>
+</section>
 <section id="Step-1:-Loading-Experimental-Data-from-a-.xy-File">
 <h2>Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File<a class="headerlink" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File" title="Link to this heading">#</a></h2>
 <p>Before applying any thickness analysis method, the first step is to acquire the data using a spectrometer. The spectrometer typically exports the raw spectral data in a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> file format, which is essentially a plain text file containing two columns :</p>
@@ -349,7 +372,7 @@ document.write(`
 </ul>
 <p>Here is an example of the raw content in such a file using the NanoCalc 2000 VIS/NIR spectrometer :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -390,7 +413,7 @@ document.write(`
 </ul>
 <p>The data can be ploted with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_spectrum</span>
@@ -412,7 +435,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1_Choice_of_method_8_0.png" src="../_images/notebooks_1_Choice_of_method_8_0.png" />
+<img alt="../_images/notebooks_1_Choice_of_method_11_0.png" src="../_images/notebooks_1_Choice_of_method_11_0.png" />
 </div>
 </div>
 </section>
@@ -420,7 +443,7 @@ document.write(`
 <h2>Step 2: Data Smoothing<a class="headerlink" href="#Step-2:-Data-Smoothing" title="Link to this heading">#</a></h2>
 <p>Once this data is loaded, you can apply a Savitsky-Golay filter of order 3 and a window of 11 points to smooth the data. We use the function <code class="docutils literal notranslate"><span class="pre">smooth_intensities</span></code> from the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain with the function <code class="docutils literal notranslate"><span class="pre">plot_spectrum</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth_intensities</span>
@@ -437,7 +460,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1_Choice_of_method_11_0.png" src="../_images/notebooks_1_Choice_of_method_11_0.png" />
+<img alt="../_images/notebooks_1_Choice_of_method_14_0.png" src="../_images/notebooks_1_Choice_of_method_14_0.png" />
 </div>
 </div>
 </section>
@@ -445,7 +468,7 @@ document.write(`
 <h2>Step 3 : Find peaks<a class="headerlink" href="#Step-3-:-Find-peaks" title="Link to this heading">#</a></h2>
 <p>The scipy function <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">peaks</span></code> is then applied to the smoothed data with the <code class="docutils literal notranslate"><span class="pre">optifik.analysis</span></code> module. Here an exemple of plot you can obtain with the function <code class="docutils literal notranslate"><span class="pre">finds_peak</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">finds_peak</span>
@@ -462,11 +485,11 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1_Choice_of_method_14_0.png" src="../_images/notebooks_1_Choice_of_method_14_0.png" />
+<img alt="../_images/notebooks_1_Choice_of_method_17_0.png" src="../_images/notebooks_1_Choice_of_method_17_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -524,6 +547,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
