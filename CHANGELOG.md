@@ -1,3 +1,6 @@
+# 0.4.1
+
+* ENH: use linregress to get uncertainties with ransac for coherence
 
 # 0.4.0
 
