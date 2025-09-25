@@ -280,7 +280,8 @@ def thickness_from_scheludko(wavelengths,
 
             if plot:
                 plt.plot(wavelengths_masked, h_values, '.',
-                         markersize=3, label=f"Order={_order}, Difference={difference:.1f} nm")
+                         markersize=3,
+                         label=f"Order={_order}, Difference={difference:.1f} nm")
                 plt.legend()
                 plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
@@ -316,13 +317,15 @@ def thickness_from_scheludko(wavelengths,
         r_index_masked = r_index[mask]
         intensities_masked = intensities[mask]
 
-        h_values = _thicknesses_scheludko_at_order(wavelengths_masked,
+        thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
                                                    intensities_masked,
                                                    interference_order,
                                                    r_index_masked)
-        thickness_values = h_values
     else:
         raise ValueError('interference_order must be >= 0.')
+
+
+    mean_thickness_values = np.mean(thickness_values)
 
     # Compute the thickness for the selected order
     if interference_order == 0:
@@ -334,15 +337,15 @@ def thickness_from_scheludko(wavelengths,
     Delta_from_data = num / denom
 
     DeltaScheludko = _Delta(wavelengths_masked,
-                            np.mean(thickness_values),
+                            mean_thickness_values,
                             interference_order,
                             r_index_masked)
 
-    xdata = (wavelengths_masked, r_index_masked)
+
     popt, pcov = curve_fit(lambda x, h: _Delta_fit(x, h, interference_order),
-                           xdata,
+                           (wavelengths_masked, r_index_masked),
                            Delta_from_data,
-                           p0=[np.mean(thickness_values)])
+                           p0=[mean_thickness_values,])
     fitted_h = popt[0]
     std_err = np.sqrt(pcov[0][0])
 
@@ -355,7 +358,7 @@ def thickness_from_scheludko(wavelengths,
                  label=r'$\mathrm{{Smoothed}}\ \mathrm{{Data}}$')
 
         # Scheludko
-        val, err = round_to_uncertainty(np.mean(thickness_values), np.std(thickness_values))
+        val, err = round_to_uncertainty(mean_thickness_values, np.std(thickness_values))
         label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
         plt.plot(wavelengths_masked, DeltaScheludko,
                  'go-', markersize=4, label=label)
