@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.optimize import curve_fit
 
+from functools import partial
 import inspect
 import matplotlib.pyplot as plt
 
@@ -100,29 +101,6 @@ def _Delta(wavelengths, thickness, interference_order, refractive_index):
 
     # Final calcuation of Delta
     return (A * (1 + alpha)) / (1 + A * alpha)
-
-
-def _Delta_fit(xdata, thickness, interference_order):
-    """
-    Wrapper on Delta() for curve_fit.
-
-    Parameters
-    ----------
-    xdata : tuple
-        (wavelengths, refractive_index)
-    thickness : array_like (or float)
-        Film thickness.
-    interference_order : int
-        Interference order.
-
-    Returns
-    -------
-    ndarray
-        Delta values.
-
-    """
-    lambdas, r_index = xdata
-    return _Delta(lambdas, thickness, interference_order, r_index)
 
 
 def get_default_start_stop_wavelengths(wavelengths,
@@ -342,8 +320,12 @@ def thickness_from_scheludko(wavelengths,
                             r_index_masked)
 
 
-    popt, pcov = curve_fit(lambda x, h: _Delta_fit(x, h, interference_order),
-                           (wavelengths_masked, r_index_masked),
+    _Delta_fit = partial(_Delta,
+                    interference_order=interference_order,
+                    refractive_index=r_index_masked)
+
+    popt, pcov = curve_fit(_Delta_fit,
+                           wavelengths_masked,
                            Delta_from_data,
                            p0=[mean_thickness_values,])
     fitted_h = popt[0]
@@ -358,7 +340,8 @@ def thickness_from_scheludko(wavelengths,
                  label=r'$\mathrm{{Smoothed}}\ \mathrm{{Data}}$')
 
         # Scheludko
-        val, err = round_to_uncertainty(mean_thickness_values, np.std(thickness_values))
+        pm_value = np.std(thickness_values, ddof=1) / np.sqrt(len(thickness_values))
+        val, err = round_to_uncertainty(mean_thickness_values, pm_value)
         label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
         plt.plot(wavelengths_masked, DeltaScheludko,
                  'go-', markersize=4, label=label)
