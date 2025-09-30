@@ -4,6 +4,8 @@ Walkthrough
 ===========
 
 
+This page contains a series of Jupyter notebooks to show the main features of optifik.
+
 .. toctree::
     :maxdepth: 2
 
