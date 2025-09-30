@@ -279,6 +279,7 @@ document.write(`
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">curve_fit</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -378,29 +379,6 @@ document.write(`
 
     <span class="c1"># Final calcuation of Delta</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">A</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_Delta_fit</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">interference_order</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Wrapper on Delta() for curve_fit.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    xdata : tuple</span>
-<span class="sd">        (wavelengths, refractive_index)</span>
-<span class="sd">    thickness : array_like (or float)</span>
-<span class="sd">        Film thickness.</span>
-<span class="sd">    interference_order : int</span>
-<span class="sd">        Interference order.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    ndarray</span>
-<span class="sd">        Delta values.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lambdas</span><span class="p">,</span> <span class="n">r_index</span> <span class="o">=</span> <span class="n">xdata</span>
-    <span class="k">return</span> <span class="n">_Delta</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">interference_order</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_default_start_stop_wavelengths">
@@ -625,8 +603,12 @@ document.write(`
                             <span class="n">r_index_masked</span><span class="p">)</span>
 
 
-    <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="n">_Delta_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">interference_order</span><span class="p">),</span>
-                           <span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">r_index_masked</span><span class="p">),</span>
+    <span class="n">_Delta_fit</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_Delta</span><span class="p">,</span>
+                    <span class="n">interference_order</span><span class="o">=</span><span class="n">interference_order</span><span class="p">,</span>
+                    <span class="n">refractive_index</span><span class="o">=</span><span class="n">r_index_masked</span><span class="p">)</span>
+
+    <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">_Delta_fit</span><span class="p">,</span>
+                           <span class="n">wavelengths_masked</span><span class="p">,</span>
                            <span class="n">Delta_from_data</span><span class="p">,</span>
                            <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="n">mean_thickness_values</span><span class="p">,])</span>
     <span class="n">fitted_h</span> <span class="o">=</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -641,7 +623,8 @@ document.write(`
                  <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{Smoothed}}\ \mathrm{{Data}}$&#39;</span><span class="p">)</span>
 
         <span class="c1"># Scheludko</span>
-        <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">round_to_uncertainty</span><span class="p">(</span><span class="n">mean_thickness_values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">))</span>
+        <span class="n">pm_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">))</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">round_to_uncertainty</span><span class="p">(</span><span class="n">mean_thickness_values</span><span class="p">,</span> <span class="n">pm_value</span><span class="p">)</span>
         <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$\mathrm</span><span class="se">{{</span><span class="s1">Scheludko</span><span class="se">}}</span><span class="s1">\ (h = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> \pm </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s1">\ \mathrm</span><span class="se">{{</span><span class="s1">nm</span><span class="se">}}</span><span class="s1">)$&#39;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">DeltaScheludko</span><span class="p">,</span>
                  <span class="s1">&#39;go-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
