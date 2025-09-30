@@ -1,6 +1,7 @@
 # 0.4.1
 
 * ENH: use linregress to get uncertainties with ransac for coherence
+* ENH: better estimation of the fit error scheludko (m-series)
 
 # 0.4.0
 
