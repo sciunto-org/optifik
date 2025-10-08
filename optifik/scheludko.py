@@ -303,8 +303,6 @@ def thickness_from_scheludko(wavelengths,
         raise ValueError('interference_order must be >= 0.')
 
 
-    mean_thickness_values = np.mean(thickness_values)
-
     # Compute the thickness for the selected order
     if interference_order == 0:
         num = intensities_masked - np.min(intensities_void_masked)
@@ -312,22 +310,17 @@ def thickness_from_scheludko(wavelengths,
     else:
         num = intensities_masked - np.min(intensities_masked)
         denom = np.max(intensities_masked) - np.min(intensities_masked)
+
     Delta_from_data = num / denom
 
-    DeltaScheludko = _Delta(wavelengths_masked,
-                            mean_thickness_values,
-                            interference_order,
-                            r_index_masked)
-
-
     _Delta_fit = partial(_Delta,
-                    interference_order=interference_order,
-                    refractive_index=r_index_masked)
+                         interference_order=interference_order,
+                         refractive_index=r_index_masked)
 
     popt, pcov = curve_fit(_Delta_fit,
                            wavelengths_masked,
                            Delta_from_data,
-                           p0=[mean_thickness_values,])
+                           p0=[np.mean(thickness_values),])
     fitted_h = popt[0]
     std_err = np.sqrt(pcov[0][0])
 
@@ -339,12 +332,6 @@ def thickness_from_scheludko(wavelengths,
                  'bo-', markersize=2,
                  label=r'$\mathrm{{Smoothed}}\ \mathrm{{Data}}$')
 
-        # Scheludko
-        pm_value = np.std(thickness_values, ddof=1) / np.sqrt(len(thickness_values))
-        val, err = round_to_uncertainty(mean_thickness_values, pm_value)
-        label = rf'$\mathrm{{Scheludko}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
-        plt.plot(wavelengths_masked, DeltaScheludko,
-                 'go-', markersize=4, label=label)
         # Fit
         val, err = round_to_uncertainty(fitted_h, std_err)
         label = rf'$\mathrm{{Fit}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
