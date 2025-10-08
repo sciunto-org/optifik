@@ -248,19 +248,7 @@ def thickness_from_scheludko(wavelengths,
         raise ValueError('Wrong value for `interference_order`.')
 
     # Find the thicknesses vs lambda
-    if interference_order == 0:
-        thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
-                                                           intensities_masked,
-                                                           interference_order,
-                                                           r_index_masked,
-                                                           intensities_void=intensities_void_masked)
-
-    elif interference_order > 0:
-        thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
-                                                   intensities_masked,
-                                                   interference_order,
-                                                   r_index_masked)
-    elif interference_order is None:
+    if interference_order is None:
         if plot:
             plt.figure()
             plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
@@ -292,6 +280,18 @@ def thickness_from_scheludko(wavelengths,
                 plt.legend()
                 plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
+    elif interference_order == 0:
+        thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
+                                                           intensities_masked,
+                                                           interference_order,
+                                                           r_index_masked,
+                                                           intensities_void=intensities_void_masked)
+
+    elif interference_order > 0:
+        thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
+                                                   intensities_masked,
+                                                   interference_order,
+                                                   r_index_masked)
 
 
     # Compute the thickness for the selected order
