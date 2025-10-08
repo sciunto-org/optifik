@@ -470,8 +470,7 @@ plot=True)</p>
 <img alt="../_images/notebooks_4_Scheludko_renormalisation_12_2.png" src="../_images/notebooks_4_Scheludko_renormalisation_12_2.png" />
 </div>
 </div>
-<p>The first plot shows the Scheludko thickness computation at each wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> along the rightmost monotonic branch (see Step 1), for all interference orders between 0 and 12. The code automatically determines the correct interference order <span class="math notranslate nohighlight">\(m\)</span> and calculates the corresponding film thickness <span class="math notranslate nohighlight">\(h\)</span>. The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess.</p>
-<p>The console output shows the maximum thickness difference for every interfererence order <span class="math notranslate nohighlight">\(m\)</span> from 0 to 12 with the smallest difference indicating the correct order, here <span class="math notranslate nohighlight">\(m=6\)</span>. It also provides the film thickness along with its associated uncertainty, here <span class="math notranslate nohighlight">\(h=778\)</span> nm.</p>
+<p>The first plot shows the Scheludko thickness computation at each wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> along the rightmost monotonic branch (see Step 1), for all interference orders between 0 and 8 (by default). The code automatically determines the correct interference order <span class="math notranslate nohighlight">\(m\)</span> and calculates the corresponding film thickness <span class="math notranslate nohighlight">\(h\)</span>. The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess.</p>
 <ul class="simple">
 <li><p>You can provide a refractive index constant <span class="math notranslate nohighlight">\(n(\lambda) = n\)</span> as an <code class="docutils literal notranslate"><span class="pre">refractive_index</span></code> input. Note that in this example a wavelength-dependent model such as Cauchy’s law <span class="math notranslate nohighlight">\(\left(n(\lambda) = A + \frac{B}{\lambda^2}\right)\)</span> is used.</p></li>
 <li><p>It is <strong>mandatory</strong> to give <code class="docutils literal notranslate"><span class="pre">wavelength_start</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_stop</span></code>.</p></li>
@@ -516,7 +515,7 @@ plot=True)</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_4_Scheludko_renormalisation_18_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_18_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_17_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_17_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -560,14 +559,14 @@ plot=True)</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_4_Scheludko_renormalisation_20_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_0.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_19_0.png" src="../_images/notebooks_4_Scheludko_renormalisation_19_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_4_Scheludko_renormalisation_20_1.png" src="../_images/notebooks_4_Scheludko_renormalisation_20_1.png" />
+<img alt="../_images/notebooks_4_Scheludko_renormalisation_19_1.png" src="../_images/notebooks_4_Scheludko_renormalisation_19_1.png" />
 </div>
 </div>
 <p>The second plot fit the data with <span class="math notranslate nohighlight">\(h\)</span> as an initial guess. The output shows the film thickness along with its associated uncertainty.</p>

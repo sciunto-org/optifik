@@ -327,6 +327,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generalities-on-the-library">Generalities on the library</a></li>
 </ul>
             </nav>
         </div>
@@ -361,16 +362,17 @@ document.write(`
 0.4.2
 </pre></div></div>
 </div>
+<p>This number must match on your system if you are up to date.</p>
 <p>In this notebook, we demonstrate how to use the three implemented methods for film thickness determination on a dataset. Since these methods rely on peak detection, we begin by illustrating the peak detection process.</p>
 </section>
 <section id="Step-1:-Loading-Experimental-Data-from-a-.xy-File">
 <h2>Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File<a class="headerlink" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File" title="Link to this heading">#</a></h2>
-<p>Before applying any thickness analysis method, the first step is to acquire the data using a spectrometer. The spectrometer typically exports the raw spectral data in a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> file format, which is essentially a plain text file containing two columns :</p>
+<p>Before applying any thickness analysis method, the first step is to acquire the data using a spectrometer. The spectrometer typically exports the raw spectral data in a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> file format, which is essentially a plain text file containing two columns:</p>
 <ul class="simple">
 <li><p>The <strong>wavelength</strong> (in nanometers)</p></li>
-<li><p>The corresponding <strong>intensity</strong> (in u.a)</p></li>
+<li><p>The corresponding <strong>intensity</strong> (arbitrary units)</p></li>
 </ul>
-<p>Here is an example of the raw content in such a file using the NanoCalc 2000 VIS/NIR spectrometer :</p>
+<p>Here is an example of the raw content in such a file using the NanoCalc 2000 VIS/NIR spectrometer:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -435,7 +437,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1_Choice_of_method_11_0.png" src="../_images/notebooks_1_Choice_of_method_11_0.png" />
+<img alt="../_images/notebooks_1_Choice_of_method_12_0.png" src="../_images/notebooks_1_Choice_of_method_12_0.png" />
 </div>
 </div>
 </section>
@@ -460,7 +462,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1_Choice_of_method_14_0.png" src="../_images/notebooks_1_Choice_of_method_14_0.png" />
+<img alt="../_images/notebooks_1_Choice_of_method_15_0.png" src="../_images/notebooks_1_Choice_of_method_15_0.png" />
 </div>
 </div>
 </section>
@@ -474,23 +476,30 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optifik.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">finds_peak</span>
 
 <span class="c1"># Peak detection function, min_peak_prominence and min_peak_distance can be adjusted.</span>
-<span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
-           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.018</span><span class="p">,</span>
-           <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-           <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">peaks</span> <span class="o">=</span> <span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities_smoothed</span><span class="p">,</span>
+                   <span class="n">min_peak_prominence</span><span class="o">=</span><span class="mf">0.018</span><span class="p">,</span>
+                   <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                   <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_1_Choice_of_method_17_0.png" src="../_images/notebooks_1_Choice_of_method_17_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_1_Choice_of_method_18_0.png" src="../_images/notebooks_1_Choice_of_method_18_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
@@ -498,6 +507,11 @@ document.write(`
 </pre></div></div>
 </div>
 <p>The console output shows the wavelength peak indices for both minima and maxima. For this example, 7 peaks have been successfully detected.</p>
+</section>
+<section id="Generalities-on-the-library">
+<h2>Generalities on the library<a class="headerlink" href="#Generalities-on-the-library" title="Link to this heading">#</a></h2>
+<p>This walktrough is just an introduction to the main features of the library. Additional options may not be shown, so please, refer to the API section of this documentation for a comprehensive description.</p>
+<p>Also, note that most functions have a <code class="docutils literal notranslate"><span class="pre">plot</span></code> option, which is designed to help for sanity checks or troubleshooting.</p>
 <p>In the following, we will distinguish three cases based on the number of peaks detected in the spectrum, each of which will be treated differently. The procedure described above is assumed to have been followed.</p>
 </section>
 </section>
@@ -551,6 +565,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Loading-Experimental-Data-from-a-.xy-File">Step 1: Loading Experimental Data from a <code class="docutils literal notranslate"><span class="pre">.xy</span></code> File</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Data-Smoothing">Step 2: Data Smoothing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3-:-Find-peaks">Step 3 : Find peaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generalities-on-the-library">Generalities on the library</a></li>
 </ul>
   </nav></div>
 
