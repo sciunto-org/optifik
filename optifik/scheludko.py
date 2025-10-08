@@ -274,7 +274,7 @@ def thickness_from_scheludko(wavelengths,
                 thickness_values = h_values
 
             if plot:
-                plt.plot(wavelengths_masked, h_values, '-',
+                plt.plot(wavelengths_masked, h_values, 'o-',
                          markersize=3,
                          label=f"Order={_order}, $h$-variation={difference:.1f} nm")
                 plt.legend()
