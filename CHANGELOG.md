@@ -1,3 +1,10 @@
+# 0.4.3
+
+* MAINT: code refactoring for scheludko
+* ENH: simplify plot in scheludko
+* ENH: return the interference order in scheludko
+* DOC: fixes and enhancements
+
 # 0.4.2
 
 * ENH: better estimation of the fit error scheludko (m-series)
