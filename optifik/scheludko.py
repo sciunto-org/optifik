@@ -210,6 +210,7 @@ def thickness_from_scheludko(wavelengths,
     """
     if isinstance(refractive_index, (float, int)):
         refractive_index = np.full_like(wavelengths,  refractive_index)
+    r_index = refractive_index
 
     if plot:
         setup_matplotlib()
@@ -221,50 +222,13 @@ def thickness_from_scheludko(wavelengths,
             if wavelength_start > wavelength_stop:
                 raise ValueError('wavelength_start and wavelength_stop are swapped.')
 
-    r_index = refractive_index
-
-    # Handle the interference order
-    if interference_order is None:
-
-        # mask input data
+    # Mask the input data
+    if interference_order is None or interference_order > 0:
         mask = (wavelengths >= wavelength_start) & (wavelengths <= wavelength_stop)
         wavelengths_masked = wavelengths[mask]
         r_index_masked = r_index[mask]
         intensities_masked = intensities[mask]
-
-        min_difference = np.inf
-        thickness_values = None
-
-        if plot:
-            plt.figure()
-            plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
-            plt.xlabel(r'$\lambda$ $[\mathrm{nm}]$')
-
-        for _order in range(0, max_order_tested+1):
-            h_values = _thicknesses_scheludko_at_order(wavelengths_masked,
-                                                       intensities_masked,
-                                                       _order,
-                                                       r_index_masked)
-
-            difference = np.max(h_values) - np.min(h_values)
-
-            # Put this in a logger eventually
-            #print(f"h-difference for m={_order}: {difference:.1f} nm")
-
-            if difference < min_difference:
-                min_difference = difference
-                interference_order = _order
-                thickness_values = h_values
-
-            if plot:
-                plt.plot(wavelengths_masked, h_values, '.',
-                         markersize=3,
-                         label=f"Order={_order}, Difference={difference:.1f} nm")
-                plt.legend()
-                plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
-
     elif interference_order == 0:
-
         min_peak_prominence = 0.02
         peaks_min, peaks_max = finds_peak(wavelengths, intensities,
                                           min_peak_prominence=min_peak_prominence,
@@ -280,8 +244,11 @@ def thickness_from_scheludko(wavelengths,
         r_index_masked = r_index[mask]
         intensities_masked = intensities[mask]
         intensities_void_masked = intensities_void[mask]
+    else:
+        raise ValueError('Wrong value for `interference_order`.')
 
-        interference_order = 0
+    # Find the thicknesses vs lambda
+    if interference_order == 0:
         thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
                                                            intensities_masked,
                                                            interference_order,
@@ -289,18 +256,42 @@ def thickness_from_scheludko(wavelengths,
                                                            intensities_void=intensities_void_masked)
 
     elif interference_order > 0:
-        # mask input data
-        mask = (wavelengths >= wavelength_start) & (wavelengths <= wavelength_stop)
-        wavelengths_masked = wavelengths[mask]
-        r_index_masked = r_index[mask]
-        intensities_masked = intensities[mask]
-
         thickness_values = _thicknesses_scheludko_at_order(wavelengths_masked,
                                                    intensities_masked,
                                                    interference_order,
                                                    r_index_masked)
-    else:
-        raise ValueError('interference_order must be >= 0.')
+    elif interference_order is None:
+        if plot:
+            plt.figure()
+            plt.ylabel(r'$h$ $[\mathrm{{nm}}]$')
+            plt.xlabel(r'$\lambda$ $[\mathrm{nm}]$')
+
+        min_difference = np.inf
+        thickness_values = None
+        for _order in range(0, max_order_tested+1):
+            h_values = _thicknesses_scheludko_at_order(wavelengths_masked,
+                                                       intensities_masked,
+                                                       _order,
+                                                       r_index_masked)
+
+            difference = np.max(h_values) - np.min(h_values)
+
+            # Put this in a logger eventually
+            #print(f"h-difference for m={_order}: {difference:.1f} nm")
+
+            # Keep the order that minimizes the range of h_values
+            if difference < min_difference:
+                min_difference = difference
+                interference_order = _order
+                thickness_values = h_values
+
+            if plot:
+                plt.plot(wavelengths_masked, h_values, '.',
+                         markersize=3,
+                         label=f"Order={_order}, Difference={difference:.1f} nm")
+                plt.legend()
+                plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
+
 
 
     # Compute the thickness for the selected order
@@ -334,7 +325,7 @@ def thickness_from_scheludko(wavelengths,
 
         # Fit
         val, err = round_to_uncertainty(fitted_h, std_err)
-        label = rf'$\mathrm{{Fit}}\ (h = {val} \pm {err}\ \mathrm{{nm}})$'
+        label = rf'$h = {val} \pm {err}\ \mathrm{{nm}}$'
         plt.plot(wavelengths_masked,  Delta_values,
                  'ro-', markersize=2,
                  label=label)
@@ -345,4 +336,5 @@ def thickness_from_scheludko(wavelengths,
         plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
     return OptimizeResult(thickness=fitted_h,
-                          thickness_uncertainty=std_err)
+                          thickness_uncertainty=std_err,
+                          interference_order=interference_order)
