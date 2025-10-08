@@ -557,9 +557,9 @@ document.write(`
                 <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">h_values</span>
 
             <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">h_values</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">h_values</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
                          <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">, $h$ variation=</span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
+                         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">, $h$-variation=</span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
 
@@ -604,7 +604,7 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">Delta_from_data</span><span class="p">,</span>
                  <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{Smoothed}}\ \mathrm{{Data}}$&#39;</span><span class="p">)</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{Smoothed}}\ \mathrm{{data}}$&#39;</span><span class="p">)</span>
 
         <span class="c1"># Fit</span>
         <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">round_to_uncertainty</span><span class="p">(</span><span class="n">fitted_h</span><span class="p">,</span> <span class="n">std_err</span><span class="p">)</span>
