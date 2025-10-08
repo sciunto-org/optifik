@@ -274,9 +274,9 @@ def thickness_from_scheludko(wavelengths,
                 thickness_values = h_values
 
             if plot:
-                plt.plot(wavelengths_masked, h_values, '.',
+                plt.plot(wavelengths_masked, h_values, '-',
                          markersize=3,
-                         label=f"Order={_order}, $h$ variation={difference:.1f} nm")
+                         label=f"Order={_order}, $h$-variation={difference:.1f} nm")
                 plt.legend()
                 plt.title(f'Func Call: {inspect.currentframe().f_code.co_name}()')
 
@@ -321,7 +321,7 @@ def thickness_from_scheludko(wavelengths,
         plt.figure()
         plt.plot(wavelengths_masked, Delta_from_data,
                  'bo-', markersize=2,
-                 label=r'$\mathrm{{Smoothed}}\ \mathrm{{Data}}$')
+                 label=r'$\mathrm{{Smoothed}}\ \mathrm{{data}}$')
 
         # Fit
         val, err = round_to_uncertainty(fitted_h, std_err)
