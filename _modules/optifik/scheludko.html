@@ -493,6 +493,7 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">refractive_index</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="n">refractive_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
+    <span class="n">r_index</span> <span class="o">=</span> <span class="n">refractive_index</span>
 
     <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
         <span class="n">setup_matplotlib</span><span class="p">()</span>
@@ -504,50 +505,13 @@ document.write(`
             <span class="k">if</span> <span class="n">wavelength_start</span> <span class="o">&gt;</span> <span class="n">wavelength_stop</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;wavelength_start and wavelength_stop are swapped.&#39;</span><span class="p">)</span>
 
-    <span class="n">r_index</span> <span class="o">=</span> <span class="n">refractive_index</span>
-
-    <span class="c1"># Handle the interference order</span>
-    <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-        <span class="c1"># mask input data</span>
+    <span class="c1"># Mask the input data</span>
+    <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">interference_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavelengths</span> <span class="o">&gt;=</span> <span class="n">wavelength_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wavelengths</span> <span class="o">&lt;=</span> <span class="n">wavelength_stop</span><span class="p">)</span>
         <span class="n">wavelengths_masked</span> <span class="o">=</span> <span class="n">wavelengths</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="n">r_index_masked</span> <span class="o">=</span> <span class="n">r_index</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="n">intensities_masked</span> <span class="o">=</span> <span class="n">intensities</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-
-        <span class="n">min_difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
-        <span class="n">thickness_values</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$h$ $[\mathrm{{nm}}]$&#39;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda$ $[\mathrm</span><span class="si">{nm}</span><span class="s1">]$&#39;</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">_order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_order_tested</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">h_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
-                                                       <span class="n">intensities_masked</span><span class="p">,</span>
-                                                       <span class="n">_order</span><span class="p">,</span>
-                                                       <span class="n">r_index_masked</span><span class="p">)</span>
-
-            <span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span>
-
-            <span class="c1"># Put this in a logger eventually</span>
-            <span class="c1">#print(f&quot;h-difference for m={_order}: {difference:.1f} nm&quot;)</span>
-
-            <span class="k">if</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">min_difference</span><span class="p">:</span>
-                <span class="n">min_difference</span> <span class="o">=</span> <span class="n">difference</span>
-                <span class="n">interference_order</span> <span class="o">=</span> <span class="n">_order</span>
-                <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">h_values</span>
-
-            <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">h_values</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
-                         <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">, Difference=</span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
-
     <span class="k">elif</span> <span class="n">interference_order</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
         <span class="n">min_peak_prominence</span> <span class="o">=</span> <span class="mf">0.02</span>
         <span class="n">peaks_min</span><span class="p">,</span> <span class="n">peaks_max</span> <span class="o">=</span> <span class="n">finds_peak</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">intensities</span><span class="p">,</span>
                                           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="n">min_peak_prominence</span><span class="p">,</span>
@@ -563,8 +527,43 @@ document.write(`
         <span class="n">r_index_masked</span> <span class="o">=</span> <span class="n">r_index</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="n">intensities_masked</span> <span class="o">=</span> <span class="n">intensities</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="n">intensities_void_masked</span> <span class="o">=</span> <span class="n">intensities_void</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong value for `interference_order`.&#39;</span><span class="p">)</span>
 
-        <span class="n">interference_order</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Find the thicknesses vs lambda</span>
+    <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$h$ $[\mathrm{{nm}}]$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda$ $[\mathrm</span><span class="si">{nm}</span><span class="s1">]$&#39;</span><span class="p">)</span>
+
+        <span class="n">min_difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">thickness_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">_order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_order_tested</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">h_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
+                                                       <span class="n">intensities_masked</span><span class="p">,</span>
+                                                       <span class="n">_order</span><span class="p">,</span>
+                                                       <span class="n">r_index_masked</span><span class="p">)</span>
+
+            <span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span>
+
+            <span class="c1"># Put this in a logger eventually</span>
+            <span class="c1">#print(f&quot;h-difference for m={_order}: {difference:.1f} nm&quot;)</span>
+
+            <span class="c1"># Keep the order that minimizes the range of h_values</span>
+            <span class="k">if</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">min_difference</span><span class="p">:</span>
+                <span class="n">min_difference</span> <span class="o">=</span> <span class="n">difference</span>
+                <span class="n">interference_order</span> <span class="o">=</span> <span class="n">_order</span>
+                <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">h_values</span>
+
+            <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">h_values</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+                         <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">, Difference=</span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">interference_order</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
                                                            <span class="n">intensities_masked</span><span class="p">,</span>
                                                            <span class="n">interference_order</span><span class="p">,</span>
@@ -572,21 +571,11 @@ document.write(`
                                                            <span class="n">intensities_void</span><span class="o">=</span><span class="n">intensities_void_masked</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">interference_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># mask input data</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavelengths</span> <span class="o">&gt;=</span> <span class="n">wavelength_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wavelengths</span> <span class="o">&lt;=</span> <span class="n">wavelength_stop</span><span class="p">)</span>
-        <span class="n">wavelengths_masked</span> <span class="o">=</span> <span class="n">wavelengths</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-        <span class="n">r_index_masked</span> <span class="o">=</span> <span class="n">r_index</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-        <span class="n">intensities_masked</span> <span class="o">=</span> <span class="n">intensities</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-
         <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
                                                    <span class="n">intensities_masked</span><span class="p">,</span>
                                                    <span class="n">interference_order</span><span class="p">,</span>
                                                    <span class="n">r_index_masked</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;interference_order must be &gt;= 0.&#39;</span><span class="p">)</span>
 
-
-    <span class="n">mean_thickness_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">)</span>
 
     <span class="c1"># Compute the thickness for the selected order</span>
     <span class="k">if</span> <span class="n">interference_order</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -595,22 +584,17 @@ document.write(`
     <span class="k">else</span><span class="p">:</span>
         <span class="n">num</span> <span class="o">=</span> <span class="n">intensities_masked</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">intensities_masked</span><span class="p">)</span>
         <span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">intensities_masked</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">intensities_masked</span><span class="p">)</span>
+
     <span class="n">Delta_from_data</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
 
-    <span class="n">DeltaScheludko</span> <span class="o">=</span> <span class="n">_Delta</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
-                            <span class="n">mean_thickness_values</span><span class="p">,</span>
-                            <span class="n">interference_order</span><span class="p">,</span>
-                            <span class="n">r_index_masked</span><span class="p">)</span>
-
-
     <span class="n">_Delta_fit</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_Delta</span><span class="p">,</span>
-                    <span class="n">interference_order</span><span class="o">=</span><span class="n">interference_order</span><span class="p">,</span>
-                    <span class="n">refractive_index</span><span class="o">=</span><span class="n">r_index_masked</span><span class="p">)</span>
+                         <span class="n">interference_order</span><span class="o">=</span><span class="n">interference_order</span><span class="p">,</span>
+                         <span class="n">refractive_index</span><span class="o">=</span><span class="n">r_index_masked</span><span class="p">)</span>
 
     <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">_Delta_fit</span><span class="p">,</span>
                            <span class="n">wavelengths_masked</span><span class="p">,</span>
                            <span class="n">Delta_from_data</span><span class="p">,</span>
-                           <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="n">mean_thickness_values</span><span class="p">,])</span>
+                           <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">),])</span>
     <span class="n">fitted_h</span> <span class="o">=</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">std_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pcov</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
@@ -622,15 +606,9 @@ document.write(`
                  <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{Smoothed}}\ \mathrm{{Data}}$&#39;</span><span class="p">)</span>
 
-        <span class="c1"># Scheludko</span>
-        <span class="n">pm_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">thickness_values</span><span class="p">))</span>
-        <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">round_to_uncertainty</span><span class="p">(</span><span class="n">mean_thickness_values</span><span class="p">,</span> <span class="n">pm_value</span><span class="p">)</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$\mathrm</span><span class="se">{{</span><span class="s1">Scheludko</span><span class="se">}}</span><span class="s1">\ (h = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> \pm </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s1">\ \mathrm</span><span class="se">{{</span><span class="s1">nm</span><span class="se">}}</span><span class="s1">)$&#39;</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">DeltaScheludko</span><span class="p">,</span>
-                 <span class="s1">&#39;go-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
         <span class="c1"># Fit</span>
         <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">round_to_uncertainty</span><span class="p">(</span><span class="n">fitted_h</span><span class="p">,</span> <span class="n">std_err</span><span class="p">)</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$\mathrm</span><span class="se">{{</span><span class="s1">Fit</span><span class="se">}}</span><span class="s1">\ (h = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> \pm </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s1">\ \mathrm</span><span class="se">{{</span><span class="s1">nm</span><span class="se">}}</span><span class="s1">)$&#39;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$h = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> \pm </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s1">\ \mathrm</span><span class="se">{{</span><span class="s1">nm</span><span class="se">}}</span><span class="s1">$&#39;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>  <span class="n">Delta_values</span><span class="p">,</span>
                  <span class="s1">&#39;ro-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
@@ -641,7 +619,8 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">fitted_h</span><span class="p">,</span>
-                          <span class="n">thickness_uncertainty</span><span class="o">=</span><span class="n">std_err</span><span class="p">)</span></div>
+                          <span class="n">thickness_uncertainty</span><span class="o">=</span><span class="n">std_err</span><span class="p">,</span>
+                          <span class="n">interference_order</span><span class="o">=</span><span class="n">interference_order</span><span class="p">)</span></div>
 
 </pre></div>
 
