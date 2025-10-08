@@ -195,7 +195,7 @@ def thickness_from_scheludko(wavelengths,
         If set to None, the value is guessed.
     max_order_tested : int, optional
         Maximum order tested if interference_order is `None'.
-        The default is 6.
+        The default is 8.
     intensities_void : array, optional
         Intensity in absence of a film.
         Mandatory if interference_order == 0.
