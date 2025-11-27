@@ -8,6 +8,10 @@ This library replaces [oospectro](https://github.com/sciunto-org/oospectro/).
 
 <https://sciunto-org.github.io/optifik/>
 
+## Publication
+
+Preprint on [arXiv](https://arxiv.org/abs/2511.21383).
+
 ## Installation
 
 The use of pip must be limited to virtualenv
