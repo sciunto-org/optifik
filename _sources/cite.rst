@@ -1,4 +1,4 @@
 How to cite this work?
 ======================
 
-Comming soon.
+We published a preprint on `arXiv <https://arxiv.org/abs/2511.21383>`_.
