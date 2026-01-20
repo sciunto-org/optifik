@@ -1,6 +1,7 @@
 # 0.4.4
 
 * DOC: add reference to EPJE T&T
+* MAINT: decrease min python version to 3.10
 
 # 0.4.3
 
