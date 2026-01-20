@@ -1,3 +1,7 @@
+# 0.4.4
+
+* DOC: add reference to EPJE T&T
+
 # 0.4.3
 
 * MAINT: code refactoring for scheludko
