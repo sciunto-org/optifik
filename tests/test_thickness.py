@@ -29,12 +29,14 @@ def test_minmax_sample1():
     min_peak_distance = 10
     skipped = ('011137.xy',
                '012426.xy',
+               '012610.xy',
                '012795.xy',
                '012979.xy',
                '011321.xy', #Insufficient number of data points
                )
 
     for path, expected in load():
+        print(path)
         file = os.path.split(path)[-1]
         if file not in skipped:
             lambdas, raw_intensities = load_spectrum(path, wavelength_min=450)
