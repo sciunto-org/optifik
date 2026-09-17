@@ -48,6 +48,7 @@ dev = [
   "pytest-cov",
   "pyyaml",
   "bumpver",
+  "twine",
 ]
 docs = [
   "sphinx>=7.0",
