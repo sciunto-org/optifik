@@ -16,29 +16,23 @@ dependencies = [
   "scikit-learn>=1.5",
 ]
 
-[tool.setuptools]
-packages = ["optifik"]
-
-
 [project.urls]
 Documentation = "https://sciunto.github.io/optifik/"
 Repository = "https://github.com/sciunto-org/optifik"
 Issues = "https://github.com/sciunto-org/optifik/issues"
-
 
 [project.optional-dependencies]
 dev = [
   "pytest",
   "pytest-cov",
   "pyyaml",
-  "bumpver"
+  "bumpver",
 ]
-
 docs = [
   "sphinx>=7.0",
   "sphinx-rtd-theme>=2.0",
   "numpydoc>=1.6",
-  "myst-parser>=2.0",  # Markdown + reStructuredText
+  "myst-parser>=2.0",
   "sphinx-autodoc-typehints>=2.0",
   "sphinx-copybutton>=0.5",
   "sphinx-design>=0.5",
@@ -47,6 +41,31 @@ docs = [
   "ipykernel",
   "sphinx-book-theme",
 ]
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "pyyaml",
+  "bumpver",
+]
+docs = [
+  "sphinx>=7.0",
+  "sphinx-rtd-theme>=2.0",
+  "numpydoc>=1.6",
+  "myst-parser>=2.0",
+  "sphinx-autodoc-typehints>=2.0",
+  "sphinx-copybutton>=0.5",
+  "sphinx-design>=0.5",
+  "nbsphinx",
+  "jupyter",
+  "ipykernel",
+  "sphinx-book-theme",
+  "nbstripout",
+]
+
+[tool.setuptools]
+packages = ["optifik"]
 
 [tool.setuptools.package-data]
 optifik = ["data/*"]
@@ -69,9 +88,10 @@ omit = ["optifik/tests/*"]
 current_version = "0.4.4"
 version_pattern = "MAJOR.MINOR.PATCH"
 commit = true
+push = false
 tag = true
+pre_commit_hook = "scripts/pre-bump.sh"
 
 [tool.bumpver.file_patterns]
 "pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
 "optifik/__init__.py" = ['__version__ = "{version}"']
-

@@ -1,3 +1,7 @@
+# 0.4.5
+
+* MAINT: migrate dependency management from pip to uv
+
 # 0.4.4
 
 * DOC: add reference to EPJE T&T

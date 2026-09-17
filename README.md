@@ -32,51 +32,46 @@ To cite this paper:
 
 ## Installation
 
-The use of pip must be limited to virtualenv
-
-
 * From PyPI
 ```
-pip install optifik
+uv pip install optifik
 ```
 
 * From tarball
 ```
-pip install /path/to/optifik-0.1.0.tar.gz
+uv pip install /path/to/optifik-0.1.0.tar.gz
 ```
 
 * From the source code
 ```
-pip install .
+uv pip install .
 ```
 
 
 ## For contributors
 
-* Install an editable version
+* Clone the repository and install in editable mode
 ```
-pip install -e .
-```
-
-* Install dev tools
-```
-pip install -e ".[dev]"
-```
-
-* Run the test suite
-```
-pytest
+git clone https://github.com/sciunto-org/optifik.git
+cd optifik
+uv sync
 ```
 
 * Install doc tools
 ```
-pip install -e ".[docs]"
+uv sync --extra docs
+```
+
+* Run the test suite
+```
+uv run pytest
 ```
 
 * Build the doc
 ```
-sphinx-build -b html docs docs/_build/html
+uv run sphinx-build -b html docs docs/_build/html
 ```
+
 
 ## Licence
 
