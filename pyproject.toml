@@ -1,6 +1,6 @@
 [project]
 name = "optifik"
-version = "0.4.4"
+version = "0.4.5"
 description = "Compute film thickness from interferometry"
 authors = [
   { name = "François Boulogne", email = "francois.boulogne@cnrs.fr" },
@@ -85,7 +85,7 @@ source = ["optifik"]
 omit = ["optifik/tests/*"]
 
 [tool.bumpver]
-current_version = "0.4.4"
+current_version = "0.4.5"
 version_pattern = "MAJOR.MINOR.PATCH"
 commit = true
 push = false
