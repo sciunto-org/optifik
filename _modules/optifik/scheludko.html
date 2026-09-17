@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -47,26 +47,33 @@
     <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/optifik/scheludko';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="canonical" href="https://sciunto-org.github.io/optifik/_modules/optifik/scheludko.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -92,7 +99,47 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
     </header>
   
 
@@ -226,11 +273,18 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
 
 
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -278,7 +332,7 @@
                                     <span class="n">interference_order</span><span class="p">,</span>
                                     <span class="n">refractive_index</span><span class="p">,</span>
                                     <span class="n">intensities_void</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute thicknesses vs wavelength for a given interference order.</span>
 
 <span class="sd">    Parameters</span>
@@ -298,7 +352,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    thicknesses : array</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">intensities_void</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">Imin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">intensities</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -322,7 +376,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_Delta</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">interference_order</span><span class="p">,</span> <span class="n">refractive_index</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute the Delta values.</span>
 
 <span class="sd">    Parameters</span>
@@ -340,7 +394,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray</span>
 <span class="sd">        Delta values.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ensure that the entries are numpy arrays</span>
     <span class="n">wavelengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
@@ -374,7 +428,7 @@
                                        <span class="n">refractive_index</span><span class="p">,</span>
                                        <span class="n">min_peak_prominence</span><span class="p">,</span>
                                        <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns the start and stop wavelength values of the last monotonic branch.</span>
 
 <span class="sd">    Parameters</span>
@@ -400,7 +454,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    wavelength_start : scalar</span>
 <span class="sd">    wavelength_stop : scalar</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">refractive_index</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="n">refractive_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
 
@@ -409,12 +463,12 @@
                                               <span class="n">min_peak_prominence</span><span class="o">=</span><span class="n">min_peak_prominence</span><span class="p">,</span>
                                               <span class="n">plot</span><span class="o">=</span><span class="n">plot</span><span class="p">)</span>
 
-    <span class="n">failure</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">failure</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">''</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_peaks_min</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Failed to detect at least one minimum. &#39;</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="s1">'Failed to detect at least one minimum. '</span>
         <span class="n">failure</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_peaks_max</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Failed to detect at least one maximum. &#39;</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="s1">'Failed to detect at least one maximum. '</span>
         <span class="n">failure</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">if</span> <span class="n">failure</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -442,7 +496,7 @@
                              <span class="n">max_order_tested</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                              <span class="n">intensities_void</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute the film thickness based on Scheludko method.</span>
 
 <span class="sd">    Parameters</span>
@@ -463,7 +517,7 @@
 <span class="sd">        Interference order, zero or positive integer.</span>
 <span class="sd">        If set to None, the value is guessed.</span>
 <span class="sd">    max_order_tested : int, optional</span>
-<span class="sd">        Maximum order tested if interference_order is `None&#39;.</span>
+<span class="sd">        Maximum order tested if interference_order is `None'.</span>
 <span class="sd">        The default is 8.</span>
 <span class="sd">    intensities_void : array, optional</span>
 <span class="sd">        Intensity in absence of a film.</span>
@@ -476,7 +530,7 @@
 <span class="sd">    results : Instance of `OptimizeResult` class.</span>
 <span class="sd">        The attribute `thickness` gives the thickness value in nm.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">refractive_index</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="n">refractive_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span>  <span class="n">refractive_index</span><span class="p">)</span>
     <span class="n">r_index</span> <span class="o">=</span> <span class="n">refractive_index</span>
@@ -486,10 +540,10 @@
 
     <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">interference_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">wavelength_stop</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">wavelength_start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;wavelength_start and wavelength_stop must be passed for interference_order != 0.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'wavelength_start and wavelength_stop must be passed for interference_order != 0.'</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">wavelength_start</span> <span class="o">&gt;</span> <span class="n">wavelength_stop</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;wavelength_start and wavelength_stop are swapped.&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'wavelength_start and wavelength_stop are swapped.'</span><span class="p">)</span>
 
     <span class="c1"># Mask the input data</span>
     <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">interference_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -503,7 +557,7 @@
                                           <span class="n">min_peak_prominence</span><span class="o">=</span><span class="n">min_peak_prominence</span><span class="p">,</span>
                                           <span class="n">plot</span><span class="o">=</span><span class="n">plot</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">peaks_max</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Failed to detect a single maximum peak.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">'Failed to detect a single maximum peak.'</span><span class="p">)</span>
 
         <span class="n">lambda_unique</span> <span class="o">=</span> <span class="n">wavelengths</span><span class="p">[</span><span class="n">peaks_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
@@ -514,14 +568,14 @@
         <span class="n">intensities_masked</span> <span class="o">=</span> <span class="n">intensities</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="n">intensities_void_masked</span> <span class="o">=</span> <span class="n">intensities_void</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong value for `interference_order`.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Wrong value for `interference_order`.'</span><span class="p">)</span>
 
     <span class="c1"># Find the thicknesses vs lambda</span>
     <span class="k">if</span> <span class="n">interference_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$h$ $[\mathrm{{nm}}]$&#39;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda$ $[\mathrm</span><span class="si">{nm}</span><span class="s1">]$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'$h$ $[\mathrm{{nm}}]$'</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'$\lambda$ $[\mathrm</span><span class="si">{nm}</span><span class="s1">]$'</span><span class="p">)</span>
 
         <span class="n">min_difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
         <span class="n">thickness_values</span> <span class="o">=</span> <span class="kc">None</span>
@@ -534,7 +588,7 @@
             <span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">h_values</span><span class="p">)</span>
 
             <span class="c1"># Put this in a logger eventually</span>
-            <span class="c1">#print(f&quot;h-difference for m={_order}: {difference:.1f} nm&quot;)</span>
+            <span class="c1">#print(f"h-difference for m={_order}: {difference:.1f} nm")</span>
 
             <span class="c1"># Keep the order that minimizes the range of h_values</span>
             <span class="k">if</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">min_difference</span><span class="p">:</span>
@@ -543,11 +597,11 @@
                 <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">h_values</span>
 
             <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">h_values</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">h_values</span><span class="p">,</span> <span class="s1">'o-'</span><span class="p">,</span>
                          <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">, $h$-variation=</span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
+                         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Order=</span><span class="si">{</span><span class="n">_order</span><span class="si">}</span><span class="s2">, $h$-variation=</span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> nm"</span><span class="p">)</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()'</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">interference_order</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">thickness_values</span> <span class="o">=</span> <span class="n">_thicknesses_scheludko_at_order</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>
@@ -589,20 +643,20 @@
 
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span> <span class="n">Delta_from_data</span><span class="p">,</span>
-                 <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{{Smoothed}}\ \mathrm{{data}}$&#39;</span><span class="p">)</span>
+                 <span class="s1">'bo-'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">'$\mathrm{{Smoothed}}\ \mathrm{{data}}$'</span><span class="p">)</span>
 
         <span class="c1"># Fit</span>
         <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">round_to_uncertainty</span><span class="p">(</span><span class="n">fitted_h</span><span class="p">,</span> <span class="n">std_err</span><span class="p">)</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$h = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> \pm </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s1">\ \mathrm</span><span class="se">{{</span><span class="s1">nm</span><span class="se">}}</span><span class="s1">$&#39;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">'$h = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> \pm </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s1">\ \mathrm</span><span class="se">{{</span><span class="s1">nm</span><span class="se">}}</span><span class="s1">$'</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelengths_masked</span><span class="p">,</span>  <span class="n">Delta_values</span><span class="p">,</span>
-                 <span class="s1">&#39;ro-&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="s1">'ro-'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta$&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda$ $[\mathrm{{nm}}]$&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'$\Delta$'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'$\lambda$ $[\mathrm{{nm}}]$'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Func Call: </span><span class="si">{</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="si">}</span><span class="s1">()'</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">fitted_h</span><span class="p">,</span>
                           <span class="n">thickness_uncertainty</span><span class="o">=</span><span class="n">std_err</span><span class="p">,</span>
@@ -670,8 +724,8 @@ By F. Boulogne et al.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
   </footer>

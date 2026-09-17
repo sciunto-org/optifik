@@ -12,11 +12,11 @@ Requirements
 Procedure
 ---------
 
-You can install Optifik using `pip` in a virtualenv:
+You can install Optifik using `uv`:
 
 .. code-block:: bash
 
-    pip install optifik
+    uv pip install optifik
 
 Alternatively, you can install directly from source:
 
@@ -25,7 +25,7 @@ Alternatively, you can install directly from source:
 .. code-block:: bash
 
     cd optifik
-    pip install -e .
+    uv pip install -e .
 
 or from the main branch (in development):
 
@@ -33,14 +33,14 @@ or from the main branch (in development):
 
     git clone https://github.com/sciunto-org/optifik.git
     cd optifik
-    pip install -e .
+    uv sync
 
 
 Check the installation and the version:
 
 .. code-block:: bash
 
-    python -c 'import optifik; print(optifik.__version__)'
+    uv run python -c 'import optifik; print(optifik.__version__)'
 
 
 Tests
@@ -50,11 +50,11 @@ Install
 
 .. code-block:: bash
 
-    pip install -e ".[dev]"
+    uv sync
 
 
 To run the test suite:
 
 .. code-block:: bash
 
-    pytest
+    uv run pytest
